@@ -29,7 +29,7 @@
         overflow-y: auto;
         box-shadow: 10px 0 30px rgba(0,0,0,0.5);
 
-        .nav-text, .logo-text, .user-info, .menu-label, .chevron, .submenu {
+        .nav-text, .logo-text, .user-info, .menu-label, .chevron {
             opacity: 1;
             transform: translateX(0);
             pointer-events: auto;
@@ -197,7 +197,7 @@ nav {
             min-width: 18px;
         }
 
-        &:hover, &.active {
+        &:not(.has-submenu):hover, &:not(.has-submenu).active {
             color: var(--text-main);
             background: var(--bg-card-hover);
         }
@@ -245,13 +245,13 @@ nav {
             display: flex;
             flex-direction: column;
             padding-left: 44px;
-            margin-top: 4px;
-            margin-bottom: 8px;
+            margin-top: 0;
+            margin-bottom: 0;
+            max-height: 0;
             opacity: 0;
-            height: 0;
             overflow: hidden;
             pointer-events: none;
-            transition: opacity 0.2s ease;
+            transition: all 0.3s ease;
 
             a {
                 position: relative;
@@ -282,7 +282,11 @@ nav {
         }
         
         &:hover .submenu {
-            height: auto;
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 4px;
+            margin-bottom: 8px;
+            pointer-events: auto;
         }
     }
 }
