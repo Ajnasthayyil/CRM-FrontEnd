@@ -7,22 +7,18 @@ import { DashboardHomeComponent } from './features/dashboard/pages/dashboard-hom
 const routes: Routes = [
   {
     path: '',
+    component: DashboardHomeComponent // Landing page (Role Selection)
+  },
+  {
+    path: 'dashboard',
     component: DashboardLayoutComponent,
     children: [
-      {
-        path: 'dashboard',
-        component: DashboardHomeComponent
-      },
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
-      }
+      // Future dashboard routes for specific roles go here
     ]
   },
   {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: ''
   }
 ];
 
