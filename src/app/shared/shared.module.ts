@@ -5,6 +5,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 
 
 
@@ -14,10 +15,19 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     HeaderComponent,
     FooterComponent,
     PageHeaderComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    ThemeToggleComponent
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    SidebarComponent,
+    HeaderComponent,
+    FooterComponent,
+    PageHeaderComponent,
+    BreadcrumbComponent,
+    ThemeToggleComponent
   ]
 })
 export class SharedModule { }

@@ -5,13 +5,22 @@ import { DashboardLayoutComponent } from './dashboard/dashboard-layout/dashboard
 
 
 
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
+
 @NgModule({
   declarations: [
     AuthLayoutComponent,
     DashboardLayoutComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    SharedModule
+  ],
+  exports: [
+    AuthLayoutComponent,
+    DashboardLayoutComponent
   ]
 })
 export class LayoutsModule { }

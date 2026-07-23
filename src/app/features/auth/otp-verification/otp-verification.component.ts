@@ -35,8 +35,8 @@ export class OtpVerificationComponent implements OnInit {
     });
   }
 
-  onInput(event: any, index: number) {
-    const value = event.target.value;
+  onModelChange(value: string, index: number) {
+    this.otpCode[index] = value;
     if (value && index < 5) {
       // Move to next input with slight delay to prevent double-entry bugs
       setTimeout(() => {

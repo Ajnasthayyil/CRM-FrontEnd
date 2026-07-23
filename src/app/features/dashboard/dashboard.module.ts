@@ -5,13 +5,17 @@ import { RoleDashboardComponent } from './pages/role-dashboard/role-dashboard.co
 
 
 
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '../../shared/shared.module';
+
 @NgModule({
   declarations: [
-    DashboardHomeComponent,
-    RoleDashboardComponent
+    DashboardHomeComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    SharedModule
   ]
 })
 export class DashboardModule { }

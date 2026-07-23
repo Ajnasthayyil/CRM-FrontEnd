@@ -23,8 +23,8 @@
       <input *ngFor="let digit of otpCode; let i = index; trackBy: trackByIndex" 
              type="text" 
              maxlength="1" 
-             [(ngModel)]="otpCode[i]" 
-             (input)="onInput($event, i)"
+             [ngModel]="otpCode[i]" 
+             (ngModelChange)="onModelChange($event, i)"
              (keydown)="onKeyDown($event, i)"
              #otpInput>
     </div>
