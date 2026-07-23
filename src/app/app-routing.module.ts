@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardLayoutComponent } from './layouts/dashboard/dashboard-layout/dashboard-layout.component';
 import { DashboardHomeComponent } from './features/dashboard/pages/dashboard-home/dashboard-home.component';
 import { LoginComponent } from './features/auth/login/login.component';
+import { OtpVerificationComponent } from './features/auth/otp-verification/otp-verification.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'verify-otp',
+    component: OtpVerificationComponent
   },
   {
     path: 'dashboard',

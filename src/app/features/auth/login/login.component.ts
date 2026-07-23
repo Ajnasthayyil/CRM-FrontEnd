@@ -26,8 +26,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(event: Event) {
     event.preventDefault();
-    // Simulate login success
-    this.authService.login(this.selectedRole);
-    this.router.navigate(['/dashboard']);
+    // Navigate to OTP verification instead of directly logging in
+    this.router.navigate(['/verify-otp'], { queryParams: { role: this.selectedRole } });
   }
 }
