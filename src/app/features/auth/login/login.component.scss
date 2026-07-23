@@ -20,42 +20,31 @@
 .login-header {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
+  text-align: left;
   margin-bottom: 2.5rem;
 
-  .logo-box {
-    background-color: var(--primary);
-    color: white;
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius-lg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-    
-    svg {
-      width: 24px;
-      height: 24px;
-    }
+  .role-badge {
+    background-color: rgba(59, 130, 246, 0.15); /* Soft blue background */
+    color: var(--primary); /* Blue text */
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    border: 1px solid rgba(59, 130, 246, 0.2);
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: var(--text-main);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
   }
   
   p {
     color: var(--text-muted);
     font-size: 0.95rem;
-    
-    strong {
-      color: var(--primary);
-      font-weight: 600;
-    }
   }
 }
 
