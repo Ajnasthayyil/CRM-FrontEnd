@@ -101,106 +101,8 @@
       </div>
     </div>
 
-    <!-- Charts Area 1: Industry Portfolio & NPA Trend -->
+    <!-- Charts Area 1: Branch Perf & Loan Mix -->
     <div class="charts-grid split-grid">
-      <div class="chart-card flex-2">
-        <div class="chart-header">
-          <div>
-            <h3>Industry-wise Portfolio</h3>
-            <p>Concentration analysis</p>
-          </div>
-        </div>
-        <div class="chart-body progress-list padded">
-          <div class="progress-item row">
-            <div class="row-label">Technology</div>
-            <div class="row-bar"><div class="fill blue" style="width: 75%"></div></div>
-            <div class="row-stats">
-              <span class="pct">28%</span>
-              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 18.5%</span>
-            </div>
-          </div>
-          <div class="progress-item row">
-            <div class="row-label">Manufacturing</div>
-            <div class="row-bar"><div class="fill blue" style="width: 65%"></div></div>
-            <div class="row-stats">
-              <span class="pct">22%</span>
-              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 6.2%</span>
-            </div>
-          </div>
-          <div class="progress-item row">
-            <div class="row-label">Pharmaceuticals</div>
-            <div class="row-bar"><div class="fill blue" style="width: 45%"></div></div>
-            <div class="row-stats">
-              <span class="pct">16%</span>
-              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 12.8%</span>
-            </div>
-          </div>
-          <div class="progress-item row">
-            <div class="row-label">Real Estate</div>
-            <div class="row-bar"><div class="fill blue" style="width: 35%"></div></div>
-            <div class="row-stats">
-              <span class="pct">14%</span>
-              <span class="trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> 2.1%</span>
-            </div>
-          </div>
-          <div class="progress-item row">
-            <div class="row-label">Exports</div>
-            <div class="row-bar"><div class="fill blue" style="width: 25%"></div></div>
-            <div class="row-stats">
-              <span class="pct">11%</span>
-              <span class="trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> 5.4%</span>
-            </div>
-          </div>
-          <div class="progress-item row">
-            <div class="row-label">Others</div>
-            <div class="row-bar"><div class="fill blue" style="width: 20%"></div></div>
-            <div class="row-stats">
-              <span class="pct">9%</span>
-              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 4.1%</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="chart-card flex-3">
-        <div class="chart-header">
-          <div>
-            <h3>NPA Trend</h3>
-            <p>Monthly NPA ratio %</p>
-          </div>
-          <a href="#" class="chart-link">Details</a>
-        </div>
-        <div class="chart-body">
-          <apx-chart
-            [series]="npaChartOptions.series!"
-            [chart]="npaChartOptions.chart!"
-            [xaxis]="npaChartOptions.xaxis!"
-            [yaxis]="npaChartOptions.yaxis!"
-            [stroke]="npaChartOptions.stroke!"
-            [markers]="npaChartOptions.markers!"
-            [grid]="npaChartOptions.grid!"
-            [tooltip]="npaChartOptions.tooltip!"
-            [colors]="npaChartOptions.colors!"
-          ></apx-chart>
-          
-          <div class="npa-stats-row">
-            <div class="npa-stat-box success">
-              <div class="stat-label">Current NPA</div>
-              <div class="stat-val">2.6%</div>
-              <div class="stat-sub trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> 0.6% from Jan</div>
-            </div>
-            <div class="npa-stat-box target">
-              <div class="stat-label">Target NPA</div>
-              <div class="stat-val">&lt;3.0%</div>
-              <div class="stat-sub"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> On target</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Charts Area 2: Branch Perf & Loan Mix -->
-    <div class="charts-grid split-grid mt-4">
       <div class="chart-card flex-3">
         <div class="chart-header">
           <div>
@@ -302,6 +204,104 @@
             <span><span class="dot" style="background: #ef4444"></span> Auto Loan (10%)</span>
             <span><span class="dot" style="background: #8b5cf6"></span> Personal Loan (6%)</span>
             <span><span class="dot" style="background: #06b6d4"></span> Others (3%)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Area 2: Industry Portfolio & NPA Trend -->
+    <div class="charts-grid split-grid mt-4">
+      <div class="chart-card flex-2">
+        <div class="chart-header">
+          <div>
+            <h3>Industry-wise Portfolio</h3>
+            <p>Concentration analysis</p>
+          </div>
+        </div>
+        <div class="chart-body progress-list padded">
+          <div class="progress-item row">
+            <div class="row-label">Technology</div>
+            <div class="row-bar"><div class="fill blue" style="width: 75%"></div></div>
+            <div class="row-stats">
+              <span class="pct">28%</span>
+              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 18.5%</span>
+            </div>
+          </div>
+          <div class="progress-item row">
+            <div class="row-label">Manufacturing</div>
+            <div class="row-bar"><div class="fill blue" style="width: 65%"></div></div>
+            <div class="row-stats">
+              <span class="pct">22%</span>
+              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 6.2%</span>
+            </div>
+          </div>
+          <div class="progress-item row">
+            <div class="row-label">Pharmaceuticals</div>
+            <div class="row-bar"><div class="fill blue" style="width: 45%"></div></div>
+            <div class="row-stats">
+              <span class="pct">16%</span>
+              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 12.8%</span>
+            </div>
+          </div>
+          <div class="progress-item row">
+            <div class="row-label">Real Estate</div>
+            <div class="row-bar"><div class="fill blue" style="width: 35%"></div></div>
+            <div class="row-stats">
+              <span class="pct">14%</span>
+              <span class="trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> 2.1%</span>
+            </div>
+          </div>
+          <div class="progress-item row">
+            <div class="row-label">Exports</div>
+            <div class="row-bar"><div class="fill blue" style="width: 25%"></div></div>
+            <div class="row-stats">
+              <span class="pct">11%</span>
+              <span class="trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> 5.4%</span>
+            </div>
+          </div>
+          <div class="progress-item row">
+            <div class="row-label">Others</div>
+            <div class="row-bar"><div class="fill blue" style="width: 20%"></div></div>
+            <div class="row-stats">
+              <span class="pct">9%</span>
+              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 4.1%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart-card flex-3">
+        <div class="chart-header">
+          <div>
+            <h3>NPA Trend</h3>
+            <p>Monthly NPA ratio %</p>
+          </div>
+          <a href="#" class="chart-link">Details</a>
+        </div>
+        <div class="chart-body">
+          <apx-chart
+            [series]="npaChartOptions.series!"
+            [chart]="npaChartOptions.chart!"
+            [xaxis]="npaChartOptions.xaxis!"
+            [yaxis]="npaChartOptions.yaxis!"
+            [stroke]="npaChartOptions.stroke!"
+            [markers]="npaChartOptions.markers!"
+            [grid]="npaChartOptions.grid!"
+            [tooltip]="npaChartOptions.tooltip!"
+            [colors]="npaChartOptions.colors!"
+          ></apx-chart>
+          
+          <div class="npa-stats-row">
+            <div class="npa-stat-box success">
+              <div class="stat-label">Current NPA</div>
+              <div class="stat-val">2.6%</div>
+              <div class="stat-sub trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> 0.6% from Jan</div>
+            </div>
+            <div class="npa-stat-box target">
+              <div class="stat-label">Target NPA</div>
+              <div class="stat-val">&lt;3.0%</div>
+              <div class="stat-sub"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> On target</div>
+            </div>
           </div>
         </div>
       </div>
