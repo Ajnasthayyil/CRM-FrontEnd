@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardRoutingModule } from './dashboard-routing.module';
+import { RouterModule } from '@angular/router';
 import { DashboardHomeComponent } from './pages/dashboard-home/dashboard-home.component';
 import { RoleDashboardComponent } from './pages/role-dashboard/role-dashboard.component';
 import { SharedModule } from '../../shared/shared.module';
@@ -13,7 +13,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule,
+    RouterModule,
     SharedModule,
     NgApexchartsModule
   ]
