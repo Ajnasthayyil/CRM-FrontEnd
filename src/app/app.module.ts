@@ -10,6 +10,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { OtpVerificationComponent } from './features/auth/otp-verification/otp-verification.component';
+import { ThemeToggleComponent } from './shared/components/theme-toggle/theme-toggle.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { OtpVerificationComponent } from './features/auth/otp-verification/otp-v
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    OtpVerificationComponent
+    OtpVerificationComponent,
+    ThemeToggleComponent
   ],
   imports: [
     BrowserModule,

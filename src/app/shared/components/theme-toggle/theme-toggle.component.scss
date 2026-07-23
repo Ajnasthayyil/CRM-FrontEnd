@@ -1,0 +1,22 @@
+.theme-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+
+  &:hover {
+    color: var(--text-main);
+    background-color: var(--bg-card-hover);
+    transform: scale(1.05);
+  }
+}
