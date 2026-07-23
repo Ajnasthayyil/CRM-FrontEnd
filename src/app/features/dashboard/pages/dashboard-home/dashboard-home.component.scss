@@ -54,7 +54,12 @@
       color: var(--text-muted);
       font-size: 1.125rem;
       max-width: 600px;
-      margin: 0 auto;
+      margin: 0 auto 0.75rem auto;
+    }
+    .subtitle-secondary {
+      font-size: 0.95rem;
+      opacity: 0.8;
+      margin-bottom: 0;
     }
   }
 }
