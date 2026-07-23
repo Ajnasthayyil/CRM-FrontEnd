@@ -11,6 +11,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { OtpVerificationComponent } from './features/auth/otp-verification/otp-verification.component';
 import { ThemeToggleComponent } from './shared/components/theme-toggle/theme-toggle.component';
+import { ToastComponent } from './shared/components/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ThemeToggleComponent } from './shared/components/theme-toggle/theme-tog
     FooterComponent,
     LoginComponent,
     OtpVerificationComponent,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

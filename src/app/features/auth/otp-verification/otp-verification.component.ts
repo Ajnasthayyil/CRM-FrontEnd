@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-otp-verification',
@@ -15,8 +16,13 @@ export class OtpVerificationComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastService: ToastService
   ) {}
+
+  trackByIndex(index: number, obj: any): any {
+    return index;
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -47,10 +53,11 @@ export class OtpVerificationComponent implements OnInit {
   verify() {
     const fullCode = this.otpCode.join('');
     if (fullCode.length === 6) {
+      this.toastService.success('Authentication successful!');
       this.authService.login(this.selectedRole);
       this.router.navigate(['/dashboard']);
     } else {
-      alert("Please enter all 6 digits.");
+      this.toastService.error('Please enter all 6 digits.');
     }
   }
 }
