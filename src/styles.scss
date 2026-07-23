@@ -2,15 +2,15 @@
 
 /* Default Light Theme (Finpay inspired) */
 :root {
-  --bg-dark: #f8fafc;
+  --bg-dark: #eff6ff;
   --bg-card: #ffffff;
-  --bg-card-hover: #f1f5f9;
+  --bg-card-hover: #e0f2fe;
   --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border-color: #e2e8f0;
+  --text-muted: #475569;
+  --border-color: #bfdbfe;
   
-  --primary: #10b981;
-  --primary-hover: #059669;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
   
   /* Role Accents */
   --accent-admin: #3b82f6;
@@ -38,15 +38,15 @@
 
 /* Dark Theme overrides */
 [data-theme="dark"] {
-  --bg-dark: #0b1120;
+  --bg-dark: #0f172a;
   --bg-card: #1e293b;
-  --bg-card-hover: #293850;
+  --bg-card-hover: #334155;
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --border-color: #334155;
   
-  --primary: #34d399;
-  --primary-hover: #10b981;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
   
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
 }

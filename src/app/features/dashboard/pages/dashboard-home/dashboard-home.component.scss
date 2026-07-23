@@ -13,7 +13,7 @@
     left: 20%;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(44, 140, 153, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
     border-radius: 50%;
     pointer-events: none;
     z-index: 0;
@@ -63,7 +63,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 8px 24px rgba(44, 140, 153, 0.3);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
     
     svg {
       width: 32px;
@@ -125,8 +125,8 @@
   &:hover {
     background-color: var(--bg-card-hover);
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px -8px rgba(44, 140, 153, 0.2);
-    border-color: rgba(44, 140, 153, 0.3);
+    box-shadow: 0 12px 24px -8px rgba(37, 99, 235, 0.2);
+    border-color: rgba(37, 99, 235, 0.3);
   }
 
   .icon-wrapper {
