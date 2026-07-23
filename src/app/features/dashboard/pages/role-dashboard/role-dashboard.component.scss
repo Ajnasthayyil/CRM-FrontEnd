@@ -124,14 +124,24 @@
 }
 
 .charts-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
+  &.split-grid {
+    flex-direction: row;
+    align-items: stretch;
+
+    @media (max-width: 1024px) {
+      flex-direction: column;
+    }
   }
 }
+
+.flex-2 { flex: 2; }
+.flex-3 { flex: 3; }
+.mt-4 { margin-top: 1.5rem; }
+.flex-center { display: flex; flex-direction: column; align-items: center; justify-content: center; }
 
 .chart-card {
   background-color: var(--bg-card);
@@ -169,120 +179,216 @@
   }
 }
 
-/* Mock Line Chart */
-.mock-line-chart {
-  width: 100%;
-  overflow: hidden;
+/* Progress List Enhancements */
+.progress-list.padded {
+  padding-top: 12px;
 }
 
-/* Mock Donut Chart */
-.mock-donut-chart {
+.progress-item.row {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
+  
+  .row-label {
+    width: 130px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    font-weight: 500;
+  }
 
-  .donut {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    /* CSS conic-gradient to simulate donut chart */
-    background: conic-gradient(
-      #2563eb 0% 35%,
-      #f97316 35% 63%,
-      #eab308 63% 81%,
-      #ef4444 81% 91%,
-      #a855f7 91% 97%,
-      #14b8a6 97% 100%
-    );
-    position: relative;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 120px;
-      height: 120px;
-      background-color: var(--bg-card);
-      border-radius: 50%;
+  .row-bar {
+    flex: 1;
+    height: 8px;
+    background-color: var(--bg-hover);
+    border-radius: 4px;
+    overflow: hidden;
+
+    .fill {
+      height: 100%;
+      border-radius: 4px;
+      &.blue { background-color: #2563eb; }
     }
   }
 
-  .legend {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px 24px;
-    width: 100%;
+  .row-stats {
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
 
-    span {
+    .pct {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .trend {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 2px;
+      &.up { color: #10b981; }
+      &.down { color: #ef4444; }
+      svg { margin-right: 2px; }
+    }
+  }
+}
+
+/* NPA Stats Row */
+.npa-stats-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+
+  .npa-stat-box {
+    flex: 1;
+    padding: 16px;
+    border-radius: var(--radius-md);
+    
+    &.success {
+      background-color: rgba(16, 185, 129, 0.1);
+      .stat-val { color: #065f46; } /* Dark green text */
+    }
+    
+    &.target {
+      background-color: rgba(37, 99, 235, 0.1);
+      .stat-val { color: #1e40af; } /* Dark blue text */
+      .stat-sub { color: #2563eb; }
+    }
+
+    .stat-label {
       font-size: 0.8rem;
       color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .stat-val {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stat-sub {
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      &.trend.down { color: #10b981; }
+    }
+  }
+}
+
+/* Branch Perf Table */
+.perf-table-wrapper {
+  overflow-x: auto;
+}
+
+.perf-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  td {
+    padding: 16px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+
+    strong { font-weight: 600; }
+    
+    .text-green { color: #10b981; font-weight: 600; }
+    .text-red { color: #ef4444; font-weight: 600; }
+    .text-yellow { color: #f59e0b; font-weight: 600; }
+    .text-blue { color: #2563eb; font-weight: 600; }
+
+    .branch-name {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
       
-      .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        &.blue { background: #2563eb; }
-        &.orange { background: #f97316; }
-        &.yellow { background: #eab308; }
-        &.red { background: #ef4444; }
-        &.purple { background: #a855f7; }
-        &.teal { background: #14b8a6; }
+      .icon-sm {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &.blue { background-color: rgba(37, 99, 235, 0.1); color: #2563eb; }
+        &.purple { background-color: rgba(168, 85, 247, 0.1); color: #a855f7; }
+        &.pink { background-color: rgba(236, 72, 153, 0.1); color: #ec4899; }
+        &.red { background-color: rgba(239, 68, 68, 0.1); color: #ef4444; }
+        &.yellow { background-color: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+        &.green { background-color: rgba(16, 185, 129, 0.1); color: #10b981; }
+      }
+    }
+
+    .perf-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      
+      .fill {
+        height: 6px;
+        border-radius: 3px;
+        flex: 1;
+        background-color: var(--bg-hover);
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; bottom: 0;
+          border-radius: 3px;
+          background-color: currentColor;
+          width: inherit;
+        }
+
+        &.blue { color: #2563eb; }
+        &.red { color: #ef4444; }
+        &.green { color: #10b981; }
+        &.yellow { color: #f59e0b; }
+      }
+
+      .lbl {
+        font-size: 0.8rem;
+        width: 60px;
+        text-align: right;
       }
     }
   }
 }
 
-/* Mock Bar Chart */
-.mock-bar-chart {
-  .bars {
+/* Custom Donut Legend */
+.donut-legend.custom {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  margin-top: 16px;
+  padding: 0 16px;
+
+  span {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-around;
-    height: 200px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 12px;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    white-space: nowrap;
     
-    .bar-group {
-      display: flex;
-      gap: 6px;
-      align-items: flex-end;
-      width: 100%;
-      justify-content: center;
-      
-      .bar {
-        width: 24px;
-        border-radius: 4px 4px 0 0;
-        
-        &.b1 { background-color: #2563eb; }
-        &.b2 { background-color: #10b981; }
-        
-        &.h-35 { height: 35%; }
-        &.h-40 { height: 40%; }
-        &.h-45 { height: 45%; }
-        &.h-50 { height: 50%; }
-        &.h-55 { height: 55%; }
-        &.h-65 { height: 65%; }
-        &.h-70 { height: 70%; }
-      }
-    }
-  }
-  
-  .x-axis {
-    display: flex;
-    justify-content: space-around;
-    padding-top: 12px;
-    
-    span {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      width: 100%;
-      text-align: center;
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
     }
   }
 }

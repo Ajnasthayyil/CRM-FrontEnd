@@ -101,56 +101,207 @@
       </div>
     </div>
 
-    <!-- Charts Area -->
-    <div class="charts-grid">
-      <div class="chart-card main-chart">
+    <!-- Charts Area 1: Industry Portfolio & NPA Trend -->
+    <div class="charts-grid split-grid">
+      <div class="chart-card flex-2">
         <div class="chart-header">
           <div>
-            <h3>Portfolio Growth & Forecast</h3>
-            <p>Monthly disbursements (₹ Lakhs) - Actual + Forecast</p>
+            <h3>Industry-wise Portfolio</h3>
+            <p>Concentration analysis</p>
           </div>
-          <a href="#" class="chart-link">Full Analytics →</a>
         </div>
-        <div class="chart-body mock-line-chart">
-          <!-- Mock line chart SVG -->
-          <svg width="100%" height="220" viewBox="0 0 600 220" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgba(37, 99, 235, 0.2)"/>
-                <stop offset="100%" stop-color="rgba(37, 99, 235, 0)"/>
-              </linearGradient>
-            </defs>
-            <!-- Grid lines -->
-            <line x1="0" y1="180" x2="600" y2="180" stroke="var(--border-color)" stroke-width="1"/>
-            <line x1="0" y1="135" x2="600" y2="135" stroke="var(--border-color)" stroke-width="1" stroke-dasharray="4"/>
-            <line x1="0" y1="90" x2="600" y2="90" stroke="var(--border-color)" stroke-width="1" stroke-dasharray="4"/>
-            <line x1="0" y1="45" x2="600" y2="45" stroke="var(--border-color)" stroke-width="1" stroke-dasharray="4"/>
-            
-            <path d="M0 150 C50 160, 80 160, 120 120 C160 80, 200 100, 250 80 C300 60, 320 80, 360 80 C400 80, 420 100, 450 80 C480 60, 500 50, 600 20" fill="url(#areaGrad)"/>
-            <path d="M0 150 C50 160, 80 160, 120 120 C160 80, 200 100, 250 80 C300 60, 320 80, 360 80" fill="none" stroke="#2563eb" stroke-width="3"/>
-            <!-- Dashed forecast part -->
-            <path d="M360 80 C400 80, 420 100, 450 80 C480 60, 500 50, 600 20" fill="none" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="6,4"/>
-          </svg>
+        <div class="chart-body progress-list padded">
+          <div class="progress-item row">
+            <div class="row-label">Technology</div>
+            <div class="row-bar"><div class="fill blue" style="width: 75%"></div></div>
+            <div class="row-stats">
+              <span class="pct">28%</span>
+              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 18.5%</span>
+            </div>
+          </div>
+          <div class="progress-item row">
+            <div class="row-label">Manufacturing</div>
+            <div class="row-bar"><div class="fill blue" style="width: 65%"></div></div>
+            <div class="row-stats">
+              <span class="pct">22%</span>
+              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 6.2%</span>
+            </div>
+          </div>
+          <div class="progress-item row">
+            <div class="row-label">Pharmaceuticals</div>
+            <div class="row-bar"><div class="fill blue" style="width: 45%"></div></div>
+            <div class="row-stats">
+              <span class="pct">16%</span>
+              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 12.8%</span>
+            </div>
+          </div>
+          <div class="progress-item row">
+            <div class="row-label">Real Estate</div>
+            <div class="row-bar"><div class="fill blue" style="width: 35%"></div></div>
+            <div class="row-stats">
+              <span class="pct">14%</span>
+              <span class="trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> 2.1%</span>
+            </div>
+          </div>
+          <div class="progress-item row">
+            <div class="row-label">Exports</div>
+            <div class="row-bar"><div class="fill blue" style="width: 25%"></div></div>
+            <div class="row-stats">
+              <span class="pct">11%</span>
+              <span class="trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> 5.4%</span>
+            </div>
+          </div>
+          <div class="progress-item row">
+            <div class="row-label">Others</div>
+            <div class="row-bar"><div class="fill blue" style="width: 20%"></div></div>
+            <div class="row-stats">
+              <span class="pct">9%</span>
+              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 4.1%</span>
+            </div>
+          </div>
         </div>
       </div>
       
-      <div class="chart-card side-chart">
+      <div class="chart-card flex-3">
+        <div class="chart-header">
+          <div>
+            <h3>NPA Trend</h3>
+            <p>Monthly NPA ratio %</p>
+          </div>
+          <a href="#" class="chart-link">Details</a>
+        </div>
+        <div class="chart-body">
+          <apx-chart
+            [series]="npaChartOptions.series!"
+            [chart]="npaChartOptions.chart!"
+            [xaxis]="npaChartOptions.xaxis!"
+            [yaxis]="npaChartOptions.yaxis!"
+            [stroke]="npaChartOptions.stroke!"
+            [markers]="npaChartOptions.markers!"
+            [grid]="npaChartOptions.grid!"
+            [tooltip]="npaChartOptions.tooltip!"
+            [colors]="npaChartOptions.colors!"
+          ></apx-chart>
+          
+          <div class="npa-stats-row">
+            <div class="npa-stat-box success">
+              <div class="stat-label">Current NPA</div>
+              <div class="stat-val">2.6%</div>
+              <div class="stat-sub trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> 0.6% from Jan</div>
+            </div>
+            <div class="npa-stat-box target">
+              <div class="stat-label">Target NPA</div>
+              <div class="stat-val">&lt;3.0%</div>
+              <div class="stat-sub"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> On target</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Area 2: Branch Perf & Loan Mix -->
+    <div class="charts-grid split-grid mt-4">
+      <div class="chart-card flex-3">
+        <div class="chart-header">
+          <div>
+            <h3>Branch Performance Comparison</h3>
+            <p>Portfolio, NPA & Disbursements by branch</p>
+          </div>
+          <a href="#" class="btn-outline-sm">Detailed Report</a>
+        </div>
+        <div class="chart-body">
+          <div class="perf-table-wrapper">
+            <table class="perf-table">
+              <thead>
+                <tr>
+                  <th>BRANCH</th>
+                  <th>PORTFOLIO SIZE</th>
+                  <th>NPA %</th>
+                  <th>JUL DISBURSEMENTS</th>
+                  <th>CUSTOMERS</th>
+                  <th>PERFORMANCE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="branch-name"><div class="icon-sm blue"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div> Mumbai Main</div></td>
+                  <td><strong>₹125.0Cr</strong></td>
+                  <td class="text-green">2.1%</td>
+                  <td>₹28.0Cr</td>
+                  <td>1,248</td>
+                  <td><div class="perf-bar"><div class="fill blue" style="width: 85%"></div><span class="lbl text-blue">Good</span></div></td>
+                </tr>
+                <tr>
+                  <td><div class="branch-name"><div class="icon-sm purple"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div> Delhi NCR</div></td>
+                  <td><strong>₹98.0Cr</strong></td>
+                  <td class="text-red">3.8%</td>
+                  <td>₹19.5Cr</td>
+                  <td>986</td>
+                  <td><div class="perf-bar"><div class="fill red" style="width: 45%"></div><span class="lbl text-red">Poor</span></div></td>
+                </tr>
+                <tr>
+                  <td><div class="branch-name"><div class="icon-sm pink"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div> Pune Central</div></td>
+                  <td><strong>₹68.0Cr</strong></td>
+                  <td class="text-green">1.9%</td>
+                  <td>₹14.5Cr</td>
+                  <td>724</td>
+                  <td><div class="perf-bar"><div class="fill green" style="width: 95%"></div><span class="lbl text-green">Excellent</span></div></td>
+                </tr>
+                <tr>
+                  <td><div class="branch-name"><div class="icon-sm red"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div> Bangalore South</div></td>
+                  <td><strong>₹54.0Cr</strong></td>
+                  <td class="text-green">2.4%</td>
+                  <td>₹11.8Cr</td>
+                  <td>621</td>
+                  <td><div class="perf-bar"><div class="fill blue" style="width: 80%"></div><span class="lbl text-blue">Good</span></div></td>
+                </tr>
+                <tr>
+                  <td><div class="branch-name"><div class="icon-sm yellow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div> Hyderabad</div></td>
+                  <td><strong>₹42.0Cr</strong></td>
+                  <td class="text-yellow">3.2%</td>
+                  <td>₹9.2Cr</td>
+                  <td>489</td>
+                  <td><div class="perf-bar"><div class="fill yellow" style="width: 60%"></div><span class="lbl text-yellow">Average</span></div></td>
+                </tr>
+                <tr>
+                  <td><div class="branch-name"><div class="icon-sm green"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div> Chennai</div></td>
+                  <td><strong>₹38.0Cr</strong></td>
+                  <td class="text-yellow">2.7%</td>
+                  <td>₹8.4Cr</td>
+                  <td>412</td>
+                  <td><div class="perf-bar"><div class="fill yellow" style="width: 65%"></div><span class="lbl text-yellow">Average</span></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart-card flex-2">
         <div class="chart-header">
           <div>
             <h3>Loan Portfolio Mix</h3>
             <p>By product type</p>
           </div>
         </div>
-        <div class="chart-body mock-donut-chart">
-          <!-- Mock Donut Chart CSS based -->
-          <div class="donut"></div>
-          <div class="legend">
-            <span><span class="dot blue"></span> Home Loan (35%)</span>
-            <span><span class="dot orange"></span> Business Loan (28%)</span>
-            <span><span class="dot yellow"></span> SME Loan (18%)</span>
-            <span><span class="dot red"></span> Auto Loan (10%)</span>
-            <span><span class="dot purple"></span> Personal Loan (6%)</span>
-            <span><span class="dot teal"></span> Others (3%)</span>
+        <div class="chart-body flex-center">
+          <apx-chart
+            [series]="mixChartOptions.series!"
+            [chart]="mixChartOptions.chart!"
+            [labels]="mixChartOptions.labels!"
+            [colors]="mixChartOptions.colors!"
+            [plotOptions]="mixChartOptions.plotOptions!"
+            [tooltip]="mixChartOptions.tooltip!"
+            [dataLabels]="mixChartOptions.dataLabels!"
+            [legend]="mixChartOptions.legend!"
+          ></apx-chart>
+          <div class="donut-legend custom">
+            <span><span class="dot" style="background: #2563eb"></span> Home Loan (35%)</span>
+            <span><span class="dot" style="background: #10b981"></span> Business Loan (28%)</span>
+            <span><span class="dot" style="background: #f59e0b"></span> SME Loan (18%)</span>
+            <span><span class="dot" style="background: #ef4444"></span> Auto Loan (10%)</span>
+            <span><span class="dot" style="background: #8b5cf6"></span> Personal Loan (6%)</span>
+            <span><span class="dot" style="background: #06b6d4"></span> Others (3%)</span>
           </div>
         </div>
       </div>
