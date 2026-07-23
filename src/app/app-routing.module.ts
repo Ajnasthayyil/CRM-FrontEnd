@@ -5,6 +5,7 @@ import { DashboardLayoutComponent } from './layouts/dashboard/dashboard-layout/d
 import { DashboardHomeComponent } from './features/dashboard/pages/dashboard-home/dashboard-home.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { OtpVerificationComponent } from './features/auth/otp-verification/otp-verification.component';
+import { RoleDashboardComponent } from './features/dashboard/pages/role-dashboard/role-dashboard.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,10 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardLayoutComponent,
     children: [
-      // Future dashboard routes for specific roles go here
+      {
+        path: '',
+        component: RoleDashboardComponent
+      }
     ]
   },
   {
