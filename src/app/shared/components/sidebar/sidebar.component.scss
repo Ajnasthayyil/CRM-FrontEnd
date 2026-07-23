@@ -244,7 +244,7 @@ nav {
         .submenu {
             display: flex;
             flex-direction: column;
-            padding-left: 48px;
+            padding-left: 44px;
             margin-top: 4px;
             margin-bottom: 8px;
             opacity: 0;
@@ -254,14 +254,29 @@ nav {
             transition: opacity 0.2s ease;
 
             a {
-                color: #64748b;
+                position: relative;
+                color: var(--text-muted);
                 text-decoration: none;
                 font-size: 0.85rem;
-                padding: 6px 0;
+                padding: 8px 0 8px 16px;
                 white-space: nowrap;
                 
+                &::before {
+                    content: '•';
+                    position: absolute;
+                    left: 0;
+                    color: #64748b;
+                    font-size: 1.2rem;
+                    line-height: 1;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+
                 &:hover {
                     color: var(--text-main);
+                    &::before {
+                        color: var(--text-main);
+                    }
                 }
             }
         }
