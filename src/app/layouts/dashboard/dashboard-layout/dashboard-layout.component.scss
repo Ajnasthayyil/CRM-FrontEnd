@@ -1,15 +1,16 @@
-.dashboard-container {
-  display: flex;
-  min-height: 100vh;
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f7fb;
 }
 
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.dashboard-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.content {
-  flex: 1;
-  padding: 20px;
+.dashboard-content {
+    flex: 1;
+    padding: 24px;
 }

@@ -1,17 +1,17 @@
-<div class="dashboard-container">
+<div class="dashboard-layout">
 
-  <app-sidebar></app-sidebar>
+    <app-sidebar></app-sidebar>
 
-  <div class="main-content">
+    <div class="dashboard-main">
 
-    <app-header></app-header>
+        <app-header></app-header>
 
-    <div class="content">
-      <router-outlet></router-outlet>
+        <main class="dashboard-content">
+            <router-outlet></router-outlet>
+        </main>
+
+        <app-footer></app-footer>
+
     </div>
-
-    <app-footer></app-footer>
-
-  </div>
 
 </div>
