@@ -41,33 +41,21 @@
   }
 
   .brand-text {
+    margin-top: 1rem;
     h1 {
-      font-size: 2rem;
+      font-size: 3.5rem;
       font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 0.25rem;
-      letter-spacing: -0.025em;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
     }
     p {
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 1.125rem;
+      max-width: 600px;
+      margin: 0 auto;
     }
-  }
-}
-
-.selection-intro {
-  text-align: center;
-  margin-bottom: 2rem;
-  
-  h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    color: var(--text-main);
-  }
-  p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
   }
 }
 
