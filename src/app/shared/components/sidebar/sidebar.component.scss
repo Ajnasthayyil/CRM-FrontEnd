@@ -1,5 +1,11 @@
+:host {
+    display: flex;
+    height: 100%;
+}
+
 .sidebar {
     width: 260px;
+    height: 100%;
     background-color: var(--bg-card);
     border-right: 1px solid var(--border-color);
     color: var(--text-main);
