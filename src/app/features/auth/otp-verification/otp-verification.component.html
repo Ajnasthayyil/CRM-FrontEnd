@@ -20,7 +20,7 @@
     </div>
 
     <div class="otp-inputs">
-      <input *ngFor="let digit of otpCode; let i = index" 
+      <input *ngFor="let digit of otpCode; let i = index; trackBy: trackByIndex" 
              type="text" 
              maxlength="1" 
              [(ngModel)]="otpCode[i]" 

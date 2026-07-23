@@ -38,8 +38,10 @@ export class OtpVerificationComponent implements OnInit {
   onInput(event: any, index: number) {
     const value = event.target.value;
     if (value && index < 5) {
-      // Move to next input
-      this.otpInputs.toArray()[index + 1].nativeElement.focus();
+      // Move to next input with slight delay to prevent double-entry bugs
+      setTimeout(() => {
+        this.otpInputs.toArray()[index + 1].nativeElement.focus();
+      }, 10);
     }
   }
 
