@@ -1,18 +1,48 @@
 :host {
-    display: flex;
+    display: block;
+    width: 88px;
     height: 100%;
+    position: relative;
+    z-index: 100;
 }
 
 .sidebar {
-    width: 280px;
+    width: 88px;
     height: 100%;
-    background-color: #0f172a; /* Fixed dark background */
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #0f172a;
     border-right: 1px solid rgba(255, 255, 255, 0.05);
-    color: #94a3b8; /* Slate 400 */
+    color: #94a3b8;
     display: flex;
     flex-direction: column;
-    z-index: 10;
-    overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: none;
+
+    &:hover {
+        width: 280px;
+        overflow-y: auto;
+        box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+
+        .nav-text, .logo-text, .user-info, .menu-label, .chevron, .submenu {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .logo-area {
+            padding: 24px;
+            justify-content: flex-start;
+        }
+
+        .user-profile {
+            padding: 20px 24px;
+            justify-content: flex-start;
+        }
+    }
 }
 
 .sidebar::-webkit-scrollbar {
@@ -24,15 +54,18 @@
 }
 
 .logo-area {
-    padding: 24px;
+    padding: 24px 22px;
     display: flex;
     align-items: center;
     gap: 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: padding 0.3s ease;
+    min-height: 88px;
 
     .logo-icon {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        min-width: 44px;
+        height: 44px;
         background: var(--primary);
         border-radius: 8px;
         display: flex;
@@ -42,6 +75,11 @@
     }
 
     .logo-text {
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        white-space: nowrap;
+
         h3 {
             margin: 0;
             color: white;
@@ -61,9 +99,12 @@
     align-items: center;
     gap: 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: padding 0.3s ease;
+    min-height: 80px;
 
     .avatar {
         width: 40px;
+        min-width: 40px;
         height: 40px;
         background: #3b82f6;
         color: white;
@@ -76,6 +117,11 @@
     }
 
     .user-info {
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        white-space: nowrap;
+
         h4 {
             margin: 0;
             color: white;
@@ -101,12 +147,17 @@ nav {
         gap: 12px;
         background-color: #2563eb;
         color: white;
-        padding: 12px 16px;
+        padding: 12px 18px;
         border-radius: 8px;
         text-decoration: none;
         font-weight: 500;
         margin-bottom: 24px;
         transition: all 0.2s ease;
+        white-space: nowrap;
+
+        svg {
+            min-width: 18px;
+        }
 
         &:hover {
             background-color: #1d4ed8;
@@ -120,13 +171,16 @@ nav {
         letter-spacing: 0.5px;
         margin-bottom: 12px;
         padding-left: 8px;
+        opacity: 0;
+        white-space: nowrap;
+        transition: opacity 0.2s ease;
     }
 
     .nav-item {
         display: flex;
         align-items: center;
         gap: 12px;
-        padding: 10px 16px;
+        padding: 10px 18px;
         color: #94a3b8;
         text-decoration: none;
         font-size: 0.9rem;
@@ -134,6 +188,12 @@ nav {
         border-radius: 8px;
         transition: all 0.2s ease;
         margin-bottom: 4px;
+        white-space: nowrap;
+        cursor: pointer;
+
+        svg {
+            min-width: 18px;
+        }
 
         &:hover, &.active {
             color: white;
@@ -143,7 +203,15 @@ nav {
         .chevron {
             margin-left: auto;
             color: #64748b;
+            opacity: 0;
+            transition: opacity 0.2s ease;
         }
+    }
+
+    .nav-text {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        pointer-events: none;
     }
 
     .has-submenu {
@@ -155,33 +223,49 @@ nav {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 16px;
+            padding: 10px 18px;
             color: #94a3b8;
             text-decoration: none;
             border-radius: 8px;
+            white-space: nowrap;
             
+            svg:first-child {
+                min-width: 18px;
+            }
+
             &:hover {
                 color: white;
+                background: rgba(255, 255, 255, 0.05);
             }
         }
 
         .submenu {
             display: flex;
             flex-direction: column;
-            padding-left: 44px;
+            padding-left: 48px;
             margin-top: 4px;
             margin-bottom: 8px;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
 
             a {
                 color: #64748b;
                 text-decoration: none;
                 font-size: 0.85rem;
                 padding: 6px 0;
+                white-space: nowrap;
                 
                 &:hover {
                     color: white;
                 }
             }
+        }
+        
+        &:hover .submenu {
+            height: auto;
         }
     }
 }
@@ -194,14 +278,19 @@ nav {
         display: flex;
         align-items: center;
         gap: 12px;
-        padding: 10px 16px;
+        padding: 10px 18px;
         color: #94a3b8;
         text-decoration: none;
         font-size: 0.9rem;
         font-weight: 500;
         border-radius: 8px;
         cursor: pointer;
+        white-space: nowrap;
         
+        svg {
+            min-width: 18px;
+        }
+
         &:hover {
             color: white;
             background: rgba(255, 255, 255, 0.05);
