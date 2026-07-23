@@ -250,7 +250,6 @@ nav {
             max-height: 0;
             opacity: 0;
             overflow: hidden;
-            pointer-events: none;
             transition: all 0.3s ease;
 
             a {
@@ -281,12 +280,11 @@ nav {
             }
         }
         
-        &:hover .submenu {
+        &:hover .submenu, &.active .submenu {
             max-height: 200px;
             opacity: 1;
             margin-top: 4px;
             margin-bottom: 8px;
-            pointer-events: auto;
         }
     }
 }

@@ -33,12 +33,7 @@ const routes: Routes = [
   {
     path: 'customers',
     component: DashboardLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./features/customers/customers.module').then(m => m.CustomersModule)
-      }
-    ]
+    loadChildren: () => import('./features/customers/customers.module').then(m => m.CustomersModule)
   },
   {
     path: '**',
