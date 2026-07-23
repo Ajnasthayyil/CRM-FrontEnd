@@ -1,0 +1,213 @@
+<div class="page-container">
+  <!-- Top Navigation -->
+  <div class="top-nav">
+    <a routerLink="/customers/list" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Back to Customer List
+    </a>
+  </div>
+
+  <!-- Profile Banner -->
+  <div class="profile-banner">
+    <div class="profile-left">
+      <div class="avatar blue">RK</div>
+      <div class="profile-info">
+        <div class="name-row">
+          <h2>{{ customer.name }}</h2>
+          <span class="status-badge"><span class="dot green"></span>Active</span>
+          <span class="tag">{{ customer.type }}</span>
+          <span class="tag">{{ customer.industry }}</span>
+        </div>
+        <div class="contact-row">
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> {{ customer.phone }}</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> {{ customer.email }}</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> {{ customer.city }}</span>
+          <span>PAN: {{ customer.pan }}</span>
+          <span>GSTIN: {{ customer.gstin }}</span>
+        </div>
+        <div class="meta-row">
+          <span>Customer since {{ customer.since }}</span>
+          <span class="divider">·</span>
+          <span>RM: <strong>{{ customer.rm }}</strong></span>
+          <span class="divider">·</span>
+          <span>Branch: <strong>{{ customer.branch }}</strong></span>
+        </div>
+      </div>
+    </div>
+    <div class="profile-right">
+      <div class="metrics">
+        <div class="metric-box score">
+          <div class="val text-green">768</div>
+          <div class="lbl">Credit Score</div>
+        </div>
+        <div class="metric-box">
+          <div class="val text-blue">3</div>
+          <div class="lbl">Total Loans</div>
+        </div>
+        <div class="metric-box outstanding">
+          <div class="val text-purple">₹42.5L</div>
+          <div class="lbl">Outstanding</div>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button class="btn-primary">+ New Loan</button>
+        <button class="btn-outline"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Edit</button>
+        <button class="btn-outline"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg> Export</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs-scroll">
+    <div class="tabs-container">
+      <div class="tab active">Overview</div>
+      <div class="tab">Loans</div>
+      <div class="tab">Applications</div>
+      <div class="tab">Documents</div>
+      <div class="tab">Timeline</div>
+      <div class="tab">Meetings</div>
+      <div class="tab">Emails</div>
+      <div class="tab">Support Tickets</div>
+      <div class="tab">EMIs</div>
+      <div class="tab">Approvals</div>
+      <div class="tab">Financial Summary</div>
+      <div class="tab">Notes</div>
+    </div>
+  </div>
+
+  <!-- Content Grid -->
+  <div class="content-grid">
+    <!-- Left Column -->
+    <div class="col-main">
+      <div class="card info-card">
+        <div class="card-header">
+          <h3>Customer Information</h3>
+          <a href="#" class="edit-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Edit</a>
+        </div>
+        <div class="card-body info-grid">
+          <div class="info-item">
+            <label>CUSTOMER ID</label>
+            <div>{{ customer.id }}</div>
+          </div>
+          <div class="info-item">
+            <label>CUSTOMER TYPE</label>
+            <div>{{ customer.type }}</div>
+          </div>
+          <div class="info-item">
+            <label>PHONE</label>
+            <div>{{ customer.phone }}</div>
+          </div>
+          <div class="info-item">
+            <label>EMAIL</label>
+            <div>{{ customer.email }}</div>
+          </div>
+          <div class="info-item">
+            <label>CITY</label>
+            <div>{{ customer.city }}</div>
+          </div>
+          <div class="info-item">
+            <label>BRANCH</label>
+            <div>{{ customer.branch }}</div>
+          </div>
+          <div class="info-item">
+            <label>RELATIONSHIP MANAGER</label>
+            <div>{{ customer.rm }}</div>
+          </div>
+          <div class="info-item">
+            <label>MEMBER SINCE</label>
+            <div>{{ customer.since }}</div>
+          </div>
+          <div class="info-item">
+            <label>PAN NUMBER</label>
+            <div>{{ customer.pan }}</div>
+          </div>
+          <div class="info-item">
+            <label>GSTIN</label>
+            <div>{{ customer.gstin }}</div>
+          </div>
+          <div class="info-item">
+            <label>INDUSTRY</label>
+            <div>{{ customer.industry }}</div>
+          </div>
+          <div class="info-item">
+            <label>ANNUAL REVENUE</label>
+            <div>{{ customer.annualRevenue }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="active-loans-section">
+        <div class="section-header">
+          <div>
+            <h3>Active Loans</h3>
+            <p class="subtitle">1 loan(s)</p>
+          </div>
+          <button class="btn-primary-sm">+ New Loan</button>
+        </div>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>LOAN ID</th>
+                <th>TYPE</th>
+                <th>AMOUNT</th>
+                <th>RATE</th>
+                <th>EMI</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let loan of activeLoans">
+                <td><a href="#" class="text-blue">{{ loan.id }}</a></td>
+                <td>{{ loan.type }}</td>
+                <td><strong>{{ loan.amount }}</strong></td>
+                <td>{{ loan.rate }}</td>
+                <td>{{ loan.emi }}</td>
+                <td><span class="status-badge"><span class="dot green"></span>{{ loan.status }}</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="col-side">
+      <div class="card quick-actions">
+        <h3>Quick Actions</h3>
+        <div class="action-list">
+          <button class="action-btn"><div class="icon-box blue"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div> New Loan Application</button>
+          <button class="action-btn"><div class="icon-box green"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div> Schedule Meeting</button>
+          <button class="action-btn"><div class="icon-box purple"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div> Send Message</button>
+          <button class="action-btn"><div class="icon-box yellow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg></div> Upload Document</button>
+          <button class="action-btn"><div class="icon-box red"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div> Credit Assessment</button>
+        </div>
+      </div>
+
+      <div class="card financial-summary">
+        <h3>Financial Summary</h3>
+        <div class="summary-list">
+          <div class="summary-row">
+            <span>Total Credit Facility</span>
+            <strong>₹59.5L</strong>
+          </div>
+          <div class="summary-row">
+            <span>Outstanding Principal</span>
+            <strong>₹42.5L</strong>
+          </div>
+          <div class="summary-row">
+            <span>Interest Accrued</span>
+            <strong>₹4.0L</strong>
+          </div>
+          <div class="summary-row">
+            <span>Total Repaid</span>
+            <strong>₹14.9L</strong>
+          </div>
+          <div class="summary-row highlight">
+            <span>Overdue Amount</span>
+            <strong class="text-green">₹0</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,135 @@
+<div class="page-container">
+  <!-- Breadcrumbs & Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / Customers / Customer List</div>
+      <h1>Customers</h1>
+      <div class="subtitle">12 total customers · 9 active</div>
+    </div>
+    <div class="header-right">
+      <button class="btn-outline-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.25 4.28"/></svg> Refresh
+      </button>
+      <button class="btn-outline-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Import
+      </button>
+      <button class="btn-outline-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg> Export
+      </button>
+      <button class="btn-primary-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add Customer
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-cards">
+    <div class="card">
+      <div class="val text-blue">12</div>
+      <div class="lbl">Total Customers</div>
+    </div>
+    <div class="card">
+      <div class="val text-green">9</div>
+      <div class="lbl">Active Customers</div>
+    </div>
+    <div class="card">
+      <div class="val text-purple">4</div>
+      <div class="lbl">Corporate Customers</div>
+    </div>
+    <div class="card">
+      <div class="val text-orange">3</div>
+      <div class="lbl">SME Customers</div>
+    </div>
+    <div class="card">
+      <div class="val text-red">1</div>
+      <div class="lbl">Blocked Customers</div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs-container">
+    <div class="tab active">All</div>
+    <div class="tab">Individual</div>
+    <div class="tab">Corporate</div>
+    <div class="tab">SME</div>
+    <div class="tab">Active</div>
+    <div class="tab">Blocked</div>
+  </div>
+
+  <!-- Search & Filter -->
+  <div class="search-bar">
+    <div class="input-group">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" placeholder="Search by name, ID, email, city...">
+    </div>
+    <div class="filter-actions">
+      <button class="btn-outline-sm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg> Advanced Filter
+      </button>
+      <span class="result-count">12 results</span>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="chk-col"><input type="checkbox"></th>
+          <th>CUSTOMER</th>
+          <th>TYPE</th>
+          <th>CREDIT SCORE</th>
+          <th>LOANS</th>
+          <th>OUTSTANDING</th>
+          <th>RM</th>
+          <th>BRANCH</th>
+          <th>STATUS</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customers" (click)="viewCustomer(customer.id)" class="clickable-row">
+          <td class="chk-col" (click)="$event.stopPropagation()"><input type="checkbox"></td>
+          <td>
+            <div class="customer-cell">
+              <div class="avatar" [ngClass]="customer.avatarColor">{{ customer.initials }}</div>
+              <div class="info">
+                <div class="name">{{ customer.name }}</div>
+                <div class="sub">{{ customer.id }} · {{ customer.email }}</div>
+              </div>
+            </div>
+          </td>
+          <td><span class="badge" [ngClass]="customer.typeClass"><span class="dot"></span>{{ customer.type }}</span></td>
+          <td><div class="credit-score"><div class="score-bar" [ngClass]="customer.creditClass"></div> <strong>{{ customer.creditScore }}</strong></div></td>
+          <td><strong>{{ customer.loans }}</strong></td>
+          <td><strong>{{ customer.outstanding }}</strong></td>
+          <td>{{ customer.rm }}</td>
+          <td>{{ customer.branch }}</td>
+          <td><span class="status-badge"><span class="dot green"></span>{{ customer.status }}</span></td>
+          <td (click)="$event.stopPropagation()">
+            <div class="actions">
+              <button class="btn-action view" (click)="viewCustomer(customer.id)">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> View
+              </button>
+              <button class="btn-action loan">+ Loan</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- Pagination -->
+    <div class="pagination-container">
+      <div class="pagination-info">Showing 1 to 4 of 12 entries</div>
+      <div class="pagination">
+        <button class="btn-page" disabled>Previous</button>
+        <div class="page-numbers">
+          <button class="page-num active">1</button>
+          <button class="page-num">2</button>
+          <button class="page-num">3</button>
+        </div>
+        <button class="btn-page">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
