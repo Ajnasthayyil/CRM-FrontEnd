@@ -1,8 +1,16 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+}
+
 .role-selection-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4rem 2rem;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -11,15 +19,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   text-align: center;
-  gap: 1rem;
+  gap: 0.75rem;
 
   .logo-box {
     background-color: var(--primary);
     color: white;
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     border-radius: var(--radius-xl);
     display: flex;
     justify-content: center;
@@ -27,14 +35,14 @@
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
     
     svg {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
     }
   }
 
   .brand-text {
     h1 {
-      font-size: 2.25rem;
+      font-size: 2rem;
       font-weight: 700;
       color: var(--text-main);
       margin-bottom: 0.25rem;
@@ -42,31 +50,31 @@
     }
     p {
       color: var(--text-muted);
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
   }
 }
 
 .selection-intro {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     color: var(--text-main);
   }
   p {
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 }
 
 .roles-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
+  gap: 1rem;
   width: 100%;
 }
 
@@ -74,10 +82,10 @@
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 1.5rem;
+  padding: 1.25rem;
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
 
@@ -89,8 +97,8 @@
   }
 
   .icon-wrapper {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: var(--radius-md);
     display: flex;
     justify-content: center;
@@ -110,20 +118,30 @@
 
   .card-content {
     h3 {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--text-main);
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.15rem;
     }
     p {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      line-height: 1.4;
+      line-height: 1.3;
     }
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+  .roles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .role-selection-container {
+    min-height: auto;
+    padding: 3rem 2rem;
+  }
+}
+
+@media (max-width: 640px) {
   .roles-grid {
     grid-template-columns: 1fr;
   }
