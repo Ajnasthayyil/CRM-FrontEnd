@@ -33,6 +33,13 @@
   }
 }
 
+.landing-theme-wrapper {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+}
+
 .role-selection-container {
   display: flex;
   flex-direction: column;
