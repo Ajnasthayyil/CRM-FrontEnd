@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 
 
@@ -10,7 +12,9 @@ import { FooterComponent } from './components/footer/footer.component';
   declarations: [
     SidebarComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    PageHeaderComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule
