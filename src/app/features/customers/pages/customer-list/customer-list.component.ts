@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-customer-list',
@@ -190,7 +190,7 @@ export class CustomerListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.currentRole$.subscribe(role => {
+    this.authService.currentRole$.subscribe((role: string | null) => {
       this.currentUserRole = role;
     });
 
