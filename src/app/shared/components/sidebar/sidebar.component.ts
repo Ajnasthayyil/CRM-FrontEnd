@@ -13,16 +13,6 @@ export class SidebarComponent implements OnInit {
   userInitials: string = 'SA';
   
   activeDept: string = '';
-  
-  expandedSections: { [key: string]: boolean } = {
-    'DIRECTORY': true,
-    'DEPARTMENTS': false,
-    'TEAM MANAGEMENT': false,
-    'LIST': false,
-    'OTHERS': false,
-    'ACADEMICS': false,
-    'ADMINISTRATION': false
-  };
 
   constructor(
     private authService: AuthService,
@@ -55,10 +45,6 @@ export class SidebarComponent implements OnInit {
     } else {
       this.activeDept = dept;
     }
-  }
-
-  toggleSection(section: string) {
-    this.expandedSections[section] = !this.expandedSections[section];
   }
 
   logout() {

@@ -173,42 +173,9 @@ nav {
         letter-spacing: 0.5px;
         margin-bottom: 12px;
         padding-left: 8px;
-        padding-right: 8px;
         opacity: 0;
         white-space: nowrap;
         transition: opacity 0.2s ease;
-    }
-
-    .section-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        cursor: pointer;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        border-radius: 6px;
-        margin-bottom: 8px;
-
-        &:hover {
-            color: var(--text-main);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .chevron {
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.2s ease;
-            color: inherit;
-            
-            &.rotated {
-                transform: rotate(90deg);
-            }
-        }
-    }
-
-    .section-content {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 16px;
     }
 
     .nav-item {
