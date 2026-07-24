@@ -7,28 +7,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Customer360Component implements OnInit {
   customer = {
-    id: 'C001',
+    id: 'STU001',
     name: 'Rajesh Kumar Sharma',
-    email: 'rajesh.sharma@techcorp.in',
+    email: 'rajesh.sharma@student.educrm.in',
     phone: '+91 98765 43210',
     city: 'Mumbai',
-    pan: 'ABCDE1234F',
-    gstin: '27ABCDE1234F1Z5',
+    pan: 'Guardian: Ramesh Sharma',
+    gstin: 'Blood Group: O+',
     since: '2021-03-15',
     rm: 'Priya Mehta',
-    branch: 'Mumbai Main',
-    industry: 'Technology',
-    annualRevenue: '₹8.5Cr',
-    type: 'Corporate'
+    branch: 'Science',
+    industry: 'PCM',
+    annualRevenue: 'Grade 10',
+    type: 'Student'
   };
 
   activeLoans = [
     {
-      id: 'LN0001',
-      type: 'Business Loan',
-      amount: '₹50.0L',
-      rate: '11.5%',
-      emi: '₹1,05,432',
+      id: 'ASN001',
+      type: 'Physics Project',
+      amount: '3 Days',
+      rate: 'Submitted',
+      emi: 'A-',
+      status: 'Graded'
+    },
+    {
+      id: 'ASN002',
+      type: 'Math Homework',
+      amount: '5 Days',
+      rate: 'Pending',
+      emi: '-',
       status: 'Active'
     }
   ];
