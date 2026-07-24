@@ -49,18 +49,18 @@ export class RoleDashboardComponent implements OnInit {
   currentRole: string | null = null;
   dateStr: string = 'Wednesday, 23 July 2024';
 
-  @ViewChild("npaChart") npaChart!: ChartComponent;
-  public npaChartOptions: Partial<LineChartOptions>;
+  @ViewChild("attendanceChart") attendanceChart!: ChartComponent;
+  public attendanceChartOptions: Partial<LineChartOptions>;
 
   @ViewChild("mixChart") mixChart!: ChartComponent;
   public mixChartOptions: Partial<DonutChartOptions>;
 
   constructor(private authService: AuthService) {
-    this.npaChartOptions = {
+    this.attendanceChartOptions = {
       series: [
         {
-          name: "NPA %",
-          data: [3.2, 3.1, 3.0, 2.9, 2.8, 2.7, 2.6]
+          name: "Attendance %",
+          data: [92, 93, 91, 94, 95, 94, 96]
         }
       ],
       chart: {
@@ -74,17 +74,17 @@ export class RoleDashboardComponent implements OnInit {
         },
         fontFamily: 'Inter, sans-serif'
       },
-      colors: ['#ef4444'],
+      colors: ['#10b981'],
       dataLabels: {
         enabled: false
       },
       stroke: {
-        curve: "straight",
+        curve: "smooth",
         width: 3
       },
       markers: {
         size: 5,
-        colors: ['#ef4444'],
+        colors: ['#10b981'],
         strokeColors: '#fff',
         strokeWidth: 2,
         hover: {
@@ -136,43 +136,35 @@ export class RoleDashboardComponent implements OnInit {
         }
       },
       yaxis: {
-        min: 2.4,
-        max: 3.4,
-        tickAmount: 4,
+        min: 85,
+        max: 100,
+        tickAmount: 3,
         labels: {
           style: {
             colors: 'var(--text-muted)'
           },
-          formatter: (value) => { return value.toFixed(1); }
+          formatter: (value) => { return value.toFixed(0) + '%'; }
         }
       },
       tooltip: {
         theme: 'light',
         y: {
           formatter: function(val) {
-            return val + "";
+            return val + "%";
           }
-        },
-        custom: function({series, seriesIndex, dataPointIndex, w}) {
-          var val = series[seriesIndex][dataPointIndex];
-          var cat = w.globals.labels[dataPointIndex];
-          return '<div style="padding: 10px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">' +
-            '<div style="color: var(--text-main); font-weight: 500; margin-bottom: 4px;">' + cat + '</div>' +
-            '<div style="color: #ef4444; font-weight: 600;">NPA % : ' + val + '</div>' +
-            '</div>';
         }
       }
     };
 
     this.mixChartOptions = {
-      series: [35, 28, 18, 10, 6, 3],
-      labels: ["Home Loan", "Business Loan", "SME Loan", "Auto Loan", "Personal Loan", "Others"],
+      series: [40, 25, 20, 10, 5],
+      labels: ["Primary", "Middle School", "High School", "Pre-Primary", "Special Ed"],
       chart: {
         type: "donut",
         height: 250,
         fontFamily: 'Inter, sans-serif'
       },
-      colors: ['#2563eb', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4'],
+      colors: ['#2563eb', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4'],
       plotOptions: {
         pie: {
           donut: {
@@ -191,15 +183,7 @@ export class RoleDashboardComponent implements OnInit {
         show: false
       },
       tooltip: {
-        theme: 'light',
-        custom: function({series, seriesIndex, dataPointIndex, w}) {
-          var val = series[seriesIndex];
-          var cat = w.globals.labels[seriesIndex];
-          var color = w.globals.colors[seriesIndex];
-          return '<div style="padding: 10px 16px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 8px;">' +
-            '<span style="color: ' + color + '; font-weight: 500;">' + cat + ' : ' + val + '%</span>' +
-            '</div>';
-        }
+        theme: 'light'
       }
     };
   }

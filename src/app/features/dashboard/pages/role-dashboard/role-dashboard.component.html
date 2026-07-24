@@ -1,14 +1,14 @@
 <div class="dashboard-wrapper">
-  <!-- CEO Dashboard Layout -->
-  <ng-container *ngIf="currentRole === 'Super Admin'">
+  <!-- School Admin Dashboard Layout -->
+  <ng-container *ngIf="currentRole === 'School Admin'">
     <div class="dash-header">
       <div class="title-area">
-        <h1>Executive Dashboard</h1>
-        <p>CEO View · Q2 FY2024-25 · All Branches · Data as of {{ dateStr }}</p>
+        <h1>School Admin Dashboard</h1>
+        <p>Enterprise View · Academic Year 2024-25 · All Departments · Data as of {{ dateStr }}</p>
       </div>
       <div class="action-area">
         <select class="branch-select">
-          <option>All Branches</option>
+          <option>All Departments</option>
         </select>
       </div>
     </div>
@@ -18,26 +18,9 @@
       <div class="metric-card">
         <div class="card-top">
           <div>
-            <div class="metric-label">TOTAL PORTFOLIO</div>
-            <div class="metric-value">₹425.0Cr</div>
-            <div class="metric-subtext">Across 6 branches</div>
-          </div>
-          <div class="icon-box blue">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-          </div>
-        </div>
-        <div class="card-bottom trend-up">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-          <span>14.2%</span> vs last month
-        </div>
-      </div>
-      
-      <div class="metric-card">
-        <div class="card-top">
-          <div>
-            <div class="metric-label">TOTAL CUSTOMERS</div>
+            <div class="metric-label">TOTAL STUDENTS</div>
             <div class="metric-value">4,480</div>
-            <div class="metric-subtext">2,480 active</div>
+            <div class="metric-subtext">Across 6 grades</div>
           </div>
           <div class="icon-box blue">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -45,16 +28,33 @@
         </div>
         <div class="card-bottom trend-up">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-          <span>8.6%</span> vs last month
+          <span>5.2%</span> vs last year
+        </div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="card-top">
+          <div>
+            <div class="metric-label">TOTAL STAFF</div>
+            <div class="metric-value">324</div>
+            <div class="metric-subtext">280 teaching staff</div>
+          </div>
+          <div class="icon-box blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+          </div>
+        </div>
+        <div class="card-bottom trend-up">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+          <span>2.1%</span> vs last year
         </div>
       </div>
 
       <div class="metric-card">
         <div class="card-top">
           <div>
-            <div class="metric-label">MONTHLY REVENUE</div>
-            <div class="metric-value">₹28.4 Cr</div>
-            <div class="metric-subtext">Jul 2024</div>
+            <div class="metric-label">AVERAGE ATTENDANCE</div>
+            <div class="metric-value">94.8%</div>
+            <div class="metric-subtext">This Month</div>
           </div>
           <div class="icon-box green">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
@@ -62,16 +62,16 @@
         </div>
         <div class="card-bottom trend-up">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-          <span>16.8%</span> vs last month
+          <span>1.2%</span> vs last month
         </div>
       </div>
       
       <div class="metric-card">
         <div class="card-top">
           <div>
-            <div class="metric-label">NPA RATIO</div>
-            <div class="metric-value">2.68%</div>
-            <div class="metric-subtext">Industry avg: 4.2%</div>
+            <div class="metric-label">ABSENTEEISM RATE</div>
+            <div class="metric-value">5.2%</div>
+            <div class="metric-subtext">Target: < 4%</div>
           </div>
           <div class="icon-box red">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
@@ -79,35 +79,35 @@
         </div>
         <div class="card-bottom trend-down">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
-          <span>8.1%</span> vs last month
+          <span>0.4%</span> vs last month
         </div>
       </div>
       
       <div class="metric-card">
         <div class="card-top">
           <div>
-            <div class="metric-label">DISBURSEMENTS</div>
-            <div class="metric-value">₹72.4 Cr</div>
-            <div class="metric-subtext">Jul 2024</div>
+            <div class="metric-label">UPCOMING EVENTS</div>
+            <div class="metric-value">12</div>
+            <div class="metric-subtext">Next 30 days</div>
           </div>
           <div class="icon-box purple">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
           </div>
         </div>
         <div class="card-bottom trend-up">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-          <span>22.3%</span> vs last month
+          <span>4</span> New events added
         </div>
       </div>
     </div>
 
-    <!-- Charts Area 1: Branch Perf & Loan Mix -->
+    <!-- Charts Area 1 -->
     <div class="charts-grid split-grid">
       <div class="chart-card flex-3">
         <div class="chart-header">
           <div>
-            <h3>Branch Performance Comparison</h3>
-            <p>Portfolio, NPA & Disbursements by branch</p>
+            <h3>Department Performance Comparison</h3>
+            <p>Students, Attendance & Grades by Department</p>
           </div>
           <a href="#" class="btn-outline-sm">Detailed Report</a>
         </div>
@@ -116,62 +116,46 @@
             <table class="perf-table">
               <thead>
                 <tr>
-                  <th>BRANCH</th>
-                  <th>PORTFOLIO SIZE</th>
-                  <th>NPA %</th>
-                  <th>JUL DISBURSEMENTS</th>
-                  <th>CUSTOMERS</th>
+                  <th>DEPARTMENT</th>
+                  <th>STUDENTS</th>
+                  <th>ATTENDANCE %</th>
+                  <th>AVG GRADE</th>
+                  <th>TEACHERS</th>
                   <th>PERFORMANCE</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><div class="branch-name"><div class="icon-sm blue"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div> Mumbai Main</div></td>
-                  <td><strong>₹125.0Cr</strong></td>
-                  <td class="text-green">2.1%</td>
-                  <td>₹28.0Cr</td>
-                  <td>1,248</td>
+                  <td><div class="branch-name"><div class="icon-sm blue"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div> Science</div></td>
+                  <td><strong>1,248</strong></td>
+                  <td class="text-green">96.5%</td>
+                  <td>A-</td>
+                  <td>45</td>
+                  <td><div class="perf-bar"><div class="fill green" style="width: 90%"></div><span class="lbl text-green">Excellent</span></div></td>
+                </tr>
+                <tr>
+                  <td><div class="branch-name"><div class="icon-sm purple"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div> Mathematics</div></td>
+                  <td><strong>1,150</strong></td>
+                  <td class="text-green">95.2%</td>
+                  <td>B+</td>
+                  <td>42</td>
                   <td><div class="perf-bar"><div class="fill blue" style="width: 85%"></div><span class="lbl text-blue">Good</span></div></td>
                 </tr>
                 <tr>
-                  <td><div class="branch-name"><div class="icon-sm purple"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div> Delhi NCR</div></td>
-                  <td><strong>₹98.0Cr</strong></td>
-                  <td class="text-red">3.8%</td>
-                  <td>₹19.5Cr</td>
-                  <td>986</td>
-                  <td><div class="perf-bar"><div class="fill red" style="width: 45%"></div><span class="lbl text-red">Poor</span></div></td>
+                  <td><div class="branch-name"><div class="icon-sm pink"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div> Languages</div></td>
+                  <td><strong>1,420</strong></td>
+                  <td class="text-yellow">92.1%</td>
+                  <td>B</td>
+                  <td>55</td>
+                  <td><div class="perf-bar"><div class="fill yellow" style="width: 75%"></div><span class="lbl text-yellow">Average</span></div></td>
                 </tr>
                 <tr>
-                  <td><div class="branch-name"><div class="icon-sm pink"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div> Pune Central</div></td>
-                  <td><strong>₹68.0Cr</strong></td>
-                  <td class="text-green">1.9%</td>
-                  <td>₹14.5Cr</td>
-                  <td>724</td>
-                  <td><div class="perf-bar"><div class="fill green" style="width: 95%"></div><span class="lbl text-green">Excellent</span></div></td>
-                </tr>
-                <tr>
-                  <td><div class="branch-name"><div class="icon-sm red"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div> Bangalore South</div></td>
-                  <td><strong>₹54.0Cr</strong></td>
-                  <td class="text-green">2.4%</td>
-                  <td>₹11.8Cr</td>
-                  <td>621</td>
-                  <td><div class="perf-bar"><div class="fill blue" style="width: 80%"></div><span class="lbl text-blue">Good</span></div></td>
-                </tr>
-                <tr>
-                  <td><div class="branch-name"><div class="icon-sm yellow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div> Hyderabad</div></td>
-                  <td><strong>₹42.0Cr</strong></td>
-                  <td class="text-yellow">3.2%</td>
-                  <td>₹9.2Cr</td>
-                  <td>489</td>
-                  <td><div class="perf-bar"><div class="fill yellow" style="width: 60%"></div><span class="lbl text-yellow">Average</span></div></td>
-                </tr>
-                <tr>
-                  <td><div class="branch-name"><div class="icon-sm green"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div> Chennai</div></td>
-                  <td><strong>₹38.0Cr</strong></td>
-                  <td class="text-yellow">2.7%</td>
-                  <td>₹8.4Cr</td>
-                  <td>412</td>
-                  <td><div class="perf-bar"><div class="fill yellow" style="width: 65%"></div><span class="lbl text-yellow">Average</span></div></td>
+                  <td><div class="branch-name"><div class="icon-sm red"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div> Arts & Humanities</div></td>
+                  <td><strong>662</strong></td>
+                  <td class="text-green">94.8%</td>
+                  <td>A</td>
+                  <td>28</td>
+                  <td><div class="perf-bar"><div class="fill green" style="width: 88%"></div><span class="lbl text-green">Good</span></div></td>
                 </tr>
               </tbody>
             </table>
@@ -182,8 +166,8 @@
       <div class="chart-card flex-2">
         <div class="chart-header">
           <div>
-            <h3>Loan Portfolio Mix</h3>
-            <p>By product type</p>
+            <h3>Student Demographics</h3>
+            <p>By Education Level</p>
           </div>
         </div>
         <div class="chart-body flex-center">
@@ -198,73 +182,52 @@
             [legend]="mixChartOptions.legend!"
           ></apx-chart>
           <div class="donut-legend custom">
-            <span><span class="dot" style="background: #2563eb"></span> Home Loan (35%)</span>
-            <span><span class="dot" style="background: #10b981"></span> Business Loan (28%)</span>
-            <span><span class="dot" style="background: #f59e0b"></span> SME Loan (18%)</span>
-            <span><span class="dot" style="background: #ef4444"></span> Auto Loan (10%)</span>
-            <span><span class="dot" style="background: #8b5cf6"></span> Personal Loan (6%)</span>
-            <span><span class="dot" style="background: #06b6d4"></span> Others (3%)</span>
+            <span><span class="dot" style="background: #2563eb"></span> Primary (40%)</span>
+            <span><span class="dot" style="background: #10b981"></span> Middle School (25%)</span>
+            <span><span class="dot" style="background: #f59e0b"></span> High School (20%)</span>
+            <span><span class="dot" style="background: #8b5cf6"></span> Pre-Primary (10%)</span>
+            <span><span class="dot" style="background: #06b6d4"></span> Special Ed (5%)</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Charts Area 2: Industry Portfolio & NPA Trend -->
+    <!-- Charts Area 2 -->
     <div class="charts-grid split-grid mt-4">
       <div class="chart-card flex-2">
         <div class="chart-header">
           <div>
-            <h3>Industry-wise Portfolio</h3>
-            <p>Concentration analysis</p>
+            <h3>Extracurricular Participation</h3>
+            <p>Activity enrollment</p>
           </div>
         </div>
         <div class="chart-body progress-list padded">
           <div class="progress-item row">
-            <div class="row-label">Technology</div>
+            <div class="row-label">Sports</div>
             <div class="row-bar"><div class="fill blue" style="width: 75%"></div></div>
             <div class="row-stats">
-              <span class="pct">28%</span>
-              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 18.5%</span>
+              <span class="pct">45%</span>
             </div>
           </div>
           <div class="progress-item row">
-            <div class="row-label">Manufacturing</div>
-            <div class="row-bar"><div class="fill blue" style="width: 65%"></div></div>
+            <div class="row-label">Music & Arts</div>
+            <div class="row-bar"><div class="fill blue" style="width: 55%"></div></div>
             <div class="row-stats">
-              <span class="pct">22%</span>
-              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 6.2%</span>
+              <span class="pct">32%</span>
             </div>
           </div>
           <div class="progress-item row">
-            <div class="row-label">Pharmaceuticals</div>
-            <div class="row-bar"><div class="fill blue" style="width: 45%"></div></div>
-            <div class="row-stats">
-              <span class="pct">16%</span>
-              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 12.8%</span>
-            </div>
-          </div>
-          <div class="progress-item row">
-            <div class="row-label">Real Estate</div>
+            <div class="row-label">Science Club</div>
             <div class="row-bar"><div class="fill blue" style="width: 35%"></div></div>
             <div class="row-stats">
-              <span class="pct">14%</span>
-              <span class="trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> 2.1%</span>
+              <span class="pct">18%</span>
             </div>
           </div>
           <div class="progress-item row">
-            <div class="row-label">Exports</div>
-            <div class="row-bar"><div class="fill blue" style="width: 25%"></div></div>
+            <div class="row-label">Debate Team</div>
+            <div class="row-bar"><div class="fill blue" style="width: 15%"></div></div>
             <div class="row-stats">
-              <span class="pct">11%</span>
-              <span class="trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> 5.4%</span>
-            </div>
-          </div>
-          <div class="progress-item row">
-            <div class="row-label">Others</div>
-            <div class="row-bar"><div class="fill blue" style="width: 20%"></div></div>
-            <div class="row-stats">
-              <span class="pct">9%</span>
-              <span class="trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 4.1%</span>
+              <span class="pct">8%</span>
             </div>
           </div>
         </div>
@@ -273,33 +236,33 @@
       <div class="chart-card flex-3">
         <div class="chart-header">
           <div>
-            <h3>NPA Trend</h3>
-            <p>Monthly NPA ratio %</p>
+            <h3>Attendance Trend</h3>
+            <p>Monthly Average Attendance %</p>
           </div>
           <a href="#" class="chart-link">Details</a>
         </div>
         <div class="chart-body">
           <apx-chart
-            [series]="npaChartOptions.series!"
-            [chart]="npaChartOptions.chart!"
-            [xaxis]="npaChartOptions.xaxis!"
-            [yaxis]="npaChartOptions.yaxis!"
-            [stroke]="npaChartOptions.stroke!"
-            [markers]="npaChartOptions.markers!"
-            [grid]="npaChartOptions.grid!"
-            [tooltip]="npaChartOptions.tooltip!"
-            [colors]="npaChartOptions.colors!"
+            [series]="attendanceChartOptions.series!"
+            [chart]="attendanceChartOptions.chart!"
+            [xaxis]="attendanceChartOptions.xaxis!"
+            [yaxis]="attendanceChartOptions.yaxis!"
+            [stroke]="attendanceChartOptions.stroke!"
+            [markers]="attendanceChartOptions.markers!"
+            [grid]="attendanceChartOptions.grid!"
+            [tooltip]="attendanceChartOptions.tooltip!"
+            [colors]="attendanceChartOptions.colors!"
           ></apx-chart>
           
           <div class="npa-stats-row">
             <div class="npa-stat-box success">
-              <div class="stat-label">Current NPA</div>
-              <div class="stat-val">2.6%</div>
-              <div class="stat-sub trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg> 0.6% from Jan</div>
+              <div class="stat-label">Current Avg</div>
+              <div class="stat-val">96%</div>
+              <div class="stat-sub trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg> 2.0% from Jan</div>
             </div>
             <div class="npa-stat-box target">
-              <div class="stat-label">Target NPA</div>
-              <div class="stat-val">&lt;3.0%</div>
+              <div class="stat-label">Target Avg</div>
+              <div class="stat-val">&gt;95%</div>
               <div class="stat-sub"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> On target</div>
             </div>
           </div>
@@ -308,16 +271,16 @@
     </div>
   </ng-container>
 
-  <!-- Branch Manager Dashboard Layout -->
-  <ng-container *ngIf="currentRole === 'Branch Manager' || currentRole === 'Bank Admin'">
+  <!-- Principal Dashboard Layout -->
+  <ng-container *ngIf="currentRole === 'Principal'">
     <div class="dash-header">
       <div class="title-area">
-        <h1>Mumbai Main Branch</h1>
-        <p>Branch Manager Dashboard · {{ dateStr }} · Q2 FY2024-25</p>
+        <h1>Principal Dashboard</h1>
+        <p>School Operations Overview · {{ dateStr }} · Term 2</p>
       </div>
       <div class="action-area">
-        <button class="btn-outline">Branch Report</button>
-        <button class="btn-primary">Pending Approvals (4)</button>
+        <button class="btn-outline">Weekly Report</button>
+        <button class="btn-primary">Pending Approvals (8)</button>
       </div>
     </div>
 
@@ -326,77 +289,60 @@
       <div class="metric-card">
         <div class="card-top">
           <div>
-            <div class="metric-label">BRANCH REVENUE</div>
-            <div class="metric-value">₹12.4Cr</div>
-            <div class="metric-subtext">July 2024</div>
+            <div class="metric-label">STAFF PRESENT TODAY</div>
+            <div class="metric-value">312 / 324</div>
+            <div class="metric-subtext">96.2% Attendance</div>
           </div>
           <div class="icon-box blue">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
           </div>
         </div>
         <div class="card-bottom trend-up">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-          <span>15.2%</span> vs last month
+          <span>Normal</span> operations
         </div>
       </div>
       
       <div class="metric-card">
         <div class="card-top">
           <div>
-            <div class="metric-label">TOTAL CUSTOMERS</div>
-            <div class="metric-value">1,248</div>
-            <div class="metric-subtext">48 new this month</div>
+            <div class="metric-label">STUDENT ATTENDANCE</div>
+            <div class="metric-value">95.4%</div>
+            <div class="metric-subtext">4,274 Present Today</div>
           </div>
-          <div class="icon-box blue">
+          <div class="icon-box green">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
           </div>
         </div>
         <div class="card-bottom trend-up">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-          <span>3.8%</span> vs last month
+          <span>1.2%</span> vs yesterday
         </div>
       </div>
 
       <div class="metric-card">
         <div class="card-top">
           <div>
-            <div class="metric-label">ACTIVE LOANS</div>
-            <div class="metric-value">892</div>
-            <div class="metric-subtext">Portfolio ₹148Cr</div>
+            <div class="metric-label">UPCOMING EXAMS</div>
+            <div class="metric-value">3</div>
+            <div class="metric-subtext">Mid-Term Assessments</div>
           </div>
-          <div class="icon-box green">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+          <div class="icon-box yellow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
           </div>
         </div>
         <div class="card-bottom trend-up">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-          <span>6.1%</span> vs last month
+          Starts next week
         </div>
       </div>
       
       <div class="metric-card">
         <div class="card-top">
           <div>
-            <div class="metric-label">PENDING APPROVALS</div>
-            <div class="metric-value">4</div>
-            <div class="metric-subtext">Avg 2.5 days TAT</div>
-          </div>
-          <div class="icon-box yellow">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-          </div>
-        </div>
-        <div class="card-bottom trend-down">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
-          <span>12%</span> vs last month
-        </div>
-      </div>
-      
-      <div class="metric-card">
-        <div class="card-top">
-          <div>
-            <div class="metric-label">NPA RATIO</div>
-            <div class="metric-value">2.1%</div>
-            <div class="metric-subtext">Below target (3%)</div>
+            <div class="metric-label">MAINTENANCE REQUESTS</div>
+            <div class="metric-value">14</div>
+            <div class="metric-subtext">4 High Priority</div>
           </div>
           <div class="icon-box red">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
@@ -404,87 +350,14 @@
         </div>
         <div class="card-bottom trend-down">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
-          <span>5.2%</span> vs last month
-        </div>
-      </div>
-    </div>
-
-    <!-- Charts Area -->
-    <div class="charts-grid">
-      <div class="chart-card main-chart">
-        <div class="chart-header">
-          <div>
-            <h3>Loan Disbursement vs Collections</h3>
-            <p>Monthly trend (₹ Lakhs)</p>
-          </div>
-          <a href="#" class="chart-link">Analytics →</a>
-        </div>
-        <div class="chart-body mock-bar-chart">
-          <div class="bars">
-            <!-- Mock bars -->
-            <div class="bar-group"><div class="bar b1 h-40"></div><div class="bar b2 h-35"></div></div>
-            <div class="bar-group"><div class="bar b1 h-35"></div><div class="bar b2 h-40"></div></div>
-            <div class="bar-group"><div class="bar b1 h-50"></div><div class="bar b2 h-45"></div></div>
-            <div class="bar-group"><div class="bar b1 h-45"></div><div class="bar b2 h-40"></div></div>
-            <div class="bar-group"><div class="bar b1 h-55"></div><div class="bar b2 h-50"></div></div>
-            <div class="bar-group"><div class="bar b1 h-50"></div><div class="bar b2 h-55"></div></div>
-            <div class="bar-group"><div class="bar b1 h-70"></div><div class="bar b2 h-65"></div></div>
-          </div>
-          <div class="x-axis">
-            <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span>
-          </div>
-        </div>
-      </div>
-      
-      <div class="chart-card side-chart">
-        <div class="chart-header">
-          <div>
-            <h3>Collection Buckets</h3>
-            <p>Overdue analysis</p>
-          </div>
-          <a href="#" class="chart-link">View all</a>
-        </div>
-        <div class="chart-body progress-list">
-          <div class="progress-item">
-            <div class="progress-info">
-              <span>0-30 DPD</span>
-              <span>12 accounts <strong>₹52.0L</strong></span>
-            </div>
-            <div class="progress-bar"><div class="fill green" style="width: 70%"></div></div>
-          </div>
-          <div class="progress-item">
-            <div class="progress-info">
-              <span>31-60 DPD</span>
-              <span>6 accounts <strong>₹28.0L</strong></span>
-            </div>
-            <div class="progress-bar"><div class="fill purple" style="width: 40%"></div></div>
-          </div>
-          <div class="progress-item">
-            <div class="progress-info">
-              <span>61-90 DPD</span>
-              <span>3 accounts <strong>₹19.0L</strong></span>
-            </div>
-            <div class="progress-bar"><div class="fill orange" style="width: 25%"></div></div>
-          </div>
-          <div class="progress-item">
-            <div class="progress-info">
-              <span>90+ DPD</span>
-              <span>4 accounts <strong>₹34.0L</strong></span>
-            </div>
-            <div class="progress-bar"><div class="fill red" style="width: 35%"></div></div>
-          </div>
-          
-          <div class="total-row">
-            <span>Total Overdue</span>
-            <span class="red-text">₹1.33 Cr</span>
-          </div>
+          Action required
         </div>
       </div>
     </div>
   </ng-container>
 
   <!-- Default Dashboard Layout for other roles -->
-  <ng-container *ngIf="currentRole !== 'Super Admin' && currentRole !== 'Branch Manager' && currentRole !== 'Bank Admin'">
+  <ng-container *ngIf="currentRole !== 'School Admin' && currentRole !== 'Principal'">
     <div class="dash-header">
       <div class="title-area">
         <h1>{{ currentRole }} Dashboard</h1>
