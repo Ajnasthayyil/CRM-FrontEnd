@@ -85,12 +85,10 @@
         <tr>
           <th class="chk-col"><input type="checkbox"></th>
           <th (click)="sortBy('name')" style="cursor: pointer;">USER {{ getSortIcon('name') }}</th>
-          <th (click)="sortBy('type')" style="cursor: pointer;">ROLE / GRADE {{ getSortIcon('type') }}</th>
+          <th (click)="sortBy('type')" style="cursor: pointer;">ROLE & DEPT</th>
           <th (click)="sortBy('creditScore')" style="cursor: pointer;">ATTENDANCE % {{ getSortIcon('creditScore') }}</th>
-          <th (click)="sortBy('loans')" style="cursor: pointer;">TASKS/ASSIGNMENTS {{ getSortIcon('loans') }}</th>
-          <th (click)="sortBy('outstanding')" style="cursor: pointer;">PERFORMANCE {{ getSortIcon('outstanding') }}</th>
+          <th (click)="sortBy('loans')" style="cursor: pointer;">ACADEMICS {{ getSortIcon('loans') }}</th>
           <th (click)="sortBy('rm')" style="cursor: pointer;">REPORTER / TEACHER {{ getSortIcon('rm') }}</th>
-          <th (click)="sortBy('branch')" style="cursor: pointer;">DEPARTMENT {{ getSortIcon('branch') }}</th>
           <th (click)="sortBy('status')" style="cursor: pointer;">STATUS {{ getSortIcon('status') }}</th>
           <th>ACTIONS</th>
         </tr>
@@ -107,12 +105,16 @@
               </div>
             </div>
           </td>
-          <td><span class="badge" [ngClass]="customer.typeClass"><span class="dot"></span>{{ customer.type }}</span></td>
+          <td>
+            <span class="badge" [ngClass]="customer.typeClass" style="margin-bottom: 4px; display: inline-flex;"><span class="dot"></span>{{ customer.type }}</span>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">{{ customer.branch }}</div>
+          </td>
           <td><div class="credit-score"><div class="score-bar" [ngClass]="customer.creditClass"></div> <strong>{{ customer.creditScore }}%</strong></div></td>
-          <td><strong>{{ customer.loans }}</strong></td>
-          <td><strong>{{ customer.outstanding }}</strong></td>
+          <td>
+            <div><strong>{{ customer.loans }}</strong> {{ customer.category === 'Student' ? 'Assignments' : 'Tasks' }}</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Perf: {{ customer.outstanding }}</div>
+          </td>
           <td>{{ customer.rm }}</td>
-          <td>{{ customer.branch }}</td>
           <td><span class="status-badge" [ngClass]="customer.status === 'Suspended' ? 'status-red' : 'status-green'"><span class="dot" [ngClass]="customer.status === 'Suspended' ? 'red' : 'green'"></span>{{ customer.status }}</span></td>
           <td (click)="$event.stopPropagation()">
             <div class="actions">

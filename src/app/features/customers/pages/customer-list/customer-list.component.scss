@@ -150,7 +150,7 @@
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  overflow: auto;
+  overflow: hidden;
 
   .data-table {
     width: 100%;
@@ -158,7 +158,7 @@
     text-align: left;
 
     th, td {
-      padding: 16px;
+      padding: 12px 8px;
       border-bottom: 1px solid var(--border-color);
     }
 
