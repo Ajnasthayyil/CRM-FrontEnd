@@ -84,27 +84,27 @@
           </div>
           <div class="card-body">
             <div class="info-grid">
-              <div class="info-group">
+              <div class="info-item">
                 <label>Full Name</label>
                 <div class="val">{{ employee.name }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Date of Birth</label>
                 <div class="val">{{ employee.dob }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Gender</label>
                 <div class="val">{{ employee.gender }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Blood Group</label>
                 <div class="val">{{ employee.bloodGroup }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Marital Status</label>
                 <div class="val">{{ employee.maritalStatus }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Nationality</label>
                 <div class="val">{{ employee.nationality }}</div>
               </div>
@@ -112,30 +112,30 @@
             
             <div class="section-title mt-4">Contact Information</div>
             <div class="info-grid">
-              <div class="info-group">
+              <div class="info-item">
                 <label>Personal Email</label>
                 <div class="val">{{ employee.personalEmail }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Mobile Number</label>
                 <div class="val">{{ employee.phone }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Emergency Contact Name</label>
                 <div class="val">{{ employee.emergencyContactName }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Emergency Contact Phone</label>
                 <div class="val">{{ employee.emergencyContactPhone }}</div>
               </div>
             </div>
 
             <div class="section-title mt-4">Address Information</div>
-            <div class="info-group full-width">
+            <div class="info-item full-width">
               <label>Current Address</label>
               <div class="val">{{ employee.currentAddress }}</div>
             </div>
-            <div class="info-group full-width mt-3">
+            <div class="info-item full-width mt-3">
               <label>Permanent Address</label>
               <div class="val">{{ employee.permanentAddress }}</div>
             </div>
@@ -151,35 +151,35 @@
           </div>
           <div class="card-body">
             <div class="info-grid">
-              <div class="info-group">
+              <div class="info-item">
                 <label>Employee ID</label>
                 <div class="val">{{ employee.id }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Department</label>
                 <div class="val">{{ employee.department }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Designation</label>
                 <div class="val">{{ employee.designation }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Date of Joining</label>
                 <div class="val">{{ employee.joinDate }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Work Email</label>
                 <div class="val">{{ employee.email }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Reporting Manager</label>
                 <div class="val">{{ employee.reportingTo }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Employment Type</label>
                 <div class="val">{{ employee.employmentType }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Shift Timing</label>
                 <div class="val">{{ employee.shift }}</div>
               </div>
@@ -196,31 +196,31 @@
           </div>
           <div class="card-body">
             <div class="info-grid">
-              <div class="info-group">
+              <div class="info-item">
                 <label>Bank Name</label>
                 <div class="val">{{ employee.bankName }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Account Holder Name</label>
                 <div class="val">{{ employee.name }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Account Number</label>
                 <div class="val">{{ employee.accountNumber }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>IFSC Code</label>
                 <div class="val">{{ employee.ifsc }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>PAN Number</label>
                 <div class="val">{{ employee.panNumber }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>Aadhar Number</label>
                 <div class="val">{{ employee.aadharNumber }}</div>
               </div>
-              <div class="info-group">
+              <div class="info-item">
                 <label>UAN (PF Number)</label>
                 <div class="val">{{ employee.uan }}</div>
               </div>
@@ -292,48 +292,6 @@
           </div>
         </div>
       </ng-container>
-      
-    </div>
-
-    <!-- Right Column (Sidebar Widgets) -->
-    <div class="col-side">
-      <div class="card widget">
-        <h3>Manager</h3>
-        <div class="assigned-user">
-          <div class="avatar blue">VS</div>
-          <div class="info">
-            <div class="name">{{ employee.reportingTo }}</div>
-            <div class="sub">Principal</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="card widget">
-        <h3>Recent Activity</h3>
-        <ul class="activity-timeline">
-          <li>
-            <div class="bullet"></div>
-            <div class="content">
-              <div class="desc">Marked present today</div>
-              <div class="time">Today, 08:30 AM</div>
-            </div>
-          </li>
-          <li>
-            <div class="bullet"></div>
-            <div class="content">
-              <div class="desc">Leave approved for Aug 15</div>
-              <div class="time">Yesterday, 02:15 PM</div>
-            </div>
-          </li>
-          <li>
-            <div class="bullet"></div>
-            <div class="content">
-              <div class="desc">Payslip generated for July</div>
-              <div class="time">Aug 1, 10:00 AM</div>
-            </div>
-          </li>
-        </ul>
-      </div>
     </div>
   </div>
 </div>

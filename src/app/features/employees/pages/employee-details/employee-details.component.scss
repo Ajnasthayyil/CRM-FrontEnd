@@ -251,30 +251,43 @@
       text-decoration: none;
     }
   }
+
+  .section-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+  }
 }
 
 .info-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px 40px;
+}
 
-  .info-item {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  
+  &.full-width {
+    grid-column: 1 / -1;
+  }
 
-    label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 0.5px;
-    }
+  label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
 
-    div {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text-main);
-    }
+  div {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-main);
   }
 }
 
@@ -392,6 +405,67 @@
     height: 6px;
     border-radius: 50%;
     background: #10b981;
+  }
+}
+
+.salary-box {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  .ctc-header {
+    div {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    h3 {
+      margin: 4px 0 0 0;
+      font-size: 1.5rem;
+      color: var(--text-main);
+    }
+  }
+
+  .salary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+
+    h4 {
+      margin: 0 0 16px 0;
+      font-size: 1rem;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .line-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--border-color);
+      font-size: 0.9rem;
+
+      span:first-child {
+        color: var(--text-muted);
+      }
+      span:last-child {
+        font-weight: 500;
+        color: var(--text-main);
+      }
+
+      &.total {
+        margin-top: 8px;
+        padding: 16px 0 0 0;
+        border-bottom: none;
+        border-top: 1px solid var(--border-color);
+        font-size: 1rem;
+        
+        span {
+          font-weight: 600;
+          color: var(--text-main);
+        }
+      }
+    }
   }
 }
 
