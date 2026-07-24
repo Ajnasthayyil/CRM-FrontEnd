@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./customer-list.component.scss']
 })
 export class CustomerListComponent implements OnInit {
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   customers = [
     {
@@ -24,7 +25,8 @@ export class CustomerListComponent implements OnInit {
       rm: 'Priya Mehta',
       branch: 'Mumbai Main',
       status: 'Active',
-      statusClass: 'status-green'
+      statusClass: 'status-green',
+      category: 'Corporate'
     },
     {
       id: 'C002',
@@ -41,7 +43,8 @@ export class CustomerListComponent implements OnInit {
       rm: 'Amit Singh',
       branch: 'Andheri West',
       status: 'Active',
-      statusClass: 'status-green'
+      statusClass: 'status-green',
+      category: 'Individual'
     },
     {
       id: 'C003',
@@ -57,8 +60,9 @@ export class CustomerListComponent implements OnInit {
       outstanding: '₹98.0L',
       rm: 'Kavita Rao',
       branch: 'Pune Central',
-      status: 'Active',
-      statusClass: 'status-green'
+      status: 'Blocked',
+      statusClass: 'status-red',
+      category: 'SME'
     },
     {
       id: 'C004',
@@ -75,17 +79,155 @@ export class CustomerListComponent implements OnInit {
       rm: 'Priya Mehta',
       branch: 'Mumbai Main',
       status: 'Active',
-      statusClass: 'status-green'
+      statusClass: 'status-green',
+      category: 'Individual'
     }
   ];
+
+  activeTab: string = 'All';
+  searchQuery: string = '';
+  isRefreshing: boolean = false;
+
+  // Filter Modal
+  showFilterModal: boolean = false;
+  filterBranch: string = 'All';
+  filterStatus: string = 'All';
+
+  // Add Modal
+  showAddModal: boolean = false;
+  newCustomer = {
+    name: '',
+    email: '',
+    category: 'Individual',
+    branch: 'Mumbai Main'
+  };
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  get filteredCustomers() {
+    return this.customers.filter(c => {
+      // 1. Tab Filter
+      if (this.activeTab !== 'All') {
+        if (this.activeTab === 'Active' || this.activeTab === 'Blocked') {
+          if (c.status !== this.activeTab) return false;
+        } else {
+          if (c.category !== this.activeTab) return false;
+        }
+      }
+
+      // 2. Search Filter
+      if (this.searchQuery) {
+        const query = this.searchQuery.toLowerCase();
+        if (
+          !c.name.toLowerCase().includes(query) &&
+          !c.id.toLowerCase().includes(query) &&
+          !c.email.toLowerCase().includes(query) &&
+          !c.branch.toLowerCase().includes(query)
+        ) {
+          return false;
+        }
+      }
+
+      // 3. Advanced Filter
+      if (this.filterBranch !== 'All' && c.branch !== this.filterBranch) return false;
+      if (this.filterStatus !== 'All' && c.status !== this.filterStatus) return false;
+
+      return true;
+    });
+  }
+
+  setTab(tab: string) {
+    this.activeTab = tab;
+  }
+
   viewCustomer(id: string) {
-    // Note: since routing is set up, navigating to /customers/360 for any ID
     this.router.navigate(['/customers/360']);
+  }
+
+  // --- ACTIONS ---
+
+  refreshList() {
+    this.isRefreshing = true;
+    setTimeout(() => {
+      this.isRefreshing = false;
+      alert('Data refreshed successfully!');
+    }, 800);
+  }
+
+  triggerImport() {
+    this.fileInput.nativeElement.click();
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      alert(`Imported ${file.name} successfully!`);
+      // Reset input
+      event.target.value = '';
+    }
+  }
+
+  exportList() {
+    alert('Customer list exported as CSV successfully!');
+  }
+
+  // --- MODALS ---
+  
+  openFilterModal() {
+    this.showFilterModal = true;
+  }
+  
+  closeFilterModal() {
+    this.showFilterModal = false;
+  }
+  
+  applyFilters() {
+    this.showFilterModal = false;
+  }
+  
+  resetFilters() {
+    this.filterBranch = 'All';
+    this.filterStatus = 'All';
+  }
+
+  openAddModal() {
+    this.newCustomer = { name: '', email: '', category: 'Individual', branch: 'Mumbai Main' };
+    this.showAddModal = true;
+  }
+
+  closeAddModal() {
+    this.showAddModal = false;
+  }
+
+  saveNewCustomer() {
+    if (!this.newCustomer.name) return;
+    
+    const id = 'C' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    const initials = this.newCustomer.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    
+    this.customers.unshift({
+      id: id,
+      name: this.newCustomer.name,
+      email: this.newCustomer.email,
+      initials: initials,
+      avatarColor: 'blue',
+      type: 'New',
+      typeClass: 'badge-purple',
+      creditScore: 0,
+      creditClass: 'score-orange',
+      loans: 0,
+      outstanding: '₹0L',
+      rm: 'System',
+      branch: this.newCustomer.branch,
+      status: 'Active',
+      statusClass: 'status-green',
+      category: this.newCustomer.category
+    });
+    
+    this.showAddModal = false;
+    alert(`Customer ${this.newCustomer.name} added!`);
   }
 }

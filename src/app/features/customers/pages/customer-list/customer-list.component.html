@@ -4,19 +4,26 @@
     <div class="header-left">
       <div class="breadcrumbs">Home / Customers / Customer List</div>
       <h1>Customers</h1>
-      <div class="subtitle">12 total customers · 9 active</div>
+      <div class="subtitle">{{ customers.length }} total customers &middot; 9 active</div>
     </div>
     <div class="header-right">
-      <button class="btn-outline-sm">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.25 4.28"/></svg> Refresh
+      <button class="btn-outline-sm" (click)="refreshList()" [disabled]="isRefreshing">
+        <svg *ngIf="!isRefreshing" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.25 4.28"/></svg>
+        <span *ngIf="isRefreshing" class="loader"></span>
+        {{ isRefreshing ? 'Refreshing...' : 'Refresh' }}
       </button>
-      <button class="btn-outline-sm">
+      
+      <!-- Hidden file input for import -->
+      <input type="file" #fileInput style="display: none" accept=".pdf, .xls, .xlsx, .csv" (change)="onFileSelected($event)">
+      <button class="btn-outline-sm" (click)="triggerImport()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Import
       </button>
-      <button class="btn-outline-sm">
+      
+      <button class="btn-outline-sm" (click)="exportList()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg> Export
       </button>
-      <button class="btn-primary-sm">
+      
+      <button class="btn-primary-sm" (click)="openAddModal()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add Customer
       </button>
     </div>
@@ -48,25 +55,25 @@
 
   <!-- Tabs -->
   <div class="tabs-container">
-    <div class="tab active">All</div>
-    <div class="tab">Individual</div>
-    <div class="tab">Corporate</div>
-    <div class="tab">SME</div>
-    <div class="tab">Active</div>
-    <div class="tab">Blocked</div>
+    <div class="tab" [class.active]="activeTab === 'All'" (click)="setTab('All')">All</div>
+    <div class="tab" [class.active]="activeTab === 'Individual'" (click)="setTab('Individual')">Individual</div>
+    <div class="tab" [class.active]="activeTab === 'Corporate'" (click)="setTab('Corporate')">Corporate</div>
+    <div class="tab" [class.active]="activeTab === 'SME'" (click)="setTab('SME')">SME</div>
+    <div class="tab" [class.active]="activeTab === 'Active'" (click)="setTab('Active')">Active</div>
+    <div class="tab" [class.active]="activeTab === 'Blocked'" (click)="setTab('Blocked')">Blocked</div>
   </div>
 
   <!-- Search & Filter -->
   <div class="search-bar">
     <div class="input-group">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      <input type="text" placeholder="Search by name, ID, email, city...">
+      <input type="text" placeholder="Search by name, ID, email, city..." [(ngModel)]="searchQuery">
     </div>
     <div class="filter-actions">
-      <button class="btn-outline-sm">
+      <button class="btn-outline-sm" (click)="openFilterModal()" [class.active]="filterBranch !== 'All' || filterStatus !== 'All'">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg> Advanced Filter
       </button>
-      <span class="result-count">12 results</span>
+      <span class="result-count">{{ filteredCustomers.length }} results</span>
     </div>
   </div>
 
@@ -88,14 +95,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let customer of customers" (click)="viewCustomer(customer.id)" class="clickable-row">
+        <tr *ngFor="let customer of filteredCustomers" (click)="viewCustomer(customer.id)" class="clickable-row">
           <td class="chk-col" (click)="$event.stopPropagation()"><input type="checkbox"></td>
           <td>
             <div class="customer-cell">
               <div class="avatar" [ngClass]="customer.avatarColor">{{ customer.initials }}</div>
               <div class="info">
                 <div class="name">{{ customer.name }}</div>
-                <div class="sub">{{ customer.id }} · {{ customer.email }}</div>
+                <div class="sub">{{ customer.id }} &middot; {{ customer.email }}</div>
               </div>
             </div>
           </td>
@@ -105,7 +112,7 @@
           <td><strong>{{ customer.outstanding }}</strong></td>
           <td>{{ customer.rm }}</td>
           <td>{{ customer.branch }}</td>
-          <td><span class="status-badge"><span class="dot green"></span>{{ customer.status }}</span></td>
+          <td><span class="status-badge" [ngClass]="customer.status === 'Blocked' ? 'status-red' : 'status-green'"><span class="dot" [ngClass]="customer.status === 'Blocked' ? 'red' : 'green'"></span>{{ customer.status }}</span></td>
           <td (click)="$event.stopPropagation()">
             <div class="actions">
               <button class="btn-action view" (click)="viewCustomer(customer.id)">
@@ -115,21 +122,100 @@
             </div>
           </td>
         </tr>
+        
+        <tr *ngIf="filteredCustomers.length === 0">
+          <td colspan="10" class="no-results">
+            No customers match your criteria.
+          </td>
+        </tr>
       </tbody>
     </table>
     
     <!-- Pagination -->
-    <div class="pagination-container">
-      <div class="pagination-info">Showing 1 to 4 of 12 entries</div>
+    <div class="pagination-container" *ngIf="filteredCustomers.length > 0">
+      <div class="pagination-info">Showing 1 to {{ filteredCustomers.length }} of {{ filteredCustomers.length }} entries</div>
       <div class="pagination">
         <button class="btn-page" disabled>Previous</button>
         <div class="page-numbers">
           <button class="page-num active">1</button>
-          <button class="page-num">2</button>
-          <button class="page-num">3</button>
         </div>
-        <button class="btn-page">Next</button>
+        <button class="btn-page" disabled>Next</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Advanced Filter Modal -->
+<div class="modal-overlay" *ngIf="showFilterModal" (click)="closeFilterModal()">
+  <div class="modal-content filter-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Advanced Filters</h3>
+      <button class="close-btn" (click)="closeFilterModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Branch</label>
+        <select class="form-control" [(ngModel)]="filterBranch">
+          <option value="All">All Branches</option>
+          <option value="Mumbai Main">Mumbai Main</option>
+          <option value="Andheri West">Andheri West</option>
+          <option value="Pune Central">Pune Central</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select class="form-control" [(ngModel)]="filterStatus">
+          <option value="All">All Statuses</option>
+          <option value="Active">Active</option>
+          <option value="Blocked">Blocked</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-text" (click)="resetFilters()">Reset</button>
+      <button class="btn-primary" (click)="applyFilters()">Apply Filters</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Customer Modal -->
+<div class="modal-overlay" *ngIf="showAddModal" (click)="closeAddModal()">
+  <div class="modal-content add-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Add New Customer</h3>
+      <button class="close-btn" (click)="closeAddModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Customer Name</label>
+        <input type="text" class="form-control" [(ngModel)]="newCustomer.name" placeholder="Enter name">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" class="form-control" [(ngModel)]="newCustomer.email" placeholder="Enter email">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Category</label>
+          <select class="form-control" [(ngModel)]="newCustomer.category">
+            <option value="Individual">Individual</option>
+            <option value="Corporate">Corporate</option>
+            <option value="SME">SME</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Branch</label>
+          <select class="form-control" [(ngModel)]="newCustomer.branch">
+            <option value="Mumbai Main">Mumbai Main</option>
+            <option value="Andheri West">Andheri West</option>
+            <option value="Pune Central">Pune Central</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-outline" (click)="closeAddModal()">Cancel</button>
+      <button class="btn-primary" (click)="saveNewCustomer()" [disabled]="!newCustomer.name">Save Customer</button>
     </div>
   </div>
 </div>
