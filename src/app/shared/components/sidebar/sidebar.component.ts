@@ -11,6 +11,8 @@ export class SidebarComponent implements OnInit {
   userRole: string = 'Super Admin';
   userName: string = 'System Administrator';
   userInitials: string = 'SA';
+  
+  activeDept: string = '';
 
   constructor(
     private authService: AuthService,
@@ -35,6 +37,14 @@ export class SidebarComponent implements OnInit {
         }
       }
     });
+  }
+  
+  toggleDept(dept: string) {
+    if (this.activeDept === dept) {
+      this.activeDept = '';
+    } else {
+      this.activeDept = dept;
+    }
   }
 
   logout() {

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-list',
@@ -180,9 +180,24 @@ export class CustomerListComponent implements OnInit {
     branch: 'Science'
   };
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params['branch']) {
+        this.filterBranch = params['branch'];
+      }
+      if (params['role']) {
+        this.filterRole = params['role'];
+      }
+      if (params['branch'] || params['role']) {
+        // Automatically switch to All tab if navigating from sidebar to avoid tab logic conflict
+        this.activeTab = 'All';
+      }
+    });
   }
 
   get filteredCustomers() {
