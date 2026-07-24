@@ -1,39 +1,49 @@
 :host {
     display: block;
-    width: 280px;
+    width: 88px;
     height: 100%;
     position: relative;
     z-index: 100;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:host(:hover) {
+    width: 280px;
 }
 
 .sidebar {
     width: 100%;
     height: 100%;
-    position: relative; 
+    position: relative; /* Not absolute, so it pushes content */
     background-color: var(--bg-card);
     border-right: 1px solid var(--border-color);
     color: var(--text-muted);
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: none;
 
-    .nav-text, .logo-text, .user-info, .menu-label, .chevron {
-        opacity: 1;
-        transform: translateX(0);
-        pointer-events: auto;
-    }
+    &:hover {
+        overflow-y: auto;
+        box-shadow: 10px 0 30px rgba(0,0,0,0.5);
 
-    .logo-area {
-        padding: 24px;
-        justify-content: flex-start;
-    }
+        .nav-text, .logo-text, .user-info, .menu-label, .chevron {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
 
-    .user-profile {
-        padding: 20px 24px;
-        justify-content: flex-start;
+        .logo-area {
+            padding: 24px;
+            justify-content: flex-start;
+        }
+
+        .user-profile {
+            padding: 20px 24px;
+            justify-content: flex-start;
+        }
     }
 }
 
@@ -67,6 +77,9 @@
     }
 
     .logo-text {
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
         white-space: nowrap;
 
         h3 {
@@ -160,7 +173,9 @@ nav {
         letter-spacing: 0.5px;
         margin-bottom: 12px;
         padding-left: 8px;
+        opacity: 0;
         white-space: nowrap;
+        transition: opacity 0.2s ease;
     }
 
     .nav-item {
@@ -190,12 +205,15 @@ nav {
         .chevron {
             margin-left: auto;
             color: #64748b;
-            transition: transform 0.2s ease;
+            opacity: 0;
+            transition: opacity 0.2s ease;
         }
     }
 
     .nav-text {
-        pointer-events: auto;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        pointer-events: none;
     }
 
     .has-submenu {
@@ -227,8 +245,11 @@ nav {
             display: flex;
             flex-direction: column;
             padding-left: 44px;
-            margin-top: 4px;
-            margin-bottom: 8px;
+            margin-top: 0;
+            margin-bottom: 0;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
             transition: all 0.3s ease;
 
             a {
@@ -258,7 +279,13 @@ nav {
                 }
             }
         }
-        /* removed hover submenu logic */
+        
+        &:hover .submenu, &.active .submenu {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 4px;
+            margin-bottom: 8px;
+        }
     }
 }
 
