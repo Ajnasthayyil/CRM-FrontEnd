@@ -128,52 +128,78 @@
             </div>
         </div>
 
-        <ng-container *ngIf="userRole !== 'HR'">
-            <div class="menu-label">ACADEMICS</div>
-
-            <div class="nav-item has-submenu">
-                <a routerLink="/classes" routerLinkActive="active">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                    </svg>
-                    <span class="nav-text">Classes & Sections</span>
-                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </a>
-            </div>
-            
-            <div class="nav-item has-submenu">
-                <a routerLink="/assignments" routerLinkActive="active">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                        <polyline points="10 9 9 9 8 9"></polyline>
-                    </svg>
-                    <span class="nav-text">Assignments</span>
-                </a>
-            </div>
-
-            <div class="menu-label">ADMINISTRATION</div>
-
-            <a routerLink="/hr" routerLinkActive="active" class="nav-item">
+        <ng-container *ngIf="userRole === 'HR' || userRole === 'Super Admin'">
+            <a routerLink="/tasks" routerLinkActive="active" class="nav-item">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
                 </svg>
-                <span class="nav-text">HR & Payroll</span>
+                <span class="nav-text">Tasks</span>
+            </a>
+            
+            <a routerLink="/calendar" routerLinkActive="active" class="nav-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span class="nav-text">Calendar</span>
             </a>
 
-            <a routerLink="/documents" routerLinkActive="active" class="nav-item">
+            <div class="menu-label">TEAM MANAGEMENT</div>
+
+            <a routerLink="/performance" routerLinkActive="active" class="nav-item">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                 </svg>
-                <span class="nav-text">Document Center</span>
+                <span class="nav-text">Performance</span>
+            </a>
+            
+            <a routerLink="/payrolls" routerLinkActive="active" class="nav-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                <span class="nav-text">Payrolls</span>
+            </a>
+            
+            <a routerLink="/invoices" routerLinkActive="active" class="nav-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+                <span class="nav-text">Invoices</span>
+            </a>
+
+            <a routerLink="/employees" routerLinkActive="active" class="nav-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <span class="nav-text">Employees</span>
+            </a>
+            
+            <a routerLink="/hiring" routerLinkActive="active" class="nav-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line>
+                </svg>
+                <span class="nav-text">Hiring</span>
+            </a>
+
+            <div class="menu-label">LIST</div>
+
+            <a routerLink="/salary-info" routerLinkActive="active" class="nav-item">
+                <span style="font-size: 1.1rem; margin-right: 0.5rem; filter: grayscale(100%);">💰</span>
+                <span class="nav-text">Salary Information</span>
+            </a>
+            
+            <a routerLink="/compensation" routerLinkActive="active" class="nav-item">
+                <span style="font-size: 1.1rem; margin-right: 0.5rem; filter: grayscale(100%);">⚖️</span>
+                <span class="nav-text">Compensation Breakdown</span>
+            </a>
+            
+            <a routerLink="/project-data" routerLinkActive="active" class="nav-item">
+                <span style="font-size: 1.1rem; margin-right: 0.5rem; filter: grayscale(100%);">📄</span>
+                <span class="nav-text">Project-specific Data</span>
             </a>
         </ng-container>
+
+        <ng-container *ngIf="userRole !== 'HR'">
     </nav>
     
     <div class="sidebar-footer">
