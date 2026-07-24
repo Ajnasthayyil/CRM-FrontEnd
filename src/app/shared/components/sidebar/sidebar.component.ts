@@ -13,6 +13,7 @@ export class SidebarComponent implements OnInit {
   userInitials: string = 'SA';
   
   activeDept: string = '';
+  activeTeamMgmt: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -45,6 +46,10 @@ export class SidebarComponent implements OnInit {
     } else {
       this.activeDept = dept;
     }
+  }
+
+  toggleTeamMgmt() {
+    this.activeTeamMgmt = !this.activeTeamMgmt;
   }
 
   logout() {
