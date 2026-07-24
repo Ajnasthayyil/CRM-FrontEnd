@@ -10,7 +10,8 @@ import { RoleDashboardComponent } from './features/dashboard/pages/role-dashboar
 const routes: Routes = [
   {
     path: '',
-    component: DashboardHomeComponent // Landing page (Role Selection)
+    component: DashboardHomeComponent,
+    pathMatch: 'full'
   },
   {
     path: 'login',
@@ -21,19 +22,18 @@ const routes: Routes = [
     component: OtpVerificationComponent
   },
   {
-    path: 'dashboard',
+    path: '',
     component: DashboardLayoutComponent,
     children: [
       {
-        path: '',
+        path: 'dashboard',
         component: RoleDashboardComponent
+      },
+      {
+        path: 'customers',
+        loadChildren: () => import('./features/customers/customers.module').then(m => m.CustomersModule)
       }
     ]
-  },
-  {
-    path: 'customers',
-    component: DashboardLayoutComponent,
-    loadChildren: () => import('./features/customers/customers.module').then(m => m.CustomersModule)
   },
   {
     path: '**',
