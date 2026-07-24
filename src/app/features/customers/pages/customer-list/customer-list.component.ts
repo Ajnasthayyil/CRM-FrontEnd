@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-customer-list',
@@ -180,12 +181,19 @@ export class CustomerListComponent implements OnInit {
     branch: 'Science'
   };
 
+  currentUserRole: string | null = null;
+
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.authService.currentRole$.subscribe(role => {
+      this.currentUserRole = role;
+    });
+
     this.route.queryParams.subscribe(params => {
       if (params['branch']) {
         this.filterBranch = params['branch'];
@@ -198,6 +206,42 @@ export class CustomerListComponent implements OnInit {
         this.activeTab = 'All';
       }
     });
+  }
+
+  canSuspend(customer: any): boolean {
+    if (!this.currentUserRole) return false;
+    
+    // Super Admin can suspend anyone
+    if (this.currentUserRole === 'Super Admin') return true;
+
+    // School Admin / Admin can suspend anyone EXCEPT Super Admin
+    if (this.currentUserRole === 'School Admin' || this.currentUserRole === 'Admin') {
+      if (customer.type === 'Super Admin') {
+        return false;
+      }
+      return true;
+    }
+    
+    // Principal can suspend anyone EXCEPT Super Admin, other Principals, and Admins
+    if (this.currentUserRole === 'Principal') {
+      if (customer.category === 'Admin' || customer.type === 'Principal' || customer.type === 'School Admin' || customer.type === 'Super Admin') {
+        return false;
+      }
+      return true;
+    }
+    
+    // Other roles cannot suspend
+    return false;
+  }
+
+  toggleSuspend(customer: any) {
+    if (customer.status === 'Active') {
+      customer.status = 'Suspended';
+      customer.statusClass = 'status-red';
+    } else {
+      customer.status = 'Active';
+      customer.statusClass = 'status-green';
+    }
   }
 
   get filteredCustomers() {
