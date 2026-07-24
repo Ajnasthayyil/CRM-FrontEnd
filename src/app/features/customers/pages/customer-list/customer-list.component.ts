@@ -9,78 +9,79 @@ import { Router } from '@angular/router';
 export class CustomerListComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
+  // Now acting as Users / Students Directory
   customers = [
     {
-      id: 'C001',
+      id: 'STU001',
       name: 'Rajesh Kumar Sharma',
-      email: 'rajesh.sharma@techcorp.in',
+      email: 'rajesh.sharma@student.educrm.in',
       initials: 'RK',
       avatarColor: 'blue',
-      type: 'Proposal',
+      type: 'Grade 10',
       typeClass: 'badge-purple',
-      creditScore: 768,
+      creditScore: 94, // Used as Attendance %
       creditClass: 'score-green',
-      loans: 3,
-      outstanding: '₹42.5L',
-      rm: 'Priya Mehta',
-      branch: 'Mumbai Main',
+      loans: 5, // Used as Active Assignments
+      outstanding: 'A-', // Used as Avg Grade
+      rm: 'Priya Mehta', // Used as Class Teacher
+      branch: 'Science', // Used as Department
       status: 'Active',
       statusClass: 'status-green',
-      category: 'Corporate'
+      category: 'Student'
     },
     {
-      id: 'C002',
+      id: 'TCH001',
       name: 'Sunita Patel',
-      email: 'sunita.patel@gmail.com',
+      email: 'sunita.patel@educrm.in',
       initials: 'SP',
       avatarColor: 'purple',
-      type: 'Contacted',
+      type: 'Senior Teacher',
       typeClass: 'badge-orange',
-      creditScore: 712,
-      creditClass: 'score-orange',
-      loans: 1,
-      outstanding: '₹28.0L',
-      rm: 'Amit Singh',
-      branch: 'Andheri West',
+      creditScore: 98,
+      creditClass: 'score-green',
+      loans: 3, 
+      outstanding: 'Excellent', 
+      rm: 'N/A', 
+      branch: 'Mathematics',
       status: 'Active',
       statusClass: 'status-green',
-      category: 'Individual'
+      category: 'Teacher'
     },
     {
-      id: 'C003',
+      id: 'STU002',
       name: 'Arun Industries Pvt Ltd',
-      email: 'finance@arunindustries.com',
+      email: 'arun@student.educrm.in',
       initials: 'AI',
       avatarColor: 'pink',
-      type: 'Qualified',
+      type: 'Grade 12',
       typeClass: 'badge-green',
-      creditScore: 689,
+      creditScore: 78,
       creditClass: 'score-orange',
       loans: 2,
-      outstanding: '₹98.0L',
+      outstanding: 'C+',
       rm: 'Kavita Rao',
-      branch: 'Pune Central',
-      status: 'Blocked',
+      branch: 'Commerce',
+      status: 'Suspended',
       statusClass: 'status-red',
-      category: 'SME'
+      category: 'Student'
     },
     {
-      id: 'C004',
+      id: 'STU003',
       name: 'Deepak Malhotra',
-      email: 'deepak.m@hotmail.com',
+      email: 'deepak.m@student.educrm.in',
       initials: 'DM',
       avatarColor: 'pink',
-      type: 'Contacted',
+      type: 'Grade 8',
       typeClass: 'badge-orange',
-      creditScore: 801,
+      creditScore: 91,
       creditClass: 'score-green',
-      loans: 2,
-      outstanding: '₹35.0L',
+      loans: 4,
+      outstanding: 'B+',
       rm: 'Priya Mehta',
-      branch: 'Mumbai Main',
+      branch: 'Arts',
       status: 'Active',
       statusClass: 'status-green',
-      category: 'Individual'
+      category: 'Student'
     }
   ];
 
@@ -98,8 +99,8 @@ export class CustomerListComponent implements OnInit {
   newCustomer = {
     name: '',
     email: '',
-    category: 'Individual',
-    branch: 'Mumbai Main'
+    category: 'Student',
+    branch: 'Science'
   };
 
   constructor(private router: Router) { }
@@ -111,7 +112,7 @@ export class CustomerListComponent implements OnInit {
     return this.customers.filter(c => {
       // 1. Tab Filter
       if (this.activeTab !== 'All') {
-        if (this.activeTab === 'Active' || this.activeTab === 'Blocked') {
+        if (this.activeTab === 'Active' || this.activeTab === 'Suspended') {
           if (c.status !== this.activeTab) return false;
         } else {
           if (c.category !== this.activeTab) return false;
@@ -171,7 +172,7 @@ export class CustomerListComponent implements OnInit {
   }
 
   exportList() {
-    alert('Customer list exported as CSV successfully!');
+    alert('User list exported as CSV successfully!');
   }
 
   // --- MODALS ---
@@ -194,7 +195,7 @@ export class CustomerListComponent implements OnInit {
   }
 
   openAddModal() {
-    this.newCustomer = { name: '', email: '', category: 'Individual', branch: 'Mumbai Main' };
+    this.newCustomer = { name: '', email: '', category: 'Student', branch: 'Science' };
     this.showAddModal = true;
   }
 
@@ -205,7 +206,7 @@ export class CustomerListComponent implements OnInit {
   saveNewCustomer() {
     if (!this.newCustomer.name) return;
     
-    const id = 'C' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    const id = (this.newCustomer.category === 'Student' ? 'STU' : 'TCH') + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
     const initials = this.newCustomer.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
     
     this.customers.unshift({
@@ -214,12 +215,12 @@ export class CustomerListComponent implements OnInit {
       email: this.newCustomer.email,
       initials: initials,
       avatarColor: 'blue',
-      type: 'New',
+      type: 'New Enrollee',
       typeClass: 'badge-purple',
-      creditScore: 0,
-      creditClass: 'score-orange',
+      creditScore: 100,
+      creditClass: 'score-green',
       loans: 0,
-      outstanding: '₹0L',
+      outstanding: 'N/A',
       rm: 'System',
       branch: this.newCustomer.branch,
       status: 'Active',
@@ -228,6 +229,6 @@ export class CustomerListComponent implements OnInit {
     });
     
     this.showAddModal = false;
-    alert(`Customer ${this.newCustomer.name} added!`);
+    alert(`User ${this.newCustomer.name} added!`);
   }
 }

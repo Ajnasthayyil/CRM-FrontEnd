@@ -2,9 +2,9 @@
   <!-- Breadcrumbs & Header -->
   <div class="page-header">
     <div class="header-left">
-      <div class="breadcrumbs">Home / Customers / Customer List</div>
-      <h1>Customers</h1>
-      <div class="subtitle">{{ customers.length }} total customers &middot; 9 active</div>
+      <div class="breadcrumbs">Home / Directory / User List</div>
+      <h1>Users Directory</h1>
+      <div class="subtitle">{{ customers.length }} total users &middot; Active and Suspended</div>
     </div>
     <div class="header-right">
       <button class="btn-outline-sm" (click)="refreshList()" [disabled]="isRefreshing">
@@ -24,7 +24,7 @@
       </button>
       
       <button class="btn-primary-sm" (click)="openAddModal()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add Customer
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add User
       </button>
     </div>
   </div>
@@ -32,42 +32,41 @@
   <!-- Summary Cards -->
   <div class="summary-cards">
     <div class="card">
-      <div class="val text-blue">12</div>
-      <div class="lbl">Total Customers</div>
+      <div class="val text-blue">4</div>
+      <div class="lbl">Total Users</div>
     </div>
     <div class="card">
-      <div class="val text-green">9</div>
-      <div class="lbl">Active Customers</div>
+      <div class="val text-green">3</div>
+      <div class="lbl">Active Users</div>
     </div>
     <div class="card">
-      <div class="val text-purple">4</div>
-      <div class="lbl">Corporate Customers</div>
+      <div class="val text-purple">3</div>
+      <div class="lbl">Students</div>
     </div>
     <div class="card">
-      <div class="val text-orange">3</div>
-      <div class="lbl">SME Customers</div>
+      <div class="val text-orange">1</div>
+      <div class="lbl">Teachers</div>
     </div>
     <div class="card">
       <div class="val text-red">1</div>
-      <div class="lbl">Blocked Customers</div>
+      <div class="lbl">Suspended</div>
     </div>
   </div>
 
   <!-- Tabs -->
   <div class="tabs-container">
     <div class="tab" [class.active]="activeTab === 'All'" (click)="setTab('All')">All</div>
-    <div class="tab" [class.active]="activeTab === 'Individual'" (click)="setTab('Individual')">Individual</div>
-    <div class="tab" [class.active]="activeTab === 'Corporate'" (click)="setTab('Corporate')">Corporate</div>
-    <div class="tab" [class.active]="activeTab === 'SME'" (click)="setTab('SME')">SME</div>
+    <div class="tab" [class.active]="activeTab === 'Student'" (click)="setTab('Student')">Students</div>
+    <div class="tab" [class.active]="activeTab === 'Teacher'" (click)="setTab('Teacher')">Teachers</div>
     <div class="tab" [class.active]="activeTab === 'Active'" (click)="setTab('Active')">Active</div>
-    <div class="tab" [class.active]="activeTab === 'Blocked'" (click)="setTab('Blocked')">Blocked</div>
+    <div class="tab" [class.active]="activeTab === 'Suspended'" (click)="setTab('Suspended')">Suspended</div>
   </div>
 
   <!-- Search & Filter -->
   <div class="search-bar">
     <div class="input-group">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      <input type="text" placeholder="Search by name, ID, email, city..." [(ngModel)]="searchQuery">
+      <input type="text" placeholder="Search by name, ID, email, department..." [(ngModel)]="searchQuery">
     </div>
     <div class="filter-actions">
       <button class="btn-outline-sm" (click)="openFilterModal()" [class.active]="filterBranch !== 'All' || filterStatus !== 'All'">
@@ -83,13 +82,13 @@
       <thead>
         <tr>
           <th class="chk-col"><input type="checkbox"></th>
-          <th>CUSTOMER</th>
-          <th>TYPE</th>
-          <th>CREDIT SCORE</th>
-          <th>LOANS</th>
-          <th>OUTSTANDING</th>
-          <th>RM</th>
-          <th>BRANCH</th>
+          <th>USER</th>
+          <th>ROLE / GRADE</th>
+          <th>ATTENDANCE %</th>
+          <th>TASKS/ASSIGNMENTS</th>
+          <th>PERFORMANCE</th>
+          <th>REPORTER / TEACHER</th>
+          <th>DEPARTMENT</th>
           <th>STATUS</th>
           <th>ACTIONS</th>
         </tr>
@@ -107,25 +106,25 @@
             </div>
           </td>
           <td><span class="badge" [ngClass]="customer.typeClass"><span class="dot"></span>{{ customer.type }}</span></td>
-          <td><div class="credit-score"><div class="score-bar" [ngClass]="customer.creditClass"></div> <strong>{{ customer.creditScore }}</strong></div></td>
+          <td><div class="credit-score"><div class="score-bar" [ngClass]="customer.creditClass"></div> <strong>{{ customer.creditScore }}%</strong></div></td>
           <td><strong>{{ customer.loans }}</strong></td>
           <td><strong>{{ customer.outstanding }}</strong></td>
           <td>{{ customer.rm }}</td>
           <td>{{ customer.branch }}</td>
-          <td><span class="status-badge" [ngClass]="customer.status === 'Blocked' ? 'status-red' : 'status-green'"><span class="dot" [ngClass]="customer.status === 'Blocked' ? 'red' : 'green'"></span>{{ customer.status }}</span></td>
+          <td><span class="status-badge" [ngClass]="customer.status === 'Suspended' ? 'status-red' : 'status-green'"><span class="dot" [ngClass]="customer.status === 'Suspended' ? 'red' : 'green'"></span>{{ customer.status }}</span></td>
           <td (click)="$event.stopPropagation()">
             <div class="actions">
               <button class="btn-action view" (click)="viewCustomer(customer.id)">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> View
               </button>
-              <button class="btn-action loan">+ Loan</button>
+              <button class="btn-action loan" *ngIf="customer.category === 'Student'">+ Grade</button>
             </div>
           </td>
         </tr>
         
         <tr *ngIf="filteredCustomers.length === 0">
           <td colspan="10" class="no-results">
-            No customers match your criteria.
+            No users match your criteria.
           </td>
         </tr>
       </tbody>
@@ -154,12 +153,13 @@
     </div>
     <div class="modal-body">
       <div class="form-group">
-        <label>Branch</label>
+        <label>Department</label>
         <select class="form-control" [(ngModel)]="filterBranch">
-          <option value="All">All Branches</option>
-          <option value="Mumbai Main">Mumbai Main</option>
-          <option value="Andheri West">Andheri West</option>
-          <option value="Pune Central">Pune Central</option>
+          <option value="All">All Departments</option>
+          <option value="Science">Science</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="Commerce">Commerce</option>
+          <option value="Arts">Arts</option>
         </select>
       </div>
       <div class="form-group">
@@ -167,7 +167,7 @@
         <select class="form-control" [(ngModel)]="filterStatus">
           <option value="All">All Statuses</option>
           <option value="Active">Active</option>
-          <option value="Blocked">Blocked</option>
+          <option value="Suspended">Suspended</option>
         </select>
       </div>
     </div>
@@ -178,16 +178,16 @@
   </div>
 </div>
 
-<!-- Add Customer Modal -->
+<!-- Add User Modal -->
 <div class="modal-overlay" *ngIf="showAddModal" (click)="closeAddModal()">
   <div class="modal-content add-modal" (click)="$event.stopPropagation()">
     <div class="modal-header">
-      <h3>Add New Customer</h3>
+      <h3>Add New User</h3>
       <button class="close-btn" (click)="closeAddModal()">&times;</button>
     </div>
     <div class="modal-body">
       <div class="form-group">
-        <label>Customer Name</label>
+        <label>Full Name</label>
         <input type="text" class="form-control" [(ngModel)]="newCustomer.name" placeholder="Enter name">
       </div>
       <div class="form-group">
@@ -196,26 +196,28 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Category</label>
+          <label>Role</label>
           <select class="form-control" [(ngModel)]="newCustomer.category">
-            <option value="Individual">Individual</option>
-            <option value="Corporate">Corporate</option>
-            <option value="SME">SME</option>
+            <option value="Student">Student</option>
+            <option value="Teacher">Teacher</option>
+            <option value="HR">HR</option>
+            <option value="Admin">Admin</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Branch</label>
+          <label>Department / Stream</label>
           <select class="form-control" [(ngModel)]="newCustomer.branch">
-            <option value="Mumbai Main">Mumbai Main</option>
-            <option value="Andheri West">Andheri West</option>
-            <option value="Pune Central">Pune Central</option>
+            <option value="Science">Science</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Commerce">Commerce</option>
+            <option value="Arts">Arts</option>
           </select>
         </div>
       </div>
     </div>
     <div class="modal-footer">
       <button class="btn-outline" (click)="closeAddModal()">Cancel</button>
-      <button class="btn-primary" (click)="saveNewCustomer()" [disabled]="!newCustomer.name">Save Customer</button>
+      <button class="btn-primary" (click)="saveNewCustomer()" [disabled]="!newCustomer.name">Save User</button>
     </div>
   </div>
 </div>
