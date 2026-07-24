@@ -49,9 +49,9 @@ export class CustomerListComponent implements OnInit {
     },
     {
       id: 'STU002',
-      name: 'Arun Industries Pvt Ltd',
+      name: 'Arun Kumar',
       email: 'arun@student.educrm.in',
-      initials: 'AI',
+      initials: 'AK',
       avatarColor: 'pink',
       type: 'Grade 12',
       typeClass: 'badge-green',
@@ -82,6 +82,78 @@ export class CustomerListComponent implements OnInit {
       status: 'Active',
       statusClass: 'status-green',
       category: 'Student'
+    },
+    {
+      id: 'ADM001',
+      name: 'Vikram Singh',
+      email: 'vikram.admin@educrm.in',
+      initials: 'VS',
+      avatarColor: 'blue',
+      type: 'School Admin',
+      typeClass: 'badge-purple',
+      creditScore: 100,
+      creditClass: 'score-green',
+      loans: 0,
+      outstanding: 'N/A',
+      rm: 'N/A',
+      branch: 'Management',
+      status: 'Active',
+      statusClass: 'status-green',
+      category: 'Admin'
+    },
+    {
+      id: 'HR001',
+      name: 'Anjali Desai',
+      email: 'anjali.hr@educrm.in',
+      initials: 'AD',
+      avatarColor: 'purple',
+      type: 'HR Manager',
+      typeClass: 'badge-green',
+      creditScore: 95,
+      creditClass: 'score-green',
+      loans: 0,
+      outstanding: 'N/A',
+      rm: 'N/A',
+      branch: 'HR',
+      status: 'Active',
+      statusClass: 'status-green',
+      category: 'HR'
+    },
+    {
+      id: 'TCH002',
+      name: 'Rahul Verma',
+      email: 'rahul.verma@educrm.in',
+      initials: 'RV',
+      avatarColor: 'pink',
+      type: 'Junior Teacher',
+      typeClass: 'badge-orange',
+      creditScore: 88,
+      creditClass: 'score-green',
+      loans: 5,
+      outstanding: 'Good',
+      rm: 'Sunita Patel',
+      branch: 'Science',
+      status: 'Active',
+      statusClass: 'status-green',
+      category: 'Teacher'
+    },
+    {
+      id: 'STU004',
+      name: 'Neha Gupta',
+      email: 'neha.g@student.educrm.in',
+      initials: 'NG',
+      avatarColor: 'blue',
+      type: 'Grade 11',
+      typeClass: 'badge-purple',
+      creditScore: 99,
+      creditClass: 'score-green',
+      loans: 6,
+      outstanding: 'A+',
+      rm: 'Sunita Patel',
+      branch: 'Mathematics',
+      status: 'Active',
+      statusClass: 'status-green',
+      category: 'Student'
     }
   ];
 
@@ -89,10 +161,15 @@ export class CustomerListComponent implements OnInit {
   searchQuery: string = '';
   isRefreshing: boolean = false;
 
+  // Sorting
+  sortColumn: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
+
   // Filter Modal
   showFilterModal: boolean = false;
   filterBranch: string = 'All';
   filterStatus: string = 'All';
+  filterRole: string = 'All';
 
   // Add Modal
   showAddModal: boolean = false;
@@ -109,7 +186,7 @@ export class CustomerListComponent implements OnInit {
   }
 
   get filteredCustomers() {
-    return this.customers.filter(c => {
+    let result = this.customers.filter(c => {
       // 1. Tab Filter
       if (this.activeTab !== 'All') {
         if (this.activeTab === 'Active' || this.activeTab === 'Suspended') {
@@ -126,7 +203,8 @@ export class CustomerListComponent implements OnInit {
           !c.name.toLowerCase().includes(query) &&
           !c.id.toLowerCase().includes(query) &&
           !c.email.toLowerCase().includes(query) &&
-          !c.branch.toLowerCase().includes(query)
+          !c.branch.toLowerCase().includes(query) &&
+          !c.type.toLowerCase().includes(query)
         ) {
           return false;
         }
@@ -135,17 +213,49 @@ export class CustomerListComponent implements OnInit {
       // 3. Advanced Filter
       if (this.filterBranch !== 'All' && c.branch !== this.filterBranch) return false;
       if (this.filterStatus !== 'All' && c.status !== this.filterStatus) return false;
+      if (this.filterRole !== 'All' && c.category !== this.filterRole) return false;
 
       return true;
     });
+
+    // 4. Sorting
+    if (this.sortColumn) {
+      result.sort((a, b) => {
+        let valA = (a as any)[this.sortColumn];
+        let valB = (b as any)[this.sortColumn];
+        
+        if (typeof valA === 'string') valA = valA.toLowerCase();
+        if (typeof valB === 'string') valB = valB.toLowerCase();
+
+        if (valA < valB) return this.sortDirection === 'asc' ? -1 : 1;
+        if (valA > valB) return this.sortDirection === 'asc' ? 1 : -1;
+        return 0;
+      });
+    }
+
+    return result;
   }
 
   setTab(tab: string) {
     this.activeTab = tab;
   }
 
+  sortBy(column: string) {
+    if (this.sortColumn === column) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+  }
+
+  getSortIcon(column: string) {
+    if (this.sortColumn !== column) return '↕';
+    return this.sortDirection === 'asc' ? '↑' : '↓';
+  }
+
   viewCustomer(id: string) {
-    this.router.navigate(['/customers/360']);
+    this.router.navigate(['/customers/360'], { queryParams: { id } });
   }
 
   // --- ACTIONS ---
@@ -154,7 +264,7 @@ export class CustomerListComponent implements OnInit {
     this.isRefreshing = true;
     setTimeout(() => {
       this.isRefreshing = false;
-      alert('Data refreshed successfully!');
+      // alert('Data refreshed successfully!');
     }, 800);
   }
 
@@ -165,14 +275,14 @@ export class CustomerListComponent implements OnInit {
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
-      alert(`Imported ${file.name} successfully!`);
+      // alert(`Imported ${file.name} successfully!`);
       // Reset input
       event.target.value = '';
     }
   }
 
   exportList() {
-    alert('User list exported as CSV successfully!');
+    // alert('User list exported as CSV successfully!');
   }
 
   // --- MODALS ---
@@ -192,6 +302,7 @@ export class CustomerListComponent implements OnInit {
   resetFilters() {
     this.filterBranch = 'All';
     this.filterStatus = 'All';
+    this.filterRole = 'All';
   }
 
   openAddModal() {
@@ -206,7 +317,12 @@ export class CustomerListComponent implements OnInit {
   saveNewCustomer() {
     if (!this.newCustomer.name) return;
     
-    const id = (this.newCustomer.category === 'Student' ? 'STU' : 'TCH') + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    let prefix = 'STU';
+    if (this.newCustomer.category === 'Teacher') prefix = 'TCH';
+    if (this.newCustomer.category === 'HR') prefix = 'HR';
+    if (this.newCustomer.category === 'Admin') prefix = 'ADM';
+    
+    const id = prefix + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
     const initials = this.newCustomer.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
     
     this.customers.unshift({
@@ -215,7 +331,7 @@ export class CustomerListComponent implements OnInit {
       email: this.newCustomer.email,
       initials: initials,
       avatarColor: 'blue',
-      type: 'New Enrollee',
+      type: 'New ' + this.newCustomer.category,
       typeClass: 'badge-purple',
       creditScore: 100,
       creditClass: 'score-green',
@@ -229,6 +345,6 @@ export class CustomerListComponent implements OnInit {
     });
     
     this.showAddModal = false;
-    alert(`User ${this.newCustomer.name} added!`);
+    // alert(`User ${this.newCustomer.name} added!`);
   }
 }
