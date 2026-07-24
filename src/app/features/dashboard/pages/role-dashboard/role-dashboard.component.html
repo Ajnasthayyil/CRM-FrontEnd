@@ -354,6 +354,92 @@
         </div>
       </div>
     </div>
+
+    <!-- Principal Charts Area -->
+    <div class="charts-grid split-grid mt-4">
+      <div class="chart-card flex-2">
+        <div class="chart-header">
+          <div>
+            <h3>Student Demographics</h3>
+            <p>By Department</p>
+          </div>
+        </div>
+        <div class="chart-body flex-center">
+          <apx-chart
+            [series]="deptChartOptions.series!"
+            [chart]="deptChartOptions.chart!"
+            [labels]="deptChartOptions.labels!"
+            [colors]="deptChartOptions.colors!"
+            [plotOptions]="deptChartOptions.plotOptions!"
+            [tooltip]="deptChartOptions.tooltip!"
+            [dataLabels]="deptChartOptions.dataLabels!"
+            [legend]="deptChartOptions.legend!"
+          ></apx-chart>
+          <div class="donut-legend custom">
+            <span><span class="dot" style="background: #3b82f6"></span> Science (35%)</span>
+            <span><span class="dot" style="background: #8b5cf6"></span> Mathematics (25%)</span>
+            <span><span class="dot" style="background: #10b981"></span> Commerce (20%)</span>
+            <span><span class="dot" style="background: #f59e0b"></span> Arts (15%)</span>
+            <span><span class="dot" style="background: #ec4899"></span> Languages (5%)</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart-card flex-3">
+        <div class="chart-header">
+          <div>
+            <h3>Department Leads & Teachers</h3>
+            <p>Staff Attendance & Performance Overview</p>
+          </div>
+          <a href="#" class="btn-outline-sm">Full Report</a>
+        </div>
+        <div class="chart-body">
+          <div class="perf-table-wrapper">
+            <table class="perf-table">
+              <thead>
+                <tr>
+                  <th>STAFF NAME</th>
+                  <th>ROLE</th>
+                  <th>DEPARTMENT</th>
+                  <th>ATTENDANCE %</th>
+                  <th>PERFORMANCE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Priya Mehta</strong></td>
+                  <td><span class="badge badge-purple" style="font-size:0.7rem;padding:2px 8px;border-radius:10px;background:rgba(139,92,246,0.1);color:#8b5cf6;">Dept Lead</span></td>
+                  <td>Science</td>
+                  <td class="text-green">98.5%</td>
+                  <td><div class="perf-bar"><div class="fill green" style="width: 95%"></div><span class="lbl text-green">Excellent</span></div></td>
+                </tr>
+                <tr>
+                  <td><strong>Sunita Patel</strong></td>
+                  <td><span class="badge badge-purple" style="font-size:0.7rem;padding:2px 8px;border-radius:10px;background:rgba(139,92,246,0.1);color:#8b5cf6;">Dept Lead</span></td>
+                  <td>Mathematics</td>
+                  <td class="text-green">96.2%</td>
+                  <td><div class="perf-bar"><div class="fill green" style="width: 92%"></div><span class="lbl text-green">Excellent</span></div></td>
+                </tr>
+                <tr>
+                  <td><strong>Rahul Verma</strong></td>
+                  <td><span class="badge badge-orange" style="font-size:0.7rem;padding:2px 8px;border-radius:10px;background:rgba(245,158,11,0.1);color:#f59e0b;">Teacher</span></td>
+                  <td>Science</td>
+                  <td class="text-yellow">88.5%</td>
+                  <td><div class="perf-bar"><div class="fill yellow" style="width: 78%"></div><span class="lbl text-yellow">Good</span></div></td>
+                </tr>
+                <tr>
+                  <td><strong>Kavita Rao</strong></td>
+                  <td><span class="badge badge-purple" style="font-size:0.7rem;padding:2px 8px;border-radius:10px;background:rgba(139,92,246,0.1);color:#8b5cf6;">Dept Lead</span></td>
+                  <td>Commerce</td>
+                  <td class="text-green">94.8%</td>
+                  <td><div class="perf-bar"><div class="fill blue" style="width: 85%"></div><span class="lbl text-blue">Very Good</span></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </ng-container>
 
   <!-- Default Dashboard Layout for other roles -->

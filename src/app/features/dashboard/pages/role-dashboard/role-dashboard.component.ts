@@ -54,6 +54,7 @@ export class RoleDashboardComponent implements OnInit {
 
   @ViewChild("mixChart") mixChart!: ChartComponent;
   public mixChartOptions: Partial<DonutChartOptions>;
+  public deptChartOptions: Partial<DonutChartOptions>;
 
   constructor(private authService: AuthService) {
     this.attendanceChartOptions = {
@@ -165,6 +166,37 @@ export class RoleDashboardComponent implements OnInit {
         fontFamily: 'Inter, sans-serif'
       },
       colors: ['#2563eb', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4'],
+      plotOptions: {
+        pie: {
+          donut: {
+            size: '65%',
+            labels: {
+              show: false
+            }
+          },
+          expandOnClick: true
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      legend: {
+        show: false
+      },
+      tooltip: {
+        theme: 'light'
+      }
+    };
+
+    this.deptChartOptions = {
+      series: [35, 25, 20, 15, 5],
+      labels: ["Science", "Mathematics", "Commerce", "Arts", "Languages"],
+      chart: {
+        type: "donut",
+        height: 250,
+        fontFamily: 'Inter, sans-serif'
+      },
+      colors: ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ec4899'],
       plotOptions: {
         pie: {
           donut: {
