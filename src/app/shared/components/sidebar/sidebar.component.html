@@ -128,24 +128,12 @@
 
             <div class="menu-label">HR MODULES</div>
 
-            <div class="nav-item has-submenu" [class.active]="activeEmployees">
-                <a (click)="toggleEmployees()" style="cursor: pointer;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
-                    <span class="nav-text">Employees</span>
-                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </a>
-                <div class="submenu">
-                    <a routerLink="/employees/all">All Employees</a>
-                    <a routerLink="/employees/teachers">Teachers</a>
-                    <a routerLink="/employees/non-teaching">Non-Teaching Staff</a>
-                    <a routerLink="/departments">Departments</a>
-                    <a routerLink="/designations">Designations</a>
-                </div>
-            </div>
+            <a routerLink="/employees/all" routerLinkActive="active" class="nav-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <span class="nav-text">Employees</span>
+            </a>
 
             <a routerLink="/attendance" routerLinkActive="active" class="nav-item">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

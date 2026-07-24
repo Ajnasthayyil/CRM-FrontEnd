@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-employee-list',
@@ -86,10 +86,10 @@ export class EmployeeListComponent implements OnInit {
   pagedEmployees: any[] = [];
   
   searchQuery: string = '';
-  filterDepartment: string = 'All';
+  filterRole: string = 'All';
   filterStatus: string = 'All';
   
-  departments = ['Science', 'Mathematics', 'Arts', 'Commerce', 'Management', 'Library'];
+  roles = ['Teacher', 'Principal', 'Department Head', 'Non-Teaching Staff'];
   
   sortColumn: string = 'name';
   sortDirection: 'asc' | 'desc' = 'asc';
@@ -102,10 +102,20 @@ export class EmployeeListComponent implements OnInit {
   
   Math = Math;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.applyFilters();
+    this.route.url.subscribe(urlSegment => {
+      const path = urlSegment.length > 0 ? urlSegment[0].path : 'all';
+      if (path === 'teachers') {
+        this.filterRole = 'Teacher';
+      } else if (path === 'non-teaching') {
+        this.filterRole = 'Non-Teaching Staff';
+      } else {
+        this.filterRole = 'All';
+      }
+      this.applyFilters();
+    });
   }
   
   getActiveCount(): number {
@@ -132,10 +142,20 @@ export class EmployeeListComponent implements OnInit {
          emp.email.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
          emp.department.toLowerCase().includes(this.searchQuery.toLowerCase())) : true;
          
-      const matchDept = this.filterDepartment !== 'All' ? emp.department === this.filterDepartment : true;
+      let matchRole = true;
+      if (this.filterRole !== 'All') {
+        if (this.filterRole === 'Teacher') {
+          matchRole = emp.designation.includes('Teacher');
+        } else if (this.filterRole === 'Non-Teaching Staff') {
+          matchRole = !emp.designation.includes('Teacher') && emp.designation !== 'Principal' && emp.designation !== 'Department Head';
+        } else {
+          matchRole = emp.designation === this.filterRole;
+        }
+      }
+
       const matchStatus = this.filterStatus !== 'All' ? emp.status === this.filterStatus : true;
       
-      return matchSearch && matchDept && matchStatus;
+      return matchSearch && matchRole && matchStatus;
     });
     
     this.sortData();
@@ -213,5 +233,16 @@ export class EmployeeListComponent implements OnInit {
   
   editEmployee(id: string) {
     this.router.navigate(['/employees', id, 'edit']);
+  }
+
+  blockEmployee(id: string) {
+    if (confirm('Are you sure you want to block this employee?')) {
+      const emp = this.employees.find(e => e.id === id);
+      if (emp) {
+        emp.status = 'Inactive';
+        emp.statusClass = 'status-red';
+        this.applyFilters();
+      }
+    }
   }
 }
