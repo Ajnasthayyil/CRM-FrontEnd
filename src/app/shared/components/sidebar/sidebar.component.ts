@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
   
   activeDept: string = '';
   activeTeamMgmt: boolean = false;
+  activeEmployees: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -50,6 +51,10 @@ export class SidebarComponent implements OnInit {
 
   toggleTeamMgmt() {
     this.activeTeamMgmt = !this.activeTeamMgmt;
+  }
+  
+  toggleEmployees() {
+    this.activeEmployees = !this.activeEmployees;
   }
 
   logout() {
