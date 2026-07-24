@@ -9,6 +9,8 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
 
 
 
+import { RouterModule } from '@angular/router';
+
 @NgModule({
   declarations: [
     SidebarComponent,
@@ -19,7 +21,8 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
     ThemeToggleComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     SidebarComponent,
