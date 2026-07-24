@@ -1,0 +1,204 @@
+<div class="page-container">
+  <!-- Breadcrumbs & Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / Employees / All Employees</div>
+      <h1>Employee Directory</h1>
+      <div class="subtitle">{{ employees.length }} total employees &middot; Active and On Leave</div>
+    </div>
+    <div class="header-right">
+      <button class="btn-outline-sm" (click)="refreshList()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.25 4.28"/></svg>
+        Refresh
+      </button>
+      
+      <!-- Hidden file input for import -->
+      <input type="file" #fileInput style="display: none" accept=".pdf, .xls, .xlsx, .csv">
+      <button class="btn-outline-sm" (click)="triggerImport()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Import
+      </button>
+      
+      <button class="btn-outline-sm" (click)="exportList()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg> Export
+      </button>
+      
+      <button class="btn-primary-sm" routerLink="/employees/add">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add Employee
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">TOTAL EMPLOYEES</div>
+          <div class="metric-value">{{ employees.length }}</div>
+          <div class="metric-subtext">Active staff members</div>
+        </div>
+        <div class="icon-box blue">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+      </div>
+    </div>
+    
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">ACTIVE</div>
+          <div class="metric-value">{{ getActiveCount() }}</div>
+          <div class="metric-subtext">Currently working</div>
+        </div>
+        <div class="icon-box green">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">ON LEAVE</div>
+          <div class="metric-value">{{ getOnLeaveCount() }}</div>
+          <div class="metric-subtext">Approved time off</div>
+        </div>
+        <div class="icon-box yellow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">TEACHERS</div>
+          <div class="metric-value">{{ getTeachersCount() }}</div>
+          <div class="metric-subtext">Academic staff</div>
+        </div>
+        <div class="icon-box purple">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">DEPT HEADS</div>
+          <div class="metric-value">{{ getDeptHeadsCount() }}</div>
+          <div class="metric-subtext">Leadership</div>
+        </div>
+        <div class="icon-box red">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search & Filter -->
+  <div class="search-bar">
+    <div class="input-group">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" placeholder="Search by name, ID, email, department..." [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()">
+    </div>
+    <div class="filter-actions">
+      <select class="form-control" [(ngModel)]="filterDepartment" (ngModelChange)="applyFilters()" style="margin-right: 8px;">
+        <option value="All">All Departments</option>
+        <option *ngFor="let dept of departments" [value]="dept">{{dept}}</option>
+      </select>
+      
+      <select class="form-control" [(ngModel)]="filterStatus" (ngModelChange)="applyFilters()">
+        <option value="All">All Statuses</option>
+        <option value="Active">Active</option>
+        <option value="On Leave">On Leave</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+      <span class="result-count" style="margin-left: 12px;">{{ filteredEmployees.length }} results</span>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th [class.active-sort]="sortColumn === 'name'" (click)="sortBy('name')" style="cursor: pointer;">
+            EMPLOYEE <span class="sort-icon">{{ getSortIcon('name') }}</span>
+          </th>
+          <th [class.active-sort]="sortColumn === 'designation'" (click)="sortBy('designation')" style="cursor: pointer;">
+            ROLE & DEPT <span class="sort-icon">{{ getSortIcon('designation') }}</span>
+          </th>
+          <th [class.active-sort]="sortColumn === 'contact'" (click)="sortBy('contact')" style="cursor: pointer;">
+            CONTACT <span class="sort-icon"></span>
+          </th>
+          <th [class.active-sort]="sortColumn === 'joinDate'" (click)="sortBy('joinDate')" style="cursor: pointer;">
+            JOIN DATE <span class="sort-icon">{{ getSortIcon('joinDate') }}</span>
+          </th>
+          <th [class.active-sort]="sortColumn === 'status'" (click)="sortBy('status')" style="cursor: pointer;">
+            STATUS <span class="sort-icon">{{ getSortIcon('status') }}</span>
+          </th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of pagedEmployees" (click)="viewEmployee(emp.id)" class="clickable-row">
+          <td>
+            <div class="customer-cell">
+              <div class="avatar" [ngClass]="emp.avatarColor">{{ emp.initials }}</div>
+              <div class="info">
+                <div class="name">{{ emp.name }}</div>
+                <div class="sub">{{ emp.id }}</div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <span class="badge" [ngClass]="emp.typeClass" style="margin-bottom: 4px; display: inline-flex;"><span class="dot"></span>{{ emp.designation }}</span>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">{{ emp.department }}</div>
+          </td>
+          <td>
+            <div>{{ emp.email }}</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">{{ emp.phone }}</div>
+          </td>
+          <td>{{ emp.joinDate }}</td>
+          <td><span class="status-badge" [ngClass]="emp.status === 'Active' ? 'status-green' : (emp.status === 'On Leave' ? 'status-orange' : 'status-red')"><span class="dot" [ngClass]="emp.status === 'Active' ? 'green' : (emp.status === 'On Leave' ? 'orange' : 'red')"></span>{{ emp.status }}</span></td>
+          <td (click)="$event.stopPropagation()">
+            <div class="actions">
+              <button class="btn-outline-sm" (click)="viewEmployee(emp.id)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                View
+              </button>
+              <button class="btn-outline-sm" (click)="editEmployee(emp.id)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                Edit
+              </button>
+            </div>
+          </td>
+        </tr>
+        
+        <tr *ngIf="filteredEmployees.length === 0">
+          <td colspan="6" class="no-results">
+            No employees match your criteria.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- Pagination -->
+    <div class="pagination-container" *ngIf="filteredEmployees.length > 0">
+      <div class="pagination-info">Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to {{ Math.min(currentPage * itemsPerPage, filteredEmployees.length) }} of {{ filteredEmployees.length }} entries</div>
+      <div class="pagination">
+        <button class="btn-page" [disabled]="currentPage === 1" (click)="setPage(currentPage - 1)">Previous</button>
+        <div class="page-numbers">
+          <button *ngFor="let page of totalPagesArray()" 
+                  class="page-num" 
+                  [class.active]="currentPage === page"
+                  (click)="setPage(page)">
+            {{ page }}
+          </button>
+        </div>
+        <button class="btn-page" [disabled]="currentPage === totalPages" (click)="setPage(currentPage + 1)">Next</button>
+      </div>
+    </div>
+  </div>
+</div>

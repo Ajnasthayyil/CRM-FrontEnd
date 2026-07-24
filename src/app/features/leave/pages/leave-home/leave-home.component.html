@@ -1,0 +1,150 @@
+<div class="page-container">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / HR Modules / Leave Management</div>
+      <h1>Leave Dashboard</h1>
+      <div class="subtitle">Manage employee leave requests and balances</div>
+    </div>
+    <div class="header-right">
+      <button class="btn-outline-sm">Leave Policy Settings</button>
+      <button class="btn-primary-sm">+ Apply Leave</button>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">PENDING REQUESTS</div>
+          <div class="metric-value">2</div>
+          <div class="metric-subtext">Awaiting approval</div>
+        </div>
+        <div class="icon-box orange">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+      </div>
+    </div>
+    
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">ON LEAVE</div>
+          <div class="metric-value">5</div>
+          <div class="metric-subtext">Employees on leave</div>
+        </div>
+        <div class="icon-box blue">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">APPROVED</div>
+          <div class="metric-value">14</div>
+          <div class="metric-subtext">This Month</div>
+        </div>
+        <div class="icon-box green">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">REJECTED</div>
+          <div class="metric-value">3</div>
+          <div class="metric-subtext">This Month</div>
+        </div>
+        <div class="icon-box red">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-grid mt-4">
+    <!-- Left Column (Requests) -->
+    <div class="col-main">
+      <div class="card p-0">
+        <div class="card-header border-bottom">
+          <h3 class="m-0">Recent Leave Requests</h3>
+          <div class="filter-tabs">
+            <button class="tab-btn active">Pending (2)</button>
+            <button class="tab-btn">Approved</button>
+            <button class="tab-btn">Rejected</button>
+            <button class="tab-btn">All</button>
+          </div>
+        </div>
+        
+        <div class="request-list">
+          <div class="request-item" *ngFor="let req of leaveRequests">
+            <div class="req-header">
+              <div class="user-info">
+                <div class="avatar" [ngClass]="'bg-' + req.avatarColor">{{ req.initials }}</div>
+                <div>
+                  <div class="fw-600">{{ req.empName }}</div>
+                  <div class="text-xs text-muted">{{ req.empId }} &middot; Applied {{ req.appliedOn }}</div>
+                </div>
+              </div>
+              <span class="status-badge" [ngClass]="req.status === 'Approved' ? 'status-green' : (req.status === 'Rejected' ? 'status-red' : 'status-orange')">
+                <span class="dot"></span>{{ req.status }}
+              </span>
+            </div>
+            
+            <div class="req-body">
+              <div class="req-detail">
+                <div class="lbl">Leave Type</div>
+                <div class="val">{{ req.type }}</div>
+              </div>
+              <div class="req-detail">
+                <div class="lbl">Duration</div>
+                <div class="val">{{ req.duration }}</div>
+              </div>
+              <div class="req-detail full-width">
+                <div class="lbl">Reason</div>
+                <div class="val text-muted">{{ req.reason }}</div>
+              </div>
+            </div>
+            
+            <div class="req-footer" *ngIf="req.status === 'Pending'">
+              <button class="btn-action reject" (click)="updateStatus(req, 'Rejected')">Reject</button>
+              <button class="btn-action approve" (click)="updateStatus(req, 'Approved')">Approve</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Column (Balances) -->
+    <div class="col-side">
+      <div class="card">
+        <h3 class="border-bottom pb-2">Leave Balances Overview</h3>
+        
+        <div class="balance-item" *ngFor="let bal of leaveBalances">
+          <div class="fw-500 mb-2">{{ bal.name }}</div>
+          <div class="balance-grid">
+            <div class="bal-box">
+              <div class="val">{{ bal.sick }}</div>
+              <div class="lbl">Sick</div>
+            </div>
+            <div class="bal-box">
+              <div class="val">{{ bal.casual }}</div>
+              <div class="lbl">Casual</div>
+            </div>
+            <div class="bal-box">
+              <div class="val">{{ bal.earned }}</div>
+              <div class="lbl">Earned</div>
+            </div>
+          </div>
+        </div>
+        
+        <button class="btn-outline" style="width: 100%; justify-content: center; margin-top: 16px;">View All Balances</button>
+      </div>
+    </div>
+  </div>
+</div>

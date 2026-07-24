@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SettingsHomeComponent } from './pages/settings-home/settings-home.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SettingsHomeComponent
+  ],
   imports: [
     CommonModule
   ]

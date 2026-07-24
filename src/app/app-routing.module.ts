@@ -32,6 +32,46 @@ const routes: Routes = [
       {
         path: 'customers',
         loadChildren: () => import('./features/customers/customers.module').then(m => m.CustomersModule)
+      },
+      {
+        path: 'employees',
+        loadChildren: () => import('./features/employees/employees.module').then(m => m.EmployeesModule)
+      },
+      {
+        path: 'attendance',
+        loadChildren: () => import('./features/attendance/attendance.module').then(m => m.AttendanceModule)
+      },
+      {
+        path: 'leave',
+        loadChildren: () => import('./features/leave/leave.module').then(m => m.LeaveModule)
+      },
+      {
+        path: 'payroll',
+        loadChildren: () => import('./features/payroll/payroll.module').then(m => m.PayrollModule)
+      },
+      {
+        path: 'recruitment',
+        loadChildren: () => import('./features/recruitment/recruitment.module').then(m => m.RecruitmentModule)
+      },
+      {
+        path: 'performance',
+        loadChildren: () => import('./features/performance/performance.module').then(m => m.PerformanceModule)
+      },
+      {
+        path: 'training',
+        loadChildren: () => import('./features/training/training.module').then(m => m.TrainingModule)
+      },
+      {
+        path: 'documents',
+        loadChildren: () => import('./features/documents/documents.module').then(m => m.DocumentsModule)
+      },
+      {
+        path: 'reports',
+        loadChildren: () => import('./features/reports/reports.module').then(m => m.ReportsModule)
+      },
+      {
+        path: 'settings',
+        loadChildren: () => import('./features/settings/settings.module').then(m => m.SettingsModule)
       }
     ]
   },

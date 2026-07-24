@@ -1,0 +1,203 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / Employees / {{ isEditMode ? 'Edit Employee' : 'Add Employee' }}</div>
+      <h1>{{ isEditMode ? 'Edit Employee' : 'Add New Employee' }}</h1>
+    </div>
+    <div class="header-right">
+      <button class="btn-text" routerLink="/employees/all">Cancel</button>
+      <button class="btn-primary-sm" (click)="saveEmployee()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> 
+        Save Employee
+      </button>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <!-- Stepper Navigation -->
+    <div class="stepper-nav">
+      <div class="step" [class.active]="currentStep === 1" [class.completed]="currentStep > 1" (click)="setStep(1)">
+        <div class="step-circle">1</div>
+        <div class="step-label">Personal Info</div>
+      </div>
+      <div class="step-line" [class.completed]="currentStep > 1"></div>
+      
+      <div class="step" [class.active]="currentStep === 2" [class.completed]="currentStep > 2" (click)="setStep(2)">
+        <div class="step-circle">2</div>
+        <div class="step-label">Employment Details</div>
+      </div>
+      <div class="step-line" [class.completed]="currentStep > 2"></div>
+      
+      <div class="step" [class.active]="currentStep === 3" [class.completed]="currentStep > 3" (click)="setStep(3)">
+        <div class="step-circle">3</div>
+        <div class="step-label">Bank & Statutory</div>
+      </div>
+      <div class="step-line" [class.completed]="currentStep > 3"></div>
+      
+      <div class="step" [class.active]="currentStep === 4" (click)="setStep(4)">
+        <div class="step-circle">4</div>
+        <div class="step-label">Salary Info</div>
+      </div>
+    </div>
+
+    <!-- Stepper Content -->
+    <div class="stepper-content">
+      <form>
+        <!-- STEP 1 -->
+        <div class="step-pane" *ngIf="currentStep === 1">
+          <h3>Personal Information</h3>
+          <p class="text-muted mb-4">Enter the basic details of the employee.</p>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" class="form-control" placeholder="Enter first name">
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" class="form-control" placeholder="Enter last name">
+            </div>
+            <div class="form-group">
+              <label>Personal Email *</label>
+              <input type="email" class="form-control" placeholder="example@email.com">
+            </div>
+            <div class="form-group">
+              <label>Mobile Number *</label>
+              <input type="tel" class="form-control" placeholder="+91">
+            </div>
+            <div class="form-group">
+              <label>Date of Birth</label>
+              <input type="date" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Gender</label>
+              <select class="form-control">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label>Current Address</label>
+              <textarea class="form-control" rows="3" placeholder="Enter full address"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-pane" *ngIf="currentStep === 2">
+          <h3>Employment Details</h3>
+          <p class="text-muted mb-4">Set up the employee's role and departmental access.</p>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Employee ID *</label>
+              <input type="text" class="form-control" placeholder="EMP001">
+            </div>
+            <div class="form-group">
+              <label>Date of Joining *</label>
+              <input type="date" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Department *</label>
+              <select class="form-control">
+                <option value="">Select Department</option>
+                <option value="Science">Science</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Arts">Arts</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Designation *</label>
+              <input type="text" class="form-control" placeholder="e.g. Senior Teacher">
+            </div>
+            <div class="form-group">
+              <label>Reporting Manager</label>
+              <select class="form-control">
+                <option value="">Select Manager</option>
+                <option value="Vikram">Vikram Singh</option>
+                <option value="Anita">Anita Desai</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Work Email</label>
+              <input type="email" class="form-control" placeholder="name@educrm.in">
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-pane" *ngIf="currentStep === 3">
+          <h3>Bank & Statutory Information</h3>
+          <p class="text-muted mb-4">Required for payroll processing and compliance.</p>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Bank Name</label>
+              <input type="text" class="form-control" placeholder="e.g. HDFC Bank">
+            </div>
+            <div class="form-group">
+              <label>Account Holder Name</label>
+              <input type="text" class="form-control" placeholder="Name as per bank">
+            </div>
+            <div class="form-group">
+              <label>Account Number</label>
+              <input type="text" class="form-control" placeholder="Enter Account Number">
+            </div>
+            <div class="form-group">
+              <label>IFSC Code</label>
+              <input type="text" class="form-control" placeholder="Enter IFSC">
+            </div>
+            <div class="form-group">
+              <label>PAN Number</label>
+              <input type="text" class="form-control" placeholder="Enter PAN">
+            </div>
+            <div class="form-group">
+              <label>Aadhar Number</label>
+              <input type="text" class="form-control" placeholder="Enter Aadhar">
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step-pane" *ngIf="currentStep === 4">
+          <h3>Salary Structure</h3>
+          <p class="text-muted mb-4">Define compensation and deduction components.</p>
+          
+          <div class="form-grid">
+            <div class="form-group full-width" style="margin-bottom: 20px;">
+              <label style="font-size: 1.1rem; color: var(--primary);">Annual CTC (₹)</label>
+              <input type="number" class="form-control" style="font-size: 1.25rem; font-weight: bold; padding: 12px 16px;" placeholder="0.00">
+            </div>
+            
+            <div class="form-group">
+              <label>Basic Salary (Monthly)</label>
+              <input type="number" class="form-control" placeholder="0.00">
+            </div>
+            <div class="form-group">
+              <label>HRA (Monthly)</label>
+              <input type="number" class="form-control" placeholder="0.00">
+            </div>
+            <div class="form-group">
+              <label>Special Allowance (Monthly)</label>
+              <input type="number" class="form-control" placeholder="0.00">
+            </div>
+            <div class="form-group">
+              <label>PF Contribution</label>
+              <input type="number" class="form-control" placeholder="0.00">
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    
+    <!-- Stepper Footer / Navigation Buttons -->
+    <div class="stepper-footer">
+      <button class="btn-outline-sm" (click)="prevStep()" [disabled]="currentStep === 1">Previous</button>
+      <button class="btn-primary-sm" (click)="nextStep()" *ngIf="currentStep < 4">Next Step</button>
+      <button class="btn-primary-sm" (click)="saveEmployee()" *ngIf="currentStep === 4">Submit & Save</button>
+    </div>
+  </div>
+</div>

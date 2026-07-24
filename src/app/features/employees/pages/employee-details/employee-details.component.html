@@ -1,0 +1,339 @@
+<div class="page-container" *ngIf="employee">
+  <!-- Top Navigation -->
+  <div class="top-nav">
+    <a routerLink="/employees/all" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Back to Employee List
+    </a>
+  </div>
+
+  <!-- Profile Banner -->
+  <div class="profile-banner">
+    <div class="profile-left">
+      <div class="avatar" [ngClass]="employee.avatarColor">{{ employee.initials }}</div>
+      <div class="profile-info">
+        <div class="name-row">
+          <h2>{{ employee.name }}</h2>
+          <span class="status-badge" [ngClass]="employee.status === 'Active' ? 'status-green' : (employee.status === 'On Leave' ? 'status-orange' : 'status-red')">
+            <span class="dot" [ngClass]="employee.status === 'Active' ? 'green' : (employee.status === 'On Leave' ? 'orange' : 'red')"></span>{{ employee.status }}
+          </span>
+          <span class="tag">{{ employee.designation }}</span>
+        </div>
+        <div class="contact-row">
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> {{ employee.phone }}</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> {{ employee.email }}</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> {{ employee.city }}</span>
+        </div>
+        <div class="meta-row">
+          <span>Employee ID: <strong>{{ employee.id }}</strong></span>
+          <span class="divider">·</span>
+          <span>Joined: <strong>{{ employee.joinDate }}</strong></span>
+          <span class="divider">·</span>
+          <span>Department: <strong>{{ employee.department }}</strong></span>
+          <span class="divider">·</span>
+          <span>Reporting To: <strong>{{ employee.reportingTo }}</strong></span>
+        </div>
+      </div>
+    </div>
+    <div class="profile-right">
+      <div class="metrics">
+        <div class="metric-box score">
+          <div class="val text-green">{{ employee.attendancePercent }}%</div>
+          <div class="lbl">YTD Attendance</div>
+        </div>
+        <div class="metric-box">
+          <div class="val text-orange">{{ employee.leaveBalance }}</div>
+          <div class="lbl">Leave Balance</div>
+        </div>
+        <div class="metric-box outstanding">
+          <div class="val text-purple">{{ employee.performanceRating }}</div>
+          <div class="lbl">Perf. Rating</div>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button class="btn-primary" [routerLink]="['/employees', employee.id, 'edit']">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Edit Profile
+        </button>
+        <button class="btn-outline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg> Export
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs-scroll">
+    <div class="tabs-container">
+      <div class="tab" [class.active]="activeTab === 'Personal'" (click)="setTab('Personal')">Personal Details</div>
+      <div class="tab" [class.active]="activeTab === 'Employment'" (click)="setTab('Employment')">Employment</div>
+      <div class="tab" [class.active]="activeTab === 'Bank'" (click)="setTab('Bank')">Bank Details</div>
+      <div class="tab" [class.active]="activeTab === 'Salary'" (click)="setTab('Salary')">Salary Info</div>
+      <div class="tab" [class.active]="activeTab === 'Documents'" (click)="setTab('Documents')">Documents</div>
+    </div>
+  </div>
+
+  <!-- Content Grid -->
+  <div class="content-grid">
+    <!-- Left Column (Main Info) -->
+    <div class="col-main">
+      
+      <!-- Personal Details Tab -->
+      <ng-container *ngIf="activeTab === 'Personal'">
+        <div class="card info-card">
+          <div class="card-header">
+            <h3>Personal Information</h3>
+          </div>
+          <div class="card-body">
+            <div class="info-grid">
+              <div class="info-group">
+                <label>Full Name</label>
+                <div class="val">{{ employee.name }}</div>
+              </div>
+              <div class="info-group">
+                <label>Date of Birth</label>
+                <div class="val">{{ employee.dob }}</div>
+              </div>
+              <div class="info-group">
+                <label>Gender</label>
+                <div class="val">{{ employee.gender }}</div>
+              </div>
+              <div class="info-group">
+                <label>Blood Group</label>
+                <div class="val">{{ employee.bloodGroup }}</div>
+              </div>
+              <div class="info-group">
+                <label>Marital Status</label>
+                <div class="val">{{ employee.maritalStatus }}</div>
+              </div>
+              <div class="info-group">
+                <label>Nationality</label>
+                <div class="val">{{ employee.nationality }}</div>
+              </div>
+            </div>
+            
+            <div class="section-title mt-4">Contact Information</div>
+            <div class="info-grid">
+              <div class="info-group">
+                <label>Personal Email</label>
+                <div class="val">{{ employee.personalEmail }}</div>
+              </div>
+              <div class="info-group">
+                <label>Mobile Number</label>
+                <div class="val">{{ employee.phone }}</div>
+              </div>
+              <div class="info-group">
+                <label>Emergency Contact Name</label>
+                <div class="val">{{ employee.emergencyContactName }}</div>
+              </div>
+              <div class="info-group">
+                <label>Emergency Contact Phone</label>
+                <div class="val">{{ employee.emergencyContactPhone }}</div>
+              </div>
+            </div>
+
+            <div class="section-title mt-4">Address Information</div>
+            <div class="info-group full-width">
+              <label>Current Address</label>
+              <div class="val">{{ employee.currentAddress }}</div>
+            </div>
+            <div class="info-group full-width mt-3">
+              <label>Permanent Address</label>
+              <div class="val">{{ employee.permanentAddress }}</div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Employment Details Tab -->
+      <ng-container *ngIf="activeTab === 'Employment'">
+        <div class="card info-card">
+          <div class="card-header">
+            <h3>Employment Information</h3>
+          </div>
+          <div class="card-body">
+            <div class="info-grid">
+              <div class="info-group">
+                <label>Employee ID</label>
+                <div class="val">{{ employee.id }}</div>
+              </div>
+              <div class="info-group">
+                <label>Department</label>
+                <div class="val">{{ employee.department }}</div>
+              </div>
+              <div class="info-group">
+                <label>Designation</label>
+                <div class="val">{{ employee.designation }}</div>
+              </div>
+              <div class="info-group">
+                <label>Date of Joining</label>
+                <div class="val">{{ employee.joinDate }}</div>
+              </div>
+              <div class="info-group">
+                <label>Work Email</label>
+                <div class="val">{{ employee.email }}</div>
+              </div>
+              <div class="info-group">
+                <label>Reporting Manager</label>
+                <div class="val">{{ employee.reportingTo }}</div>
+              </div>
+              <div class="info-group">
+                <label>Employment Type</label>
+                <div class="val">{{ employee.employmentType }}</div>
+              </div>
+              <div class="info-group">
+                <label>Shift Timing</label>
+                <div class="val">{{ employee.shift }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Bank Details Tab -->
+      <ng-container *ngIf="activeTab === 'Bank'">
+        <div class="card info-card">
+          <div class="card-header">
+            <h3>Bank & Statutory Details</h3>
+          </div>
+          <div class="card-body">
+            <div class="info-grid">
+              <div class="info-group">
+                <label>Bank Name</label>
+                <div class="val">{{ employee.bankName }}</div>
+              </div>
+              <div class="info-group">
+                <label>Account Holder Name</label>
+                <div class="val">{{ employee.name }}</div>
+              </div>
+              <div class="info-group">
+                <label>Account Number</label>
+                <div class="val">{{ employee.accountNumber }}</div>
+              </div>
+              <div class="info-group">
+                <label>IFSC Code</label>
+                <div class="val">{{ employee.ifsc }}</div>
+              </div>
+              <div class="info-group">
+                <label>PAN Number</label>
+                <div class="val">{{ employee.panNumber }}</div>
+              </div>
+              <div class="info-group">
+                <label>Aadhar Number</label>
+                <div class="val">{{ employee.aadharNumber }}</div>
+              </div>
+              <div class="info-group">
+                <label>UAN (PF Number)</label>
+                <div class="val">{{ employee.uan }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Salary Tab -->
+      <ng-container *ngIf="activeTab === 'Salary'">
+        <div class="card info-card">
+          <div class="card-header">
+            <h3>Salary Structure</h3>
+          </div>
+          <div class="card-body">
+            <div class="salary-box">
+              <div class="ctc-header">
+                <div>Total CTC (Annual)</div>
+                <h3>₹{{ employee.ctcAnnual }}</h3>
+              </div>
+              
+              <div class="salary-grid">
+                <div class="earnings-col">
+                  <h4>Earnings</h4>
+                  <div class="line-item">
+                    <span>Basic Salary</span>
+                    <span>₹{{ employee.salary.basic }}</span>
+                  </div>
+                  <div class="line-item">
+                    <span>HRA</span>
+                    <span>₹{{ employee.salary.hra }}</span>
+                  </div>
+                  <div class="line-item">
+                    <span>Special Allowance</span>
+                    <span>₹{{ employee.salary.specialAllowance }}</span>
+                  </div>
+                  <div class="line-item total">
+                    <span>Gross Earnings</span>
+                    <span>₹{{ employee.salary.gross }}</span>
+                  </div>
+                </div>
+                
+                <div class="deductions-col">
+                  <h4>Deductions</h4>
+                  <div class="line-item">
+                    <span>PF Contribution</span>
+                    <span>₹{{ employee.salary.pf }}</span>
+                  </div>
+                  <div class="line-item">
+                    <span>Professional Tax</span>
+                    <span>₹{{ employee.salary.pt }}</span>
+                  </div>
+                  <div class="line-item">
+                    <span>Income Tax (TDS)</span>
+                    <span>₹{{ employee.salary.tds }}</span>
+                  </div>
+                  <div class="line-item total">
+                    <span>Total Deductions</span>
+                    <span>₹{{ employee.salary.totalDeductions }}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="net-pay-footer">
+                <div>Net Payable (Monthly)</div>
+                <h3>₹{{ employee.salary.net }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      
+    </div>
+
+    <!-- Right Column (Sidebar Widgets) -->
+    <div class="col-side">
+      <div class="card widget">
+        <h3>Manager</h3>
+        <div class="assigned-user">
+          <div class="avatar blue">VS</div>
+          <div class="info">
+            <div class="name">{{ employee.reportingTo }}</div>
+            <div class="sub">Principal</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card widget">
+        <h3>Recent Activity</h3>
+        <ul class="activity-timeline">
+          <li>
+            <div class="bullet"></div>
+            <div class="content">
+              <div class="desc">Marked present today</div>
+              <div class="time">Today, 08:30 AM</div>
+            </div>
+          </li>
+          <li>
+            <div class="bullet"></div>
+            <div class="content">
+              <div class="desc">Leave approved for Aug 15</div>
+              <div class="time">Yesterday, 02:15 PM</div>
+            </div>
+          </li>
+          <li>
+            <div class="bullet"></div>
+            <div class="content">
+              <div class="desc">Payslip generated for July</div>
+              <div class="time">Aug 1, 10:00 AM</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
