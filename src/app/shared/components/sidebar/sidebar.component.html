@@ -61,10 +61,8 @@
             </a>
             <div class="submenu" [style.display]="activeDept === 'Science' ? 'flex' : 'none'">
                 <a routerLink="/customers/list" [queryParams]="{branch: 'Science', role: 'Admin'}">Department Head</a>
-                <ng-container *ngIf="userRole !== 'HR'">
-                    <a routerLink="/customers/list" [queryParams]="{branch: 'Science', role: 'Teacher'}">Teachers</a>
-                    <a routerLink="/customers/list" [queryParams]="{branch: 'Science', role: 'Student'}">Students</a>
-                </ng-container>
+                <a routerLink="/customers/list" [queryParams]="{branch: 'Science', role: 'Teacher'}">Teachers</a>
+                <a routerLink="/customers/list" [queryParams]="{branch: 'Science', role: 'Student'}">Students</a>
             </div>
         </div>
 
@@ -81,10 +79,8 @@
             </a>
             <div class="submenu" [style.display]="activeDept === 'Mathematics' ? 'flex' : 'none'">
                 <a routerLink="/customers/list" [queryParams]="{branch: 'Mathematics', role: 'Admin'}">Department Head</a>
-                <ng-container *ngIf="userRole !== 'HR'">
-                    <a routerLink="/customers/list" [queryParams]="{branch: 'Mathematics', role: 'Teacher'}">Teachers</a>
-                    <a routerLink="/customers/list" [queryParams]="{branch: 'Mathematics', role: 'Student'}">Students</a>
-                </ng-container>
+                <a routerLink="/customers/list" [queryParams]="{branch: 'Mathematics', role: 'Teacher'}">Teachers</a>
+                <a routerLink="/customers/list" [queryParams]="{branch: 'Mathematics', role: 'Student'}">Students</a>
             </div>
         </div>
 
@@ -101,10 +97,8 @@
             </a>
             <div class="submenu" [style.display]="activeDept === 'Commerce' ? 'flex' : 'none'">
                 <a routerLink="/customers/list" [queryParams]="{branch: 'Commerce', role: 'Admin'}">Department Head</a>
-                <ng-container *ngIf="userRole !== 'HR'">
-                    <a routerLink="/customers/list" [queryParams]="{branch: 'Commerce', role: 'Teacher'}">Teachers</a>
-                    <a routerLink="/customers/list" [queryParams]="{branch: 'Commerce', role: 'Student'}">Students</a>
-                </ng-container>
+                <a routerLink="/customers/list" [queryParams]="{branch: 'Commerce', role: 'Teacher'}">Teachers</a>
+                <a routerLink="/customers/list" [queryParams]="{branch: 'Commerce', role: 'Student'}">Students</a>
             </div>
         </div>
         
@@ -121,10 +115,8 @@
             </a>
             <div class="submenu" [style.display]="activeDept === 'Arts' ? 'flex' : 'none'">
                 <a routerLink="/customers/list" [queryParams]="{branch: 'Arts', role: 'Admin'}">Department Head</a>
-                <ng-container *ngIf="userRole !== 'HR'">
-                    <a routerLink="/customers/list" [queryParams]="{branch: 'Arts', role: 'Teacher'}">Teachers</a>
-                    <a routerLink="/customers/list" [queryParams]="{branch: 'Arts', role: 'Student'}">Students</a>
-                </ng-container>
+                <a routerLink="/customers/list" [queryParams]="{branch: 'Arts', role: 'Teacher'}">Teachers</a>
+                <a routerLink="/customers/list" [queryParams]="{branch: 'Arts', role: 'Student'}">Students</a>
             </div>
         </div>
 
