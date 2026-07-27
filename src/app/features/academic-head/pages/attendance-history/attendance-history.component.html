@@ -6,11 +6,17 @@
       <div class="breadcrumbs">Home / Attendance / History</div>
       <h2>Teacher Attendance History</h2>
     </div>
+    <div class="header-right">
+      <select [(ngModel)]="selectedTeacher" style="padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 0.95rem; font-weight: 500;">
+        <option value="All Teachers">All Teachers</option>
+        <option *ngFor="let t of teachers" [value]="t.name">{{ t.name }}</option>
+      </select>
+    </div>
   </div>
 
   <!-- Teacher Attendance Charts -->
   <div class="charts-scroll-container" style="display: flex; gap: 16px; overflow-x: auto; padding-bottom: 16px; margin-bottom: 24px;">
-    <div *ngFor="let item of teacherCharts" class="card" style="min-width: 200px; background: var(--bg-card); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center;">
+    <div *ngFor="let item of filteredTeacherCharts" class="card" style="min-width: 200px; background: var(--bg-card); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center;">
       <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; text-align: center;">{{ item.teacher.name }}</div>
       <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; text-align: center;">Attendance: {{ item.teacher.attendanceSummary?.percentage }}%</div>
       <apx-chart 
@@ -36,7 +42,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let a of teacherAttendance" style="border-bottom: 1px solid var(--border-color);">
+        <tr *ngFor="let a of filteredTeacherAttendance" style="border-bottom: 1px solid var(--border-color);">
           <td style="padding: 12px 8px;">{{ a.date }}</td>
           <td style="padding: 12px 8px;">{{ a.userName }}</td>
           <td style="padding: 12px 8px;">{{ a.detailInfo }}</td>

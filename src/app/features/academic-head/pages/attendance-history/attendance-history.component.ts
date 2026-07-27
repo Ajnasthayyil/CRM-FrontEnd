@@ -13,6 +13,7 @@ export class AttendanceHistoryComponent implements OnInit {
   teacherAttendance: AttendanceRecord[] = [];
   teachers: Teacher[] = [];
   teacherCharts: any[] = [];
+  selectedTeacher: string = 'All Teachers';
 
   constructor(
     private attendanceService: AttendanceService,
@@ -39,5 +40,15 @@ export class AttendanceHistoryComponent implements OnInit {
         }
       }));
     });
+  }
+
+  get filteredTeacherCharts() {
+    if (this.selectedTeacher === 'All Teachers') return this.teacherCharts;
+    return this.teacherCharts.filter(c => c.teacher.name === this.selectedTeacher);
+  }
+
+  get filteredTeacherAttendance() {
+    if (this.selectedTeacher === 'All Teachers') return this.teacherAttendance;
+    return this.teacherAttendance.filter(a => a.userName === this.selectedTeacher);
   }
 }
