@@ -1,1 +1,45 @@
-<p>reports-home works!</p>
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / HR Modules / Reports</div>
+      <h1>Reports & Analytics</h1>
+    </div>
+    <div class="header-right">
+      <button class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Create Custom Report
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container mt-4">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>REPORT TITLE</th>
+          <th>CATEGORY</th>
+          <th>LAST GENERATED</th>
+          <th>STATUS</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of reports">
+          <td>
+            <div class="fw-500">{{ report.title }}</div>
+          </td>
+          <td>{{ report.category }}</td>
+          <td>{{ report.lastGenerated }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="report.statusClass">
+              <span class="dot"></span>{{ report.status }}
+            </span>
+          </td>
+          <td>
+            <button class="btn-outline-sm" style="padding: 4px 8px; margin-right: 8px;">View</button>
+            <button class="btn-outline-sm" style="padding: 4px 8px;">Download PDF</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

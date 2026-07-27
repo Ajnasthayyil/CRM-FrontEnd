@@ -1,1 +1,94 @@
-<p>settings-home works!</p>
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / HR Modules / Settings</div>
+      <h1>System Settings</h1>
+    </div>
+    <div class="header-right">
+      <button class="btn-primary">Save Changes</button>
+    </div>
+  </div>
+
+  <div class="settings-layout" style="display: flex; gap: 24px; margin-top: 24px;">
+    <!-- Sidebar Menu -->
+    <div class="settings-sidebar" style="width: 250px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color); padding: 16px; height: fit-content;">
+      <ul style="list-style: none; padding: 0; margin: 0;">
+        <li style="margin-bottom: 8px;">
+          <a (click)="setTab('general')" [class.active]="activeTab === 'general'" style="display: block; padding: 10px 16px; border-radius: 8px; cursor: pointer; color: var(--text-primary); text-decoration: none;" [ngStyle]="{'background': activeTab === 'general' ? 'var(--bg-hover)' : 'transparent', 'font-weight': activeTab === 'general' ? '500' : 'normal'}">General</a>
+        </li>
+        <li style="margin-bottom: 8px;">
+          <a (click)="setTab('security')" [class.active]="activeTab === 'security'" style="display: block; padding: 10px 16px; border-radius: 8px; cursor: pointer; color: var(--text-primary); text-decoration: none;" [ngStyle]="{'background': activeTab === 'security' ? 'var(--bg-hover)' : 'transparent', 'font-weight': activeTab === 'security' ? '500' : 'normal'}">Security</a>
+        </li>
+        <li style="margin-bottom: 8px;">
+          <a (click)="setTab('notifications')" [class.active]="activeTab === 'notifications'" style="display: block; padding: 10px 16px; border-radius: 8px; cursor: pointer; color: var(--text-primary); text-decoration: none;" [ngStyle]="{'background': activeTab === 'notifications' ? 'var(--bg-hover)' : 'transparent', 'font-weight': activeTab === 'notifications' ? '500' : 'normal'}">Notifications</a>
+        </li>
+        <li>
+          <a (click)="setTab('roles')" [class.active]="activeTab === 'roles'" style="display: block; padding: 10px 16px; border-radius: 8px; cursor: pointer; color: var(--text-primary); text-decoration: none;" [ngStyle]="{'background': activeTab === 'roles' ? 'var(--bg-hover)' : 'transparent', 'font-weight': activeTab === 'roles' ? '500' : 'normal'}">Roles & Permissions</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Content Area -->
+    <div class="settings-content" style="flex: 1; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color); padding: 24px;">
+      <div *ngIf="activeTab === 'general'">
+        <h2 style="font-size: 18px; margin-bottom: 24px; margin-top: 0;">General Settings</h2>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Company Name</label>
+          <input type="text" class="form-control" value="EduCRM Inc." style="width: 100%; max-width: 400px; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-main); color: var(--text-primary);">
+        </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Support Email</label>
+          <input type="email" class="form-control" value="support@educrm.com" style="width: 100%; max-width: 400px; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-main); color: var(--text-primary);">
+        </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label style="display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px;">Timezone</label>
+          <select class="form-control" style="width: 100%; max-width: 400px; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--bg-main); color: var(--text-primary);">
+            <option>UTC - Coordinated Universal Time</option>
+            <option>EST - Eastern Standard Time</option>
+            <option>PST - Pacific Standard Time</option>
+          </select>
+        </div>
+      </div>
+
+      <div *ngIf="activeTab === 'security'">
+        <h2 style="font-size: 18px; margin-bottom: 24px; margin-top: 0;">Security Settings</h2>
+        <div class="form-group" style="margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; max-width: 500px;">
+          <div>
+            <div style="font-weight: 500;">Two-Factor Authentication (2FA)</div>
+            <div style="font-size: 13px; color: var(--text-muted);">Require all users to use 2FA when signing in.</div>
+          </div>
+          <input type="checkbox" checked style="width: 20px; height: 20px;">
+        </div>
+        <div class="form-group" style="margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; max-width: 500px;">
+          <div>
+            <div style="font-weight: 500;">Session Timeout</div>
+            <div style="font-size: 13px; color: var(--text-muted);">Automatically log out users after 30 minutes of inactivity.</div>
+          </div>
+          <input type="checkbox" checked style="width: 20px; height: 20px;">
+        </div>
+      </div>
+
+      <div *ngIf="activeTab === 'notifications'">
+        <h2 style="font-size: 18px; margin-bottom: 24px; margin-top: 0;">Notification Settings</h2>
+        <div class="form-group" style="margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; max-width: 500px;">
+          <div>
+            <div style="font-weight: 500;">Email Alerts</div>
+            <div style="font-size: 13px; color: var(--text-muted);">Receive daily summary of system activities.</div>
+          </div>
+          <input type="checkbox" checked style="width: 20px; height: 20px;">
+        </div>
+      </div>
+
+      <div *ngIf="activeTab === 'roles'">
+        <h2 style="font-size: 18px; margin-bottom: 24px; margin-top: 0;">Roles & Permissions</h2>
+        <p style="color: var(--text-muted);">Manage custom roles and access control here. For now, you can view the default roles.</p>
+        <ul style="list-style: disc; margin-left: 20px; margin-top: 10px;">
+          <li style="margin-bottom: 8px;">Super Admin</li>
+          <li style="margin-bottom: 8px;">HR Admin</li>
+          <li style="margin-bottom: 8px;">Department Head</li>
+          <li style="margin-bottom: 8px;">Employee</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

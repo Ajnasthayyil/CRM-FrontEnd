@@ -1,1 +1,143 @@
-<p>performance-home works!</p>
+<div class="page-container">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <div class="breadcrumbs">Home / Performance / Overview</div>
+      <h1>Performance Management</h1>
+      <div class="subtitle">Track staff evaluations, KPIs, and review cycles</div>
+    </div>
+    <div class="header-right">
+      <button class="btn-primary" (click)="newEvaluation()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+        </svg>
+        New Evaluation
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary Metrics -->
+  <div class="summary-cards">
+    <div class="card">
+      <div class="card-title">UPCOMING REVIEWS</div>
+      <div class="card-value">{{ metrics.upcomingReviews }}</div>
+      <div class="card-subtitle">Scheduled for this month</div>
+    </div>
+    <div class="card">
+      <div class="card-title">TOP PERFORMERS</div>
+      <div class="card-value">{{ metrics.topPerformers }}</div>
+      <div class="card-subtitle">Staff with 5-star ratings</div>
+    </div>
+    <div class="card">
+      <div class="card-title">AVERAGE SCHOOL RATING</div>
+      <div class="card-value">{{ metrics.averageRating }}<span style="font-size: 1rem; color: #f59e0b; margin-left: 4px;">★</span></div>
+      <div class="card-subtitle">Across all departments</div>
+    </div>
+  </div>
+
+  <!-- Table Container -->
+  <div class="table-container card">
+    <div class="table-header">
+      <div class="search-bar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" placeholder="Search by name, ID, or role...">
+      </div>
+      <div class="filters">
+        <select class="filter-select">
+          <option value="">All Departments</option>
+          <option value="science">Science</option>
+          <option value="math">Mathematics</option>
+          <option value="leadership">Leadership</option>
+        </select>
+        <select class="filter-select">
+          <option value="">Status: All</option>
+          <option value="reviewed">Reviewed</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>EMPLOYEE ↕</th>
+          <th>ROLE & DEPT ↕</th>
+          <th>LAST REVIEW ↕</th>
+          <th>OVERALL RATING ↕</th>
+          <th>STATUS ↕</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let review of reviews">
+          <td>
+            <div class="employee-cell">
+              <div class="avatar-placeholder" 
+                   [ngClass]="{
+                     'bg-blue': review.department === 'Leadership',
+                     'bg-green': review.department === 'Science',
+                     'bg-purple': review.department === 'Mathematics',
+                     'bg-orange': review.department === 'Support Staff'
+                   }">
+                {{ review.employeeName.substring(0, 2).toUpperCase().replace('.', '') }}
+              </div>
+              <div class="info">
+                <div class="name">{{ review.employeeName }}</div>
+                <div class="role">{{ review.id }}</div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div style="font-weight: 500;">{{ review.role }}</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">{{ review.department }}</div>
+          </td>
+          <td>{{ review.lastReviewDate }}</td>
+          <td>
+            <div class="rating-stars">
+              <ng-container *ngFor="let i of [1,2,3,4,5]">
+                <svg width="14" height="14" viewBox="0 0 24 24" [attr.fill]="i <= review.overallRating ? '#f59e0b' : 'none'" [attr.stroke]="i <= review.overallRating ? '#f59e0b' : '#cbd5e1'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </ng-container>
+            </div>
+          </td>
+          <td>
+            <span class="status-badge" 
+                  [ngClass]="{
+                    'status-reviewed': review.status === 'Reviewed',
+                    'status-pending': review.status === 'Pending'
+                  }">
+              {{ review.status }}
+            </span>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <button class="btn-icon" (click)="viewDetails(review.id)" title="View Details">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="table-footer">
+      <div class="pagination-info">Showing 1 to {{ reviews.length }} of {{ reviews.length }} entries</div>
+      <div class="pagination-controls">
+        <button class="page-btn" disabled>Previous</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn" disabled>Next</button>
+      </div>
+    </div>
+  </div>
+</div>

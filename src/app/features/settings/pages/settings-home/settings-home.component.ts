@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./settings-home.component.scss']
 })
 export class SettingsHomeComponent {
+  activeTab = 'general';
 
+  setTab(tab: string) {
+    this.activeTab = tab;
+  }
 }

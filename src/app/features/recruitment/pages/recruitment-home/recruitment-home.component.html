@@ -1,1 +1,157 @@
-<p>recruitment-home works!</p>
+<div class="page-container">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <div class="breadcrumbs">Home / Recruitment / Overview</div>
+      <h1>Recruitment & Hiring</h1>
+      <div class="subtitle">Manage job postings, track candidates, and schedule interviews</div>
+    </div>
+    <div class="header-right">
+      <button class="btn-primary" (click)="postJob()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        Post New Job
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary Metrics -->
+  <div class="summary-cards">
+    <div class="card">
+      <div class="card-title">OPEN VACANCIES</div>
+      <div class="card-value">{{ metrics.openVacancies }}</div>
+      <div class="card-subtitle">Active job postings</div>
+    </div>
+    <div class="card">
+      <div class="card-title">TOTAL CANDIDATES</div>
+      <div class="card-value">{{ metrics.totalCandidates }}</div>
+      <div class="card-subtitle">In the hiring pipeline</div>
+    </div>
+    <div class="card">
+      <div class="card-title">INTERVIEWS SCHEDULED</div>
+      <div class="card-value">{{ metrics.interviewsScheduled }}</div>
+      <div class="card-subtitle">For the upcoming week</div>
+    </div>
+  </div>
+
+  <!-- Active Job Postings (Mini Cards) -->
+  <div class="section-title">Active Postings</div>
+  <div class="job-grid">
+    <div class="job-card" *ngFor="let job of jobPostings">
+      <div class="job-header">
+        <h4>{{ job.title }}</h4>
+        <span class="status-dot"></span>
+      </div>
+      <div class="job-dept">{{ job.department }}</div>
+      <div class="job-footer">
+        <div class="applicants">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          {{ job.applicants }} Applicants
+        </div>
+        <a class="view-link">View Pipeline →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Container for Candidates -->
+  <div class="table-container card mt-4">
+    <div class="table-header">
+      <div class="search-bar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" placeholder="Search candidates...">
+      </div>
+      <div class="filters">
+        <select class="filter-select">
+          <option value="">All Roles</option>
+          <option *ngFor="let job of jobPostings" [value]="job.title">{{ job.title }}</option>
+        </select>
+        <select class="filter-select">
+          <option value="">Stage: All</option>
+          <option value="New">New</option>
+          <option value="Interviewing">Interviewing</option>
+          <option value="Offered">Offered</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>CANDIDATE ↕</th>
+          <th>APPLIED ROLE ↕</th>
+          <th>APPLIED DATE ↕</th>
+          <th>RATING ↕</th>
+          <th>STAGE ↕</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let candidate of candidates">
+          <td>
+            <div class="employee-cell">
+              <div class="avatar-placeholder bg-blue">
+                {{ candidate.name.substring(0, 2).toUpperCase() }}
+              </div>
+              <div class="info">
+                <div class="name">{{ candidate.name }}</div>
+                <div class="role">{{ candidate.id }}</div>
+              </div>
+            </div>
+          </td>
+          <td>{{ candidate.appliedRole }}</td>
+          <td>{{ candidate.appliedDate }}</td>
+          <td>
+            <div class="rating-stars">
+              <ng-container *ngFor="let i of [1,2,3,4,5]">
+                <svg width="14" height="14" viewBox="0 0 24 24" [attr.fill]="i <= candidate.rating ? '#f59e0b' : 'none'" [attr.stroke]="i <= candidate.rating ? '#f59e0b' : '#cbd5e1'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </ng-container>
+            </div>
+          </td>
+          <td>
+            <span class="status-badge" 
+                  [ngClass]="{
+                    'status-new': candidate.stage === 'New',
+                    'status-interviewing': candidate.stage === 'Interviewing',
+                    'status-offered': candidate.stage === 'Offered',
+                    'status-rejected': candidate.stage === 'Rejected'
+                  }">
+              {{ candidate.stage }}
+            </span>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <button class="btn-icon" (click)="viewCandidate(candidate.id)" title="View Profile">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="table-footer">
+      <div class="pagination-info">Showing 1 to {{ candidates.length }} of {{ candidates.length }} entries</div>
+      <div class="pagination-controls">
+        <button class="page-btn" disabled>Previous</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn" disabled>Next</button>
+      </div>
+    </div>
+  </div>
+</div>

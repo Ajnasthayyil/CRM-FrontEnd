@@ -1,0 +1,112 @@
+<div class="page-container">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <div class="breadcrumbs">
+        <a routerLink="/performance">Performance</a> / Add Review
+      </div>
+      <h1>Add Performance Review</h1>
+      <div class="subtitle">Evaluate your direct reports based on their monthly performance</div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Target Selection Section -->
+      <div class="form-section">
+        <h3 class="section-title">Review Target</h3>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Target Role *</label>
+            <select formControlName="targetRole" class="form-control" [ngClass]="{'is-invalid': reviewForm.get('targetRole')?.invalid && reviewForm.get('targetRole')?.touched}">
+              <option value="" disabled selected>Select Role to Evaluate</option>
+              <option *ngFor="let role of targetRoles" [value]="role">{{ role }}</option>
+            </select>
+            <div class="error-msg" *ngIf="reviewForm.get('targetRole')?.invalid && reviewForm.get('targetRole')?.touched">
+              Role is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Specific Person *</label>
+            <select formControlName="targetPerson" class="form-control" [ngClass]="{'is-invalid': reviewForm.get('targetPerson')?.invalid && reviewForm.get('targetPerson')?.touched}">
+              <option value="" disabled selected>Select Person</option>
+              <option *ngFor="let person of availableTargets" [value]="person">{{ person }}</option>
+            </select>
+            <div class="error-msg" *ngIf="reviewForm.get('targetPerson')?.invalid && reviewForm.get('targetPerson')?.touched">
+              Person is required
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Evaluation Period Section -->
+      <div class="form-section">
+        <h3 class="section-title">Evaluation Period</h3>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Month *</label>
+            <select formControlName="month" class="form-control" [ngClass]="{'is-invalid': reviewForm.get('month')?.invalid && reviewForm.get('month')?.touched}">
+              <option value="" disabled selected>Select Month</option>
+              <option *ngFor="let m of months" [value]="m">{{ m }}</option>
+            </select>
+            <div class="error-msg" *ngIf="reviewForm.get('month')?.invalid && reviewForm.get('month')?.touched">
+              Month is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Year *</label>
+            <select formControlName="year" class="form-control" [ngClass]="{'is-invalid': reviewForm.get('year')?.invalid && reviewForm.get('year')?.touched}">
+              <option value="" disabled selected>Select Year</option>
+              <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+            </select>
+            <div class="error-msg" *ngIf="reviewForm.get('year')?.invalid && reviewForm.get('year')?.touched">
+              Year is required
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rating & Feedback Section -->
+      <div class="form-section">
+        <h3 class="section-title">Performance Rating</h3>
+        
+        <div class="form-group mb-4">
+          <label>Overall Rating *</label>
+          <div class="star-rating-input">
+            <ng-container *ngFor="let star of ratings">
+              <svg (click)="setRating(star)" 
+                   [ngClass]="{'active': star <= reviewForm.get('rating')?.value}"
+                   width="32" height="32" viewBox="0 0 24 24" 
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </ng-container>
+          </div>
+          <div class="error-msg" *ngIf="reviewForm.get('rating')?.value === 0 && reviewForm.get('rating')?.touched">
+            Please select a rating
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Detailed Feedback & Comments *</label>
+          <textarea formControlName="feedback" class="form-control" rows="5" placeholder="Provide constructive feedback..." [ngClass]="{'is-invalid': reviewForm.get('feedback')?.invalid && reviewForm.get('feedback')?.touched}"></textarea>
+          <div class="error-msg" *ngIf="reviewForm.get('feedback')?.invalid && reviewForm.get('feedback')?.touched">
+            Feedback is required (minimum 10 characters)
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="cancel()">Cancel</button>
+        <button type="submit" class="btn-primary" [disabled]="reviewForm.invalid || reviewForm.get('rating')?.value === 0">Submit Review</button>
+      </div>
+
+    </form>
+  </div>
+</div>

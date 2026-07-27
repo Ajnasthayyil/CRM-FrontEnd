@@ -1,1 +1,150 @@
-<p>training-home works!</p>
+<div class="page-container">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <div class="breadcrumbs">Home / Training / Overview</div>
+      <h1>Training & Development</h1>
+      <div class="subtitle">Manage staff development programs and certifications</div>
+    </div>
+    <div class="header-right">
+      <button class="btn-primary" (click)="scheduleTraining()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        Schedule Training
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary Metrics -->
+  <div class="summary-cards">
+    <div class="card">
+      <div class="card-title">ACTIVE PROGRAMS</div>
+      <div class="card-value">{{ metrics.activePrograms }}</div>
+      <div class="card-subtitle">Currently running</div>
+    </div>
+    <div class="card">
+      <div class="card-title">STAFF ENROLLED</div>
+      <div class="card-value">{{ metrics.staffEnrolled }}</div>
+      <div class="card-subtitle">Across all courses</div>
+    </div>
+    <div class="card">
+      <div class="card-title">COMPLETED CERTIFICATIONS</div>
+      <div class="card-value">{{ metrics.certifications }}</div>
+      <div class="card-subtitle">This semester</div>
+    </div>
+  </div>
+
+  <!-- Active Programs (Mini Cards) -->
+  <div class="section-title">Active Programs</div>
+  <div class="program-grid">
+    <div class="program-card" *ngFor="let program of programs">
+      <div class="program-header">
+        <h4>{{ program.title }}</h4>
+        <span class="status-dot" [ngClass]="{'bg-green': program.status === 'Active', 'bg-blue': program.status === 'Upcoming'}"></span>
+      </div>
+      <div class="program-cat">{{ program.category }}</div>
+      <div class="program-footer">
+        <div class="enrolled">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          {{ program.enrolled }} Enrolled
+        </div>
+        <a class="view-link">View Course →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Container for Enrollments -->
+  <div class="table-container card mt-4">
+    <div class="table-header">
+      <div class="search-bar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" placeholder="Search enrollments...">
+      </div>
+      <div class="filters">
+        <select class="filter-select">
+          <option value="">All Courses</option>
+          <option *ngFor="let p of programs" [value]="p.title">{{ p.title }}</option>
+        </select>
+        <select class="filter-select">
+          <option value="">Status: All</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+          <option value="Not Started">Not Started</option>
+        </select>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>EMPLOYEE ↕</th>
+          <th>COURSE TITLE ↕</th>
+          <th>PROGRESS ↕</th>
+          <th>STATUS ↕</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let enrollment of enrollments">
+          <td>
+            <div class="employee-cell">
+              <div class="avatar-placeholder bg-purple">
+                {{ enrollment.employeeName.substring(0, 2).toUpperCase().replace('.', '') }}
+              </div>
+              <div class="info">
+                <div class="name">{{ enrollment.employeeName }}</div>
+                <div class="role">{{ enrollment.role }}</div>
+              </div>
+            </div>
+          </td>
+          <td style="font-weight: 500;">{{ enrollment.courseTitle }}</td>
+          <td>
+            <div class="progress-bar-container">
+              <div class="progress-bar" [style.width]="enrollment.progress + '%'" [ngClass]="{'bg-green': enrollment.progress === 100, 'bg-blue': enrollment.progress > 0 && enrollment.progress < 100}"></div>
+            </div>
+            <span class="progress-text">{{ enrollment.progress }}%</span>
+          </td>
+          <td>
+            <span class="status-badge" 
+                  [ngClass]="{
+                    'status-progress': enrollment.status === 'In Progress',
+                    'status-completed': enrollment.status === 'Completed',
+                    'status-not-started': enrollment.status === 'Not Started'
+                  }">
+              {{ enrollment.status }}
+            </span>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <button class="btn-icon" (click)="viewCourse(enrollment.id)" title="View Enrollment">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="table-footer">
+      <div class="pagination-info">Showing 1 to {{ enrollments.length }} of {{ enrollments.length }} entries</div>
+      <div class="pagination-controls">
+        <button class="page-btn" disabled>Previous</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn" disabled>Next</button>
+      </div>
+    </div>
+  </div>
+</div>

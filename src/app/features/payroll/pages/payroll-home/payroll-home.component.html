@@ -1,1 +1,143 @@
-<p>payroll-home works!</p>
+<div class="page-container">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <div class="breadcrumbs">Home / Payroll / Overview</div>
+      <h1>Payroll Management</h1>
+      <div class="subtitle">Manage salaries, deductions, and payslips for {{ metrics.totalEmployees }} employees</div>
+    </div>
+    <div class="header-right">
+      <button class="btn-outline" (click)="exportData()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Export
+      </button>
+      <button class="btn-primary" (click)="runPayroll()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        Run Payroll
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary Metrics -->
+  <div class="summary-cards">
+    <div class="card">
+      <div class="card-title">TOTAL PAYROLL</div>
+      <div class="card-value">₹{{ (metrics.totalPayroll / 100000).toFixed(2) }}L</div>
+      <div class="card-subtitle">Estimated for current month</div>
+    </div>
+    <div class="card">
+      <div class="card-title">PENDING APPROVALS</div>
+      <div class="card-value">{{ metrics.pendingApprovals }}</div>
+      <div class="card-subtitle">Requires review before payout</div>
+    </div>
+    <div class="card">
+      <div class="card-title">NEXT PAY DATE</div>
+      <div class="card-value">{{ metrics.nextPayDate }}</div>
+      <div class="card-subtitle">Upcoming direct deposits</div>
+    </div>
+  </div>
+
+  <!-- Table Container -->
+  <div class="table-container card">
+    <div class="table-header">
+      <div class="search-bar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" placeholder="Search by name, ID, or department...">
+      </div>
+      <div class="filters">
+        <select class="filter-select">
+          <option value="">All Departments</option>
+          <option value="science">Science</option>
+          <option value="math">Mathematics</option>
+          <option value="leadership">Leadership</option>
+        </select>
+        <select class="filter-select">
+          <option value="">Status: All</option>
+          <option value="paid">Paid</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>EMPLOYEE ↕</th>
+          <th>DEPARTMENT ↕</th>
+          <th class="text-right">BASE PAY ↕</th>
+          <th class="text-right">DEDUCTIONS ↕</th>
+          <th class="text-right">NET PAY ↕</th>
+          <th>STATUS ↕</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of payrollRecords">
+          <td>
+            <div class="employee-cell">
+              <div class="avatar-placeholder" 
+                   [ngClass]="{
+                     'bg-blue': record.department === 'Leadership',
+                     'bg-green': record.department === 'Science',
+                     'bg-purple': record.department === 'Mathematics',
+                     'bg-orange': record.department === 'Support Staff'
+                   }">
+                {{ record.employeeName.substring(0, 2).toUpperCase().replace('.', '') }}
+              </div>
+              <div class="info">
+                <div class="name">{{ record.employeeName }}</div>
+                <div class="role">{{ record.role }}</div>
+              </div>
+            </div>
+          </td>
+          <td>{{ record.department }}</td>
+          <td class="text-right">₹{{ record.basePay | number }}</td>
+          <td class="text-right text-red">-₹{{ record.deductions | number }}</td>
+          <td class="text-right text-bold">₹{{ record.netPay | number }}</td>
+          <td>
+            <span class="status-badge" 
+                  [ngClass]="{
+                    'status-paid': record.status === 'Paid',
+                    'status-pending': record.status === 'Pending',
+                    'status-processing': record.status === 'Processing'
+                  }">
+              {{ record.status }}
+            </span>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <button class="btn-icon" (click)="viewPayslip(record.id)" title="View Payslip">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="table-footer">
+      <div class="pagination-info">Showing 1 to {{ payrollRecords.length }} of {{ payrollRecords.length }} entries</div>
+      <div class="pagination-controls">
+        <button class="page-btn" disabled>Previous</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn" disabled>Next</button>
+      </div>
+    </div>
+  </div>
+</div>

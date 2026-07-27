@@ -1,1 +1,78 @@
-<p>documents-home works!</p>
+<div class="page-container">
+  <!-- Toaster -->
+  <div class="toaster-container" *ngIf="toasterMessage">
+    <div class="toaster">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      {{ toasterMessage }}
+    </div>
+  </div>
+
+  <div class="page-header">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / HR Modules / Documents</div>
+      <h1>Document Center</h1>
+    </div>
+    <div class="header-right">
+      <input type="file" #fileInput style="display: none" (change)="onFileSelected($event)">
+      <button class="btn-primary" (click)="triggerUpload(fileInput)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg> Upload Document
+      </button>
+    </div>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card" *ngFor="let folder of folders">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">{{ folder.name | uppercase }}</div>
+          <div class="metric-value">{{ folder.count }}</div>
+          <div class="metric-subtext">Files inside</div>
+        </div>
+        <div class="icon-box" [ngClass]="folder.iconClass">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container mt-4">
+    <div class="search-bar" style="padding: 16px; border-bottom: 1px solid var(--border-color);">
+      <div class="input-group">
+        <div class="search-icon-wrapper">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <input type="text" placeholder="Search documents...">
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>DOCUMENT NAME</th>
+          <th>TYPE</th>
+          <th>SIZE</th>
+          <th>UPLOADED DATE</th>
+          <th>AUTHOR</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doc of recentDocuments">
+          <td>
+            <div class="fw-500">{{ doc.name }}</div>
+          </td>
+          <td>{{ doc.type }}</td>
+          <td>{{ doc.size }}</td>
+          <td>{{ doc.date }}</td>
+          <td>{{ doc.author }}</td>
+          <td>
+            <button class="btn-outline-sm" style="padding: 4px 8px; margin-right: 8px;" (click)="viewDocument(doc)">View</button>
+            <button class="btn-outline-sm" style="padding: 4px 8px;" (click)="downloadDocument(doc)">Download</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

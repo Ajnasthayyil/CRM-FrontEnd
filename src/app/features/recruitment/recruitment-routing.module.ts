@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { RecruitmentHomeComponent } from './pages/recruitment-home/recruitment-home.component';
+
+const routes: Routes = [
+  { path: '', component: RecruitmentHomeComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
