@@ -18,12 +18,18 @@
     <ng-container *ngIf="activeTab === 'attendance'">
       <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-bottom: 32px;">
         <div>
-          <h3 class="section-title">Attendance Overview</h3>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+            <h3 class="section-title" style="margin: 0; border: none; padding: 0;">Teacher Overview</h3>
+            <select [(ngModel)]="selectedTeacher" (change)="updateTeacherChart()" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 0.9rem;">
+              <option value="All">All Teachers</option>
+              <option *ngFor="let t of uniqueTeachers" [value]="t">{{ t }}</option>
+            </select>
+          </div>
           <apx-chart 
-            [series]="attendanceChartOptions.series"
-            [chart]="attendanceChartOptions.chart"
-            [labels]="attendanceChartOptions.labels"
-            [colors]="attendanceChartOptions.colors">
+            [series]="teacherChartOptions.series"
+            [chart]="teacherChartOptions.chart"
+            [labels]="teacherChartOptions.labels"
+            [colors]="teacherChartOptions.colors">
           </apx-chart>
         </div>
         <div>
@@ -38,7 +44,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let a of teacherAttendance" style="border-bottom: 1px solid var(--border-color);">
+          <tr *ngFor="let a of filteredTeacherAttendance" style="border-bottom: 1px solid var(--border-color);">
             <td style="padding: 12px 8px;">{{ a.date }}</td>
             <td style="padding: 12px 8px;">{{ a.userName }}</td>
             <td style="padding: 12px 8px;">{{ a.detailInfo }}</td>
@@ -53,8 +59,25 @@
       </div>
       </div>
 
-      <h3 class="section-title">Student Attendance</h3>
-      <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse;">
+      <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-bottom: 32px;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+            <h3 class="section-title" style="margin: 0; border: none; padding: 0;">Student Overview</h3>
+            <select [(ngModel)]="selectedStudent" (change)="updateStudentChart()" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 0.9rem;">
+              <option value="All">All Students</option>
+              <option *ngFor="let s of uniqueStudents" [value]="s">{{ s }}</option>
+            </select>
+          </div>
+          <apx-chart 
+            [series]="studentChartOptions.series"
+            [chart]="studentChartOptions.chart"
+            [labels]="studentChartOptions.labels"
+            [colors]="studentChartOptions.colors">
+          </apx-chart>
+        </div>
+        <div>
+          <h3 class="section-title">Student Attendance</h3>
+          <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse;">
         <thead>
           <tr style="border-bottom: 1px solid var(--border-color);">
             <th style="padding: 12px 8px;">Date</th>
@@ -64,7 +87,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let a of studentAttendance" style="border-bottom: 1px solid var(--border-color);">
+          <tr *ngFor="let a of filteredStudentAttendance" style="border-bottom: 1px solid var(--border-color);">
             <td style="padding: 12px 8px;">{{ a.date }}</td>
             <td style="padding: 12px 8px;">{{ a.userName }}</td>
             <td style="padding: 12px 8px;">{{ a.detailInfo }}</td>
@@ -76,6 +99,8 @@
           </tr>
         </tbody>
       </table>
+      </div>
+      </div>
     </ng-container>
 
     <ng-container *ngIf="activeTab === 'performance'">
