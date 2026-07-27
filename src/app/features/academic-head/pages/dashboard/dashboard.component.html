@@ -48,7 +48,7 @@
     <div class="charts-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
       
       <div class="card" style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
-        <h3 style="margin-top: 0; margin-bottom: 16px; font-size: 1.1rem;">Teacher Attendance</h3>
+        <h3 class="card-title">Teacher Attendance</h3>
         <apx-chart 
           [series]="teacherAttendanceChartOptions.series"
           [chart]="teacherAttendanceChartOptions.chart"
@@ -58,7 +58,7 @@
       </div>
 
       <div class="card" style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
-        <h3 style="margin-top: 0; margin-bottom: 16px; font-size: 1.1rem;">Performance Overview</h3>
+        <h3 class="card-title">Performance Overview</h3>
         <apx-chart 
           [series]="performanceChartOptions.series"
           [chart]="performanceChartOptions.chart"
@@ -73,7 +73,7 @@
       
       <!-- Quick Actions -->
       <div class="card" style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
-        <h3 style="margin-top: 0; margin-bottom: 16px; font-size: 1.1rem;">Quick Actions</h3>
+        <h3 class="card-title">Quick Actions</h3>
         <div style="display: flex; flex-direction: column; gap: 12px;">
           <button class="btn-outline-sm" routerLink="/academic-head/teacher-attendance" style="text-align: left; padding: 10px 16px; display:flex; gap:8px; align-items:center;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Mark Teacher Attendance
@@ -86,7 +86,7 @@
 
       <!-- Recent Activities -->
       <div class="card" style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); flex: 1;">
-        <h3 style="margin-top: 0; margin-bottom: 16px; font-size: 1.1rem;">Recent Activities</h3>
+        <h3 class="card-title">Recent Activities</h3>
         
         <div class="activity-timeline">
           <div class="activity-item" *ngFor="let act of recentActivities" style="display: flex; gap: 16px; margin-bottom: 16px;">
