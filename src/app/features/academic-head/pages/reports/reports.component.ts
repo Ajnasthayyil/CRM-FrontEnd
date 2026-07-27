@@ -16,6 +16,9 @@ export class ReportsComponent implements OnInit {
   studentAttendance: AttendanceRecord[] = [];
   performanceReviews: PerformanceReview[] = [];
 
+  attendanceChartOptions: any;
+  performanceChartOptions: any;
+
   constructor(
     private attendanceService: AttendanceService,
     private performanceService: PerformanceService
@@ -25,6 +28,24 @@ export class ReportsComponent implements OnInit {
     this.attendanceService.getTeacherAttendanceHistory().subscribe(data => this.teacherAttendance = data);
     this.attendanceService.getStudentAttendanceHistory().subscribe(data => this.studentAttendance = data);
     this.performanceService.getPerformanceReviews().subscribe(data => this.performanceReviews = data);
+
+    this.initCharts();
+  }
+
+  initCharts() {
+    this.attendanceChartOptions = {
+      series: [85, 10, 5],
+      chart: { type: 'donut', height: 250 },
+      labels: ['Present', 'Leave', 'Absent'],
+      colors: ['#2563eb', '#f59e0b', '#ef4444']
+    };
+
+    this.performanceChartOptions = {
+      series: [{ name: 'Teachers', data: [12, 18, 5, 2] }],
+      chart: { type: 'bar', height: 250 },
+      xaxis: { categories: ['Excellent', 'Good', 'Needs Improvement', 'Unsatisfactory'] },
+      colors: ['#8b5cf6']
+    };
   }
 
   exportReport() {

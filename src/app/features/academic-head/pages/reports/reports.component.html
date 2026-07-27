@@ -2,7 +2,7 @@
   <app-department-header></app-department-header>
 
   <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-    <h2>Department Reports</h2>
+    <h1 style="font-size: 1.75rem; font-weight: 700; margin: 0;">Department Reports</h1>
     <button class="btn-primary" (click)="exportReport()">
       <i class="pi pi-download"></i> Export Report
     </button>
@@ -16,8 +16,19 @@
   <div class="card" style="background: var(--bg-card); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
     
     <ng-container *ngIf="activeTab === 'attendance'">
-      <h3>Teacher Attendance</h3>
-      <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse; margin-bottom: 32px;">
+      <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-bottom: 32px;">
+        <div>
+          <h3 class="section-title">Attendance Overview</h3>
+          <apx-chart 
+            [series]="attendanceChartOptions.series"
+            [chart]="attendanceChartOptions.chart"
+            [labels]="attendanceChartOptions.labels"
+            [colors]="attendanceChartOptions.colors">
+          </apx-chart>
+        </div>
+        <div>
+          <h3 class="section-title">Teacher Attendance</h3>
+          <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse;">
         <thead>
           <tr style="border-bottom: 1px solid var(--border-color);">
             <th style="padding: 12px 8px;">Date</th>
@@ -39,8 +50,10 @@
           </tr>
         </tbody>
       </table>
+      </div>
+      </div>
 
-      <h3>Student Attendance</h3>
+      <h3 class="section-title">Student Attendance</h3>
       <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse;">
         <thead>
           <tr style="border-bottom: 1px solid var(--border-color);">
@@ -66,8 +79,19 @@
     </ng-container>
 
     <ng-container *ngIf="activeTab === 'performance'">
-      <h3>Performance Reviews</h3>
-      <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse;">
+      <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-bottom: 24px;">
+        <div>
+          <h3 class="section-title">Performance Distribution</h3>
+          <apx-chart 
+            [series]="performanceChartOptions.series"
+            [chart]="performanceChartOptions.chart"
+            [xaxis]="performanceChartOptions.xaxis"
+            [colors]="performanceChartOptions.colors">
+          </apx-chart>
+        </div>
+        <div>
+          <h3 class="section-title">Performance Reviews</h3>
+          <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse;">
         <thead>
           <tr style="border-bottom: 1px solid var(--border-color);">
             <th style="padding: 12px 8px;">Date</th>
@@ -91,6 +115,8 @@
           </tr>
         </tbody>
       </table>
+      </div>
+      </div>
     </ng-container>
 
   </div>
