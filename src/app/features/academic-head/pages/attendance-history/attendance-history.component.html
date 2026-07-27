@@ -1,10 +1,26 @@
 <div class="page-container">
   <app-department-header></app-department-header>
 
-  <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+  <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
     <div class="header-left">
       <div class="breadcrumbs">Home / Attendance / History</div>
       <h2>Teacher Attendance History</h2>
+    </div>
+  </div>
+
+  <!-- Teacher Attendance Charts -->
+  <div class="charts-scroll-container" style="display: flex; gap: 16px; overflow-x: auto; padding-bottom: 16px; margin-bottom: 24px;">
+    <div *ngFor="let item of teacherCharts" class="card" style="min-width: 200px; background: var(--bg-card); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center;">
+      <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; text-align: center;">{{ item.teacher.name }}</div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; text-align: center;">Attendance: {{ item.teacher.attendanceSummary?.percentage }}%</div>
+      <apx-chart 
+        [series]="item.chartOptions.series"
+        [chart]="item.chartOptions.chart"
+        [labels]="item.chartOptions.labels"
+        [colors]="item.chartOptions.colors"
+        [dataLabels]="item.chartOptions.dataLabels"
+        [legend]="item.chartOptions.legend">
+      </apx-chart>
     </div>
   </div>
 

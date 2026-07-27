@@ -40,6 +40,31 @@
         </div>
       </div>
     </div>
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">TOTAL STUDENTS</div>
+          <div class="metric-value">{{ stats.totalStudents }}</div>
+          <div class="metric-subtext">Active department students</div>
+        </div>
+        <div class="icon-box purple">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+      </div>
+    </div>
+    
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">STUDENT ATTENDANCE</div>
+          <div class="metric-value">{{ stats.todayStudentAttendance }}</div>
+          <div class="metric-subtext">Today's average</div>
+        </div>
+        <div class="icon-box yellow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="dashboard-content" style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-top: 24px;">
@@ -64,6 +89,25 @@
           [chart]="performanceChartOptions.chart"
           [xaxis]="performanceChartOptions.xaxis"
           [colors]="performanceChartOptions.colors">
+        </apx-chart>
+      </div>
+      <div class="card" style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
+        <h3 class="card-title">Student Attendance</h3>
+        <apx-chart 
+          [series]="studentAttendanceChartOptions.series"
+          [chart]="studentAttendanceChartOptions.chart"
+          [labels]="studentAttendanceChartOptions.labels"
+          [colors]="studentAttendanceChartOptions.colors">
+        </apx-chart>
+      </div>
+
+      <div class="card" style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
+        <h3 class="card-title">Student Performance</h3>
+        <apx-chart 
+          [series]="studentPerformanceChartOptions.series"
+          [chart]="studentPerformanceChartOptions.chart"
+          [xaxis]="studentPerformanceChartOptions.xaxis"
+          [colors]="studentPerformanceChartOptions.colors">
         </apx-chart>
       </div>
     </div>
