@@ -15,7 +15,7 @@
     <!-- User Profile removed as per request -->
 
     <nav>
-        <a routerLink="/dashboard" routerLinkActive="active" class="btn-dashboard">
+        <a [routerLink]="userRole === 'Academic Lead' ? '/academic-head/dashboard' : '/dashboard'" routerLinkActive="active" class="btn-dashboard">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="3" width="7" height="7"></rect>
                 <rect x="14" y="3" width="7" height="7"></rect>
@@ -25,7 +25,7 @@
             <span class="nav-text">Dashboard</span>
         </a>
 
-        <ng-container *ngIf="userRole !== 'HR'">
+        <ng-container *ngIf="userRole !== 'HR' && userRole !== 'Academic Lead'">
             <div class="menu-label">DIRECTORY</div>
             
             <div class="nav-item has-submenu">
@@ -48,7 +48,7 @@
             </div>
         </ng-container>
 
-        <ng-container *ngIf="userRole !== 'HR'">
+        <ng-container *ngIf="userRole !== 'HR' && userRole !== 'Academic Lead'">
             <div class="menu-label">DEPARTMENTS</div>
 
             <!-- Science -->
@@ -200,7 +200,7 @@
             </a>
         </ng-container>
 
-        <ng-container *ngIf="userRole !== 'HR'">
+        <ng-container *ngIf="userRole !== 'HR' && userRole !== 'Academic Lead'">
             <div class="menu-label">ACADEMICS</div>
 
             <a routerLink="/classes" routerLinkActive="active" class="nav-item">
@@ -237,6 +237,59 @@
                     <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
                 </svg>
                 <span class="nav-text">Document Center</span>
+            </a>
+        </ng-container>
+
+        <ng-container *ngIf="userRole === 'Academic Lead'">
+            <div class="menu-label">TEACHERS</div>
+            <div class="nav-item has-submenu" [class.active]="activeDept === 'Teachers'">
+                <a (click)="toggleDept('Teachers')" style="cursor: pointer;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-text">Teachers</span>
+                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+                <div class="submenu">
+                    <a routerLink="/academic-head/teachers" routerLinkActive="active">All Teachers</a>
+                    <a routerLink="/academic-head/teacher-performance" routerLinkActive="active">Teacher Performance</a>
+                </div>
+            </div>
+
+            <div class="menu-label">ATTENDANCE</div>
+            <div class="nav-item has-submenu" [class.active]="activeDept === 'Attendance'">
+                <a (click)="toggleDept('Attendance')" style="cursor: pointer;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span class="nav-text">Attendance</span>
+                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+                <div class="submenu">
+                    <a routerLink="/academic-head/teacher-attendance" routerLinkActive="active">Teacher Attendance</a>
+                    <a routerLink="/academic-head/attendance-history" routerLinkActive="active">Attendance History</a>
+                </div>
+            </div>
+
+            <div class="menu-label">PERFORMANCE</div>
+            <a routerLink="/academic-head/teacher-performance" routerLinkActive="active" class="nav-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                <span class="nav-text">Teacher Performance</span>
+            </a>
+
+            <div class="menu-label">REPORTS</div>
+            <a routerLink="/academic-head/reports" routerLinkActive="active" class="nav-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                </svg>
+                <span class="nav-text">Reports</span>
             </a>
         </ng-container>
     </nav>

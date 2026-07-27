@@ -1,0 +1,41 @@
+<div class="page-container">
+  <app-department-header></app-department-header>
+
+  <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+    <h2>Department Students</h2>
+  </div>
+
+  <div class="card" style="background: var(--bg-card); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
+    <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse;">
+      <thead>
+        <tr style="border-bottom: 1px solid var(--border-color);">
+          <th style="padding: 12px 8px;">ID</th>
+          <th style="padding: 12px 8px;">Name</th>
+          <th style="padding: 12px 8px;">Class</th>
+          <th style="padding: 12px 8px;">Batch</th>
+          <th style="padding: 12px 8px;">Attendance</th>
+          <th style="padding: 12px 8px;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of students" style="border-bottom: 1px solid var(--border-color);">
+          <td style="padding: 12px 8px;">{{ s.id }}</td>
+          <td style="padding: 12px 8px; font-weight: 500; color: var(--primary);">{{ s.name }}</td>
+          <td style="padding: 12px 8px;">{{ s.className }} (Sec {{ s.section }})</td>
+          <td style="padding: 12px 8px;">{{ s.batch }}</td>
+          <td style="padding: 12px 8px;">
+            <span class="badge" [ngClass]="{'bg-green': s.attendanceSummary.percentage >= 90, 'bg-orange': s.attendanceSummary.percentage < 90 && s.attendanceSummary.percentage >= 75, 'bg-red': s.attendanceSummary.percentage < 75}" style="padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; color: white;">
+              {{ s.attendanceSummary.percentage }}%
+            </span>
+          </td>
+          <td style="padding: 12px 8px;">
+            <button class="btn-outline-sm" [routerLink]="['/academic-head/students', s.id]">View Details</button>
+          </td>
+        </tr>
+        <tr *ngIf="students.length === 0">
+          <td colspan="6" style="padding: 24px; text-align: center; color: var(--text-muted);">No students found in this department.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

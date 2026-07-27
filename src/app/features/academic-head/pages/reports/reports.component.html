@@ -1,0 +1,97 @@
+<div class="page-container">
+  <app-department-header></app-department-header>
+
+  <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+    <h2>Department Reports</h2>
+    <button class="btn-primary" (click)="exportReport()">
+      <i class="pi pi-download"></i> Export Report
+    </button>
+  </div>
+
+  <div class="tabs" style="display: flex; gap: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+    <button [class.active]="activeTab === 'attendance'" (click)="activeTab = 'attendance'" style="background:none; border:none; padding:8px 16px; font-weight:600; cursor:pointer;" [style.border-bottom]="activeTab === 'attendance' ? '2px solid var(--primary)' : 'none'" [style.color]="activeTab === 'attendance' ? 'var(--primary)' : 'inherit'">Attendance Reports</button>
+    <button [class.active]="activeTab === 'performance'" (click)="activeTab = 'performance'" style="background:none; border:none; padding:8px 16px; font-weight:600; cursor:pointer;" [style.border-bottom]="activeTab === 'performance' ? '2px solid var(--primary)' : 'none'" [style.color]="activeTab === 'performance' ? 'var(--primary)' : 'inherit'">Performance Reports</button>
+  </div>
+
+  <div class="card" style="background: var(--bg-card); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
+    
+    <ng-container *ngIf="activeTab === 'attendance'">
+      <h3>Teacher Attendance</h3>
+      <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse; margin-bottom: 32px;">
+        <thead>
+          <tr style="border-bottom: 1px solid var(--border-color);">
+            <th style="padding: 12px 8px;">Date</th>
+            <th style="padding: 12px 8px;">Teacher</th>
+            <th style="padding: 12px 8px;">Subject</th>
+            <th style="padding: 12px 8px;">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of teacherAttendance" style="border-bottom: 1px solid var(--border-color);">
+            <td style="padding: 12px 8px;">{{ a.date }}</td>
+            <td style="padding: 12px 8px;">{{ a.userName }}</td>
+            <td style="padding: 12px 8px;">{{ a.detailInfo }}</td>
+            <td style="padding: 12px 8px;">
+              <span class="badge" [ngClass]="{'bg-green': a.status==='Present', 'bg-red': a.status==='Absent', 'bg-orange': a.status==='Late' || a.status==='Half Day', 'bg-blue': a.status==='Leave'}" style="padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; color: white;">
+                {{ a.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Student Attendance</h3>
+      <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse;">
+        <thead>
+          <tr style="border-bottom: 1px solid var(--border-color);">
+            <th style="padding: 12px 8px;">Date</th>
+            <th style="padding: 12px 8px;">Student</th>
+            <th style="padding: 12px 8px;">Class / Batch</th>
+            <th style="padding: 12px 8px;">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of studentAttendance" style="border-bottom: 1px solid var(--border-color);">
+            <td style="padding: 12px 8px;">{{ a.date }}</td>
+            <td style="padding: 12px 8px;">{{ a.userName }}</td>
+            <td style="padding: 12px 8px;">{{ a.detailInfo }}</td>
+            <td style="padding: 12px 8px;">
+              <span class="badge" [ngClass]="{'bg-green': a.status==='Present', 'bg-red': a.status==='Absent', 'bg-orange': a.status==='Late', 'bg-blue': a.status==='Leave'}" style="padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; color: white;">
+                {{ a.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+
+    <ng-container *ngIf="activeTab === 'performance'">
+      <h3>Performance Reviews</h3>
+      <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse;">
+        <thead>
+          <tr style="border-bottom: 1px solid var(--border-color);">
+            <th style="padding: 12px 8px;">Date</th>
+            <th style="padding: 12px 8px;">Teacher</th>
+            <th style="padding: 12px 8px;">Period</th>
+            <th style="padding: 12px 8px;">Score</th>
+            <th style="padding: 12px 8px;">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of performanceReviews" style="border-bottom: 1px solid var(--border-color);">
+            <td style="padding: 12px 8px;">{{ p.reviewedDate }}</td>
+            <td style="padding: 12px 8px;">{{ p.teacherName }}</td>
+            <td style="padding: 12px 8px;">{{ p.reviewPeriod }}</td>
+            <td style="padding: 12px 8px;">{{ p.overallScore | number:'1.1-1' }} / 5.0</td>
+            <td style="padding: 12px 8px;">
+              <span class="badge" [ngClass]="{'bg-green': p.status==='Excellent' || p.status==='Very Good', 'bg-blue': p.status==='Good', 'bg-red': p.status==='Needs Improvement' || p.status==='Unsatisfactory'}" style="padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; color: white;">
+                {{ p.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+
+  </div>
+</div>

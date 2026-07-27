@@ -1,0 +1,54 @@
+<div class="page-container">
+  <!-- Breadcrumbs & Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / Attendance / Mark Attendance</div>
+      <h1>Mark Teacher Attendance</h1>
+      <div class="subtitle">Date: {{ today }}</div>
+    </div>
+    <div class="header-right">
+      <button class="btn-primary-sm" (click)="submitAttendance()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Submit Attendance
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>TEACHER</th>
+          <th>SUBJECT</th>
+          <th>STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of teachers">
+          <td>
+            <div class="customer-cell">
+              <div class="avatar blue">{{ t.name.charAt(0) }}</div>
+              <div class="info">
+                <div class="name">{{ t.name }}</div>
+                <div class="sub">{{ t.designation || 'Teacher' }}</div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <span class="badge badge-purple" style="display: inline-flex;"><span class="dot"></span>{{ t.subject }}</span>
+          </td>
+          <td>
+            <select [(ngModel)]="t.currentMark" class="form-control" style="width: auto; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <option value="Present">Present</option>
+              <option value="Absent">Absent</option>
+              <option value="Leave">Leave</option>
+              <option value="Half Day">Half Day</option>
+            </select>
+          </td>
+        </tr>
+        <tr *ngIf="teachers.length === 0">
+          <td colspan="3" class="no-results">No teachers found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

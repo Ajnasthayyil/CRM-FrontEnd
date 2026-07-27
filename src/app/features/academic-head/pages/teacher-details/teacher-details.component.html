@@ -1,0 +1,92 @@
+<div class="page-container" *ngIf="teacher">
+  <!-- Top Navigation -->
+  <div class="top-nav">
+    <a routerLink="/academic-head/teachers" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Back to Teachers List
+    </a>
+  </div>
+
+  <!-- Profile Banner -->
+  <div class="profile-banner">
+    <div class="profile-left">
+      <div class="avatar" [ngClass]="$any(teacher).avatarColor">{{ $any(teacher).initials }}</div>
+      <div class="profile-info">
+        <div class="name-row">
+          <h2>{{ teacher.name }}</h2>
+          <span class="status-badge" [ngClass]="teacher.status === 'Active' ? 'status-green' : 'status-red'">
+            <span class="dot" [ngClass]="teacher.status === 'Active' ? 'green' : 'red'"></span>{{ teacher.status }}
+          </span>
+          <span class="tag">{{ teacher.designation || 'Teacher' }}</span>
+        </div>
+        <div class="contact-row">
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> {{ teacher.phone }}</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> {{ teacher.email }}</span>
+        </div>
+        <div class="meta-row">
+          <span>Teacher ID: <strong>{{ teacher.id }}</strong></span>
+          <span class="divider">·</span>
+          <span>Subject: <strong>{{ teacher.subject }}</strong></span>
+          <span class="divider">·</span>
+          <span>Department: <strong>{{ teacher.departmentId === 3 ? 'Computer Science' : 'Department ' + teacher.departmentId }}</strong></span>
+        </div>
+      </div>
+    </div>
+    <div class="profile-right">
+      <div class="metrics">
+        <div class="metric-box score">
+          <div class="val text-green">{{ teacher.attendanceSummary.percentage }}%</div>
+          <div class="lbl">Attendance</div>
+        </div>
+        <div class="metric-box outstanding">
+          <div class="val text-purple">{{ teacher.performanceStatus }}</div>
+          <div class="lbl">Performance</div>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button class="btn-primary" routerLink="/academic-head/add-performance">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path></svg> Add Performance
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs-scroll">
+    <div class="tabs-container">
+      <div class="tab active">Overview</div>
+    </div>
+  </div>
+
+  <!-- Content Grid -->
+  <div class="content-grid">
+    <div class="col-main">
+      <div class="card info-card">
+        <div class="card-header">
+          <h3>Academic Information</h3>
+        </div>
+        <div class="card-body">
+          <div class="info-grid">
+            <div class="info-item">
+              <label>Qualification</label>
+              <div class="val">{{ teacher.qualification }}</div>
+            </div>
+            <div class="info-item">
+              <label>Subject</label>
+              <div class="val">{{ teacher.subject }}</div>
+            </div>
+            <div class="info-item">
+              <label>Designation</label>
+              <div class="val">{{ teacher.designation || 'Teacher' }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-container" *ngIf="!teacher" style="display:flex; justify-content:center; padding: 40px;">
+  <div style="text-align: center; color: var(--text-muted);">
+    Teacher not found.
+  </div>
+</div>

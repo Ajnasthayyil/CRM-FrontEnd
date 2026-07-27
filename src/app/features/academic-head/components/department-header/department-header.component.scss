@@ -1,0 +1,23 @@
+.department-header-bar {
+  background-color: var(--bg-card, #ffffff);
+  border-bottom: 1px solid var(--border-color, #eaedf2);
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+
+  .user-role {
+    font-size: 0.85rem;
+    color: var(--text-muted, #6c757d);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  .department-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary, #2563eb);
+    margin-top: 4px;
+  }
+}

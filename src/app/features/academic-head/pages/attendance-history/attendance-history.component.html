@@ -1,0 +1,37 @@
+<div class="page-container">
+  <app-department-header></app-department-header>
+
+  <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / Attendance / History</div>
+      <h2>Teacher Attendance History</h2>
+    </div>
+  </div>
+
+  <div class="card" style="background: var(--bg-card); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
+    <table class="data-table" style="width: 100%; text-align: left; border-collapse: collapse;">
+      <thead>
+        <tr style="border-bottom: 1px solid var(--border-color);">
+          <th style="padding: 12px 8px;">Date</th>
+          <th style="padding: 12px 8px;">Teacher</th>
+          <th style="padding: 12px 8px;">Subject</th>
+          <th style="padding: 12px 8px;">Status</th>
+          <th style="padding: 12px 8px;">Marked By</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of teacherAttendance" style="border-bottom: 1px solid var(--border-color);">
+          <td style="padding: 12px 8px;">{{ a.date }}</td>
+          <td style="padding: 12px 8px;">{{ a.userName }}</td>
+          <td style="padding: 12px 8px;">{{ a.detailInfo }}</td>
+          <td style="padding: 12px 8px;">
+            <span class="badge" [ngClass]="{'bg-green': a.status==='Present', 'bg-red': a.status==='Absent', 'bg-orange': a.status==='Late' || a.status==='Half Day', 'bg-blue': a.status==='Leave'}" style="padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; color: white;">
+              {{ a.status }}
+            </span>
+          </td>
+          <td style="padding: 12px 8px;">{{ a.markedBy }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,11 +1,19 @@
 <div class="page-container">
+  <!-- Toaster -->
+  <div class="toaster-container" *ngIf="toasterMessage">
+    <div class="toaster">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      {{ toasterMessage }}
+    </div>
+  </div>
+
   <div class="page-header">
     <div class="header-left">
       <div class="breadcrumbs">Home / HR Modules / Reports</div>
       <h1>Reports & Analytics</h1>
     </div>
     <div class="header-right">
-      <button class="btn-primary">
+      <button class="btn-primary" (click)="createReport()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Create Custom Report
       </button>
     </div>
@@ -35,8 +43,8 @@
             </span>
           </td>
           <td>
-            <button class="btn-outline-sm" style="padding: 4px 8px; margin-right: 8px;">View</button>
-            <button class="btn-outline-sm" style="padding: 4px 8px;">Download PDF</button>
+            <button class="btn-outline-sm" style="padding: 4px 8px; margin-right: 8px;" (click)="viewReport(report)">View</button>
+            <button class="btn-outline-sm" style="padding: 4px 8px;" (click)="downloadReport(report)">Download PDF</button>
           </td>
         </tr>
       </tbody>

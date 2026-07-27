@@ -1,0 +1,107 @@
+<div class="page-container">
+  <!-- Breadcrumbs & Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / Dashboard</div>
+      <h1>Academic Lead Dashboard</h1>
+      <div class="subtitle">Department Overview &middot; Data as of Today</div>
+    </div>
+    <div class="header-right">
+      <button class="btn-primary-sm" routerLink="/academic-head/add-performance">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add Performance
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">TOTAL TEACHERS</div>
+          <div class="metric-value">{{ stats.totalTeachers }}</div>
+          <div class="metric-subtext">Active staff members</div>
+        </div>
+        <div class="icon-box blue">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+      </div>
+    </div>
+    
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">TEACHER ATTENDANCE</div>
+          <div class="metric-value">{{ stats.todayTeacherAttendance }}%</div>
+          <div class="metric-subtext">Today's average</div>
+        </div>
+        <div class="icon-box green">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-content" style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-top: 24px;">
+    
+    <!-- Charts Section -->
+    <div class="charts-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      
+      <div class="card" style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
+        <h3 style="margin-top: 0; margin-bottom: 16px; font-size: 1.1rem;">Teacher Attendance</h3>
+        <apx-chart 
+          [series]="teacherAttendanceChartOptions.series"
+          [chart]="teacherAttendanceChartOptions.chart"
+          [labels]="teacherAttendanceChartOptions.labels"
+          [colors]="teacherAttendanceChartOptions.colors">
+        </apx-chart>
+      </div>
+
+      <div class="card" style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
+        <h3 style="margin-top: 0; margin-bottom: 16px; font-size: 1.1rem;">Performance Overview</h3>
+        <apx-chart 
+          [series]="performanceChartOptions.series"
+          [chart]="performanceChartOptions.chart"
+          [xaxis]="performanceChartOptions.xaxis"
+          [colors]="performanceChartOptions.colors">
+        </apx-chart>
+      </div>
+    </div>
+
+    <!-- Quick Actions & Activities -->
+    <div class="side-panel" style="display: flex; flex-direction: column; gap: 24px;">
+      
+      <!-- Quick Actions -->
+      <div class="card" style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
+        <h3 style="margin-top: 0; margin-bottom: 16px; font-size: 1.1rem;">Quick Actions</h3>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <button class="btn-outline-sm" routerLink="/academic-head/teacher-attendance" style="text-align: left; padding: 10px 16px; display:flex; gap:8px; align-items:center;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Mark Teacher Attendance
+          </button>
+          <button class="btn-outline-sm" routerLink="/academic-head/teachers" style="text-align: left; padding: 10px 16px; display:flex; gap:8px; align-items:center;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg> View Teachers
+          </button>
+        </div>
+      </div>
+
+      <!-- Recent Activities -->
+      <div class="card" style="background: var(--bg-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); flex: 1;">
+        <h3 style="margin-top: 0; margin-bottom: 16px; font-size: 1.1rem;">Recent Activities</h3>
+        
+        <div class="activity-timeline">
+          <div class="activity-item" *ngFor="let act of recentActivities" style="display: flex; gap: 16px; margin-bottom: 16px;">
+            <div class="activity-icon" style="background: var(--bg-main); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary);">
+              <i class="pi" [ngClass]="{'pi-check-circle': act.type==='attendance', 'pi-star': act.type==='performance'}"></i>
+            </div>
+            <div>
+              <div style="font-weight: 500; font-size: 0.95rem;">{{ act.title }}</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">{{ act.time }}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

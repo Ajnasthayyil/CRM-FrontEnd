@@ -1,0 +1,78 @@
+<div class="page-container">
+  <!-- Breadcrumbs & Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / Performance / Add Review</div>
+      <h1>Add Teacher Performance Review</h1>
+    </div>
+    <div class="header-right">
+      <button class="btn-outline-sm" routerLink="/academic-head/teacher-performance">Back to Reviews</button>
+    </div>
+  </div>
+
+  <div class="card" style="background: var(--bg-card); padding: 32px; border-radius: 12px; border: 1px solid var(--border-color); max-width: 900px; margin: 0 auto;">
+    
+    <form [formGroup]="performanceForm" (ngSubmit)="onSubmit()">
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
+        <div class="form-group">
+          <label style="display: block; font-weight: 500; margin-bottom: 8px;">Select Teacher <span style="color:var(--red);">*</span></label>
+          <select formControlName="teacherId" class="form-control" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-main);">
+            <option value="">-- Select Teacher --</option>
+            <option *ngFor="let t of teachers" [value]="t.id">{{ t.name }} ({{ t.subject }})</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label style="display: block; font-weight: 500; margin-bottom: 8px;">Review Period <span style="color:var(--red);">*</span></label>
+          <select formControlName="reviewPeriod" class="form-control" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-main);">
+            <option value="Monthly">Monthly</option>
+            <option value="Quarterly">Quarterly</option>
+            <option value="Half Yearly">Half Yearly</option>
+            <option value="Annual">Annual</option>
+          </select>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Ratings</h3>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px;">
+        
+        <div class="form-group" *ngFor="let cat of categories">
+          <label style="display: block; font-weight: 500; margin-bottom: 8px; color: var(--text-muted);">{{ cat.name }}</label>
+          <div class="star-rating" style="color: #f59e0b; font-size: 1.5rem; cursor: pointer; display: flex; gap: 6px;">
+            <i *ngFor="let star of [1,2,3,4,5]" 
+               class="pi" 
+               [ngClass]="performanceForm.get(cat.control)?.value >= star ? 'pi-star-fill' : 'pi-star'" 
+               (click)="performanceForm.get(cat.control)?.setValue(star)"></i>
+          </div>
+        </div>
+
+      </div>
+
+      <h3 style="margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">Remarks & Feedback</h3>
+      <div style="display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 32px;">
+        <div class="form-group">
+          <label style="display: block; font-weight: 500; margin-bottom: 8px;">Strengths <span style="color:var(--red);">*</span></label>
+          <textarea formControlName="strengths" rows="2" class="form-control" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-main);"></textarea>
+        </div>
+        <div class="form-group">
+          <label style="display: block; font-weight: 500; margin-bottom: 8px;">Areas for Improvement</label>
+          <textarea formControlName="areasForImprovement" rows="2" class="form-control" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-main);"></textarea>
+        </div>
+        <div class="form-group">
+          <label style="display: block; font-weight: 500; margin-bottom: 8px;">Academic Head Remarks</label>
+          <textarea formControlName="academicHeadRemarks" rows="2" class="form-control" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-main);"></textarea>
+        </div>
+        <div class="form-group">
+          <label style="display: block; font-weight: 500; margin-bottom: 8px;">Recommendations</label>
+          <textarea formControlName="recommendations" rows="2" class="form-control" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-main);"></textarea>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 16px;">
+        <button type="button" class="btn-outline-sm" routerLink="/academic-head/teacher-performance" style="padding: 10px 24px;">Cancel</button>
+        <button type="submit" class="btn-primary-sm" [disabled]="performanceForm.invalid" style="padding: 10px 24px; opacity: performanceForm.invalid ? 0.5 : 1;">Submit Review</button>
+      </div>
+
+    </form>
+  </div>
+</div>

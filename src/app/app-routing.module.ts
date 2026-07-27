@@ -72,6 +72,10 @@ const routes: Routes = [
       {
         path: 'settings',
         loadChildren: () => import('./features/settings/settings.module').then(m => m.SettingsModule)
+      },
+      {
+        path: 'academic-head',
+        loadChildren: () => import('./features/academic-head/academic-head.module').then(m => m.AcademicHeadModule)
       }
     ]
   },

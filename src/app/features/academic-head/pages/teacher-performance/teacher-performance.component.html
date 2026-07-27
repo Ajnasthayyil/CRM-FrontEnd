@@ -1,0 +1,62 @@
+<div class="page-container">
+  <!-- Breadcrumbs & Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / Performance / Teacher Performance</div>
+      <h1>Teacher Performance</h1>
+      <div class="subtitle">{{ reviews.length }} total reviews</div>
+    </div>
+    <div class="header-right">
+      <button class="btn-primary-sm" routerLink="/academic-head/add-performance">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add Performance Review
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>DATE</th>
+          <th>TEACHER</th>
+          <th>PERIOD</th>
+          <th>SCORE</th>
+          <th>STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of reviews">
+          <td>{{ p.reviewedDate }}</td>
+          <td>
+            <div class="customer-cell">
+              <div class="avatar blue">{{ p.teacherName.charAt(0) }}</div>
+              <div class="info">
+                <div class="name">{{ p.teacherName }}</div>
+              </div>
+            </div>
+          </td>
+          <td>{{ p.reviewPeriod }}</td>
+          <td>
+            <div style="font-weight: 600; color: var(--primary);">
+              {{ p.overallScore | number:'1.1-1' }} / 5.0
+            </div>
+            <!-- Simple star representation -->
+            <div style="color: #f59e0b; font-size: 0.8rem; margin-top: 2px;">
+              <span *ngFor="let s of [1,2,3,4,5]">
+                <i class="pi" [ngClass]="s <= p.overallScore ? 'pi-star-fill' : 'pi-star'"></i>
+              </span>
+            </div>
+          </td>
+          <td>
+            <span class="status-badge" [ngClass]="{'status-green': p.status==='Excellent' || p.status==='Very Good', 'status-orange': p.status==='Good', 'status-red': p.status==='Needs Improvement' || p.status==='Unsatisfactory'}">
+              <span class="dot" [ngClass]="{'green': p.status==='Excellent' || p.status==='Very Good', 'orange': p.status==='Good', 'red': p.status==='Needs Improvement' || p.status==='Unsatisfactory'}"></span>{{ p.status }}
+            </span>
+          </td>
+        </tr>
+        <tr *ngIf="reviews.length === 0">
+          <td colspan="5" class="no-results">No performance reviews found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
