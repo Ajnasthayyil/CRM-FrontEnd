@@ -1,94 +1,108 @@
 <div class="page-container">
   <div class="page-header">
-    <div class="header-content">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / Teacher / Performance</div>
       <h1>Student Performance</h1>
-      <p>Track and record academic performance of your students</p>
-    </div>
-    <div class="header-actions">
-      <button mat-flat-button color="primary">
-        <mat-icon>add</mat-icon> Add Record
-      </button>
+      <div class="subtitle">{{ performanceRecords.length }} records &middot; Track and analyze student grades</div>
     </div>
   </div>
 
-  <mat-card class="table-card">
-    <div class="table-toolbar">
-      <mat-form-field appearance="outline" class="search-field">
-        <mat-label>Search records</mat-label>
-        <mat-icon matPrefix>search</mat-icon>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Student Name, Class, or Assessment">
-      </mat-form-field>
+  <!-- Search & Filter -->
+  <div class="search-bar">
+    <div class="input-group">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" class="form-control" placeholder="Search by student name, class, or assessment..." [(ngModel)]="searchQuery" (ngModelChange)="applyFilters()">
     </div>
+    <div class="filter-actions">
+      <span class="result-count" style="margin-left: 12px;">{{ filteredRecords.length }} results</span>
+    </div>
+  </div>
 
-    <div class="table-container">
-      <div class="loading-shade" *ngIf="isLoading">
-        <p>Loading performance data...</p>
-      </div>
+  <div class="loading-shade" *ngIf="isLoading" style="padding: 20px; text-align: center; color: var(--text-muted);">
+    <p>Loading performance data...</p>
+  </div>
 
-      <table mat-table [dataSource]="dataSource" matSort>
-        
-        <ng-container matColumnDef="studentName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Student </th>
-          <td mat-cell *matCellDef="let row"> <strong>{{row.studentName}}</strong> </td>
-        </ng-container>
-
-        <ng-container matColumnDef="class">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Class & Subject </th>
-          <td mat-cell *matCellDef="let row"> {{row.classId}} | {{row.subject}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="assessment">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Assessment </th>
-          <td mat-cell *matCellDef="let row"> 
-            <div class="assessment-cell">
-              <span>{{row.assessmentName}}</span>
-              <small>{{row.assessmentType}}</small>
+  <div class="table-container" *ngIf="!isLoading">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th [class.active-sort]="sortColumn === 'studentName'" (click)="sortBy('studentName')" style="cursor: pointer;">
+            STUDENT <span class="sort-icon">{{ getSortIcon('studentName') }}</span>
+          </th>
+          <th [class.active-sort]="sortColumn === 'classId'" (click)="sortBy('classId')" style="cursor: pointer;">
+            CLASS <span class="sort-icon">{{ getSortIcon('classId') }}</span>
+          </th>
+          <th [class.active-sort]="sortColumn === 'assessmentName'" (click)="sortBy('assessmentName')" style="cursor: pointer;">
+            ASSESSMENT <span class="sort-icon">{{ getSortIcon('assessmentName') }}</span>
+          </th>
+          <th [class.active-sort]="sortColumn === 'obtainedMarks'" (click)="sortBy('obtainedMarks')" style="cursor: pointer;">
+            MARKS <span class="sort-icon">{{ getSortIcon('obtainedMarks') }}</span>
+          </th>
+          <th [class.active-sort]="sortColumn === 'percentage'" (click)="sortBy('percentage')" style="cursor: pointer;">
+            PERCENTAGE <span class="sort-icon">{{ getSortIcon('percentage') }}</span>
+          </th>
+          <th [class.active-sort]="sortColumn === 'grade'" (click)="sortBy('grade')" style="cursor: pointer;">
+            GRADE <span class="sort-icon">{{ getSortIcon('grade') }}</span>
+          </th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of pagedRecords" class="clickable-row">
+          <td>
+            <div class="name-cell">
+              <strong style="color: var(--text-main);">{{row.studentName}}</strong>
+              <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">ID: {{row.studentId}}</div>
             </div>
           </td>
-        </ng-container>
-
-        <ng-container matColumnDef="marks">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Marks </th>
-          <td mat-cell *matCellDef="let row"> {{row.obtainedMarks}} / {{row.maximumMarks}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="percentage">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> % </th>
-          <td mat-cell *matCellDef="let row">
-            <span class="badge" [class.badge-success]="row.percentage >= 80" [class.badge-warning]="row.percentage < 80 && row.percentage >= 60" [class.badge-danger]="row.percentage < 60">
+          <td>{{row.classId}}</td>
+          <td>{{row.assessmentName}}</td>
+          <td>{{row.obtainedMarks}} / {{row.maximumMarks}}</td>
+          <td>
+            <span class="badge" 
+                  [ngStyle]="{'background-color': row.percentage >= 75 ? 'rgba(34, 197, 94, 0.1)' : (row.percentage >= 50 ? 'rgba(234, 179, 8, 0.1)' : 'rgba(239, 68, 68, 0.1)'),
+                              'color': row.percentage >= 75 ? '#22c55e' : (row.percentage >= 50 ? '#eab308' : '#ef4444'),
+                              'padding': '4px 8px', 'border-radius': '4px', 'font-size': '0.75rem', 'font-weight': '600'}">
               {{row.percentage}}%
             </span>
           </td>
-        </ng-container>
-
-        <ng-container matColumnDef="grade">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Grade </th>
-          <td mat-cell *matCellDef="let row"> <strong>{{row.grade}}</strong> </td>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef> Actions </th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-icon-button color="primary" matTooltip="View Details">
-              <mat-icon>visibility</mat-icon>
-            </button>
-            <button mat-icon-button color="accent" matTooltip="Edit Record">
-              <mat-icon>edit</mat-icon>
-            </button>
+          <td>
+            <span class="status-badge" [ngClass]="row.grade === 'A' ? 'status-green' : (row.grade === 'B' ? 'status-blue' : (row.grade === 'C' ? 'status-orange' : 'status-red'))">
+              {{row.grade}}
+            </span>
           </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row"></tr>
-
-        <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell" colspan="7" style="text-align: center; padding: 20px;">
-            No performance records found.
+          <td (click)="$event.stopPropagation()">
+            <div class="actions" style="display: flex; gap: 8px;">
+              <button class="btn-outline-sm" title="View Details" (click)="viewDetails(row)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </button>
+            </div>
           </td>
         </tr>
-      </table>
-    </div>
+        
+        <tr *ngIf="filteredRecords.length === 0">
+          <td colspan="7" style="text-align: center; padding: 30px; color: var(--text-muted);">
+            No performance records found matching your criteria.
+          </td>
+        </tr>
+      </tbody>
+    </table>
     
-    <mat-paginator [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of records"></mat-paginator>
-  </mat-card>
+    <!-- Pagination -->
+    <div class="pagination-container" *ngIf="filteredRecords.length > 0" style="display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-top: 1px solid var(--border-color);">
+      <div class="pagination-info" style="font-size: 0.85rem; color: var(--text-muted);">
+        Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to {{ Math.min(currentPage * itemsPerPage, filteredRecords.length) }} of {{ filteredRecords.length }} entries
+      </div>
+      <div class="pagination" style="display: flex; gap: 4px;">
+        <button class="btn-outline-sm" [disabled]="currentPage === 1" (click)="setPage(currentPage - 1)">Prev</button>
+        <button *ngFor="let page of totalPagesArray()" 
+                class="btn-outline-sm" 
+                [class.active]="currentPage === page"
+                (click)="setPage(page)">
+          {{ page }}
+        </button>
+        <button class="btn-outline-sm" [disabled]="currentPage === totalPages" (click)="setPage(currentPage + 1)">Next</button>
+      </div>
+    </div>
+  </div>
 </div>

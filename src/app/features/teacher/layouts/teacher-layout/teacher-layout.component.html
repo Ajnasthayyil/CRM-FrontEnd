@@ -1,9 +1,0 @@
-<div class="teacher-layout">
-  <app-teacher-sidebar [isOpen]="isSidebarOpen"></app-teacher-sidebar>
-  <div class="main-content" [class.expanded]="!isSidebarOpen">
-    <app-teacher-header (toggle)="toggleSidebar()"></app-teacher-header>
-    <div class="page-content">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</div>

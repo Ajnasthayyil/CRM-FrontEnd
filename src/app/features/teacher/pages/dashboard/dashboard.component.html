@@ -1,53 +1,80 @@
-<div class="dashboard-container" *ngIf="teacher$ | async as teacher">
+<div class="dashboard-container page-container" *ngIf="teacher$ | async as teacher">
   <div class="welcome-header">
     <div class="welcome-text">
       <h1>Good Morning, {{ teacher.teacherName.split(' ')[0] }}!</h1>
       <p>{{ teacher.departmentName }} Department | Academic Year: 2026–2027</p>
     </div>
     <div class="quick-actions">
-      <button mat-flat-button color="primary"><mat-icon>fact_check</mat-icon> Mark Attendance</button>
-      <button mat-stroked-button color="primary"><mat-icon>add_task</mat-icon> Add Assignment</button>
+      <button class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg> Mark Attendance
+      </button>
+      <button class="btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg> Add Assignment
+      </button>
     </div>
   </div>
 
-  <div class="kpi-cards">
-    <mat-card class="kpi-card">
-      <div class="kpi-icon students"><mat-icon>people</mat-icon></div>
-      <div class="kpi-info">
-        <h3>142</h3>
-        <p>Total Students</p>
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">TOTAL STUDENTS</div>
+          <div class="metric-value">142</div>
+          <div class="metric-subtext">Across all classes</div>
+        </div>
+        <div class="icon-box blue">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
       </div>
-    </mat-card>
-    <mat-card class="kpi-card">
-      <div class="kpi-icon classes"><mat-icon>class</mat-icon></div>
-      <div class="kpi-info">
-        <h3>5</h3>
-        <p>Classes Today</p>
+    </div>
+    
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">CLASSES TODAY</div>
+          <div class="metric-value">5</div>
+          <div class="metric-subtext">Scheduled sessions</div>
+        </div>
+        <div class="icon-box yellow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        </div>
       </div>
-    </mat-card>
-    <mat-card class="kpi-card">
-      <div class="kpi-icon assignments"><mat-icon>assignment</mat-icon></div>
-      <div class="kpi-info">
-        <h3>12</h3>
-        <p>Pending Assignments</p>
+    </div>
+
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">PENDING ASSIGNMENTS</div>
+          <div class="metric-value">12</div>
+          <div class="metric-subtext">To be graded</div>
+        </div>
+        <div class="icon-box red">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        </div>
       </div>
-    </mat-card>
-    <mat-card class="kpi-card">
-      <div class="kpi-icon performance"><mat-icon>trending_up</mat-icon></div>
-      <div class="kpi-info">
-        <h3>84%</h3>
-        <p>Avg Performance</p>
+    </div>
+
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">AVG PERFORMANCE</div>
+          <div class="metric-value">84%</div>
+          <div class="metric-subtext">Overall score</div>
+        </div>
+        <div class="icon-box green">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+        </div>
       </div>
-    </mat-card>
+    </div>
   </div>
 
   <div class="dashboard-grid">
     <div class="grid-col-2">
-      <mat-card class="chart-card">
-        <mat-card-header>
-          <mat-card-title>Student Performance Trend</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+      <div class="chart-card">
+        <div class="card-header">
+          <h3>Student Performance Trend</h3>
+        </div>
+        <div class="card-content">
           <apx-chart
             [series]="performanceChartOptions.series!"
             [chart]="performanceChartOptions.chart!"
@@ -56,15 +83,15 @@
             [colors]="performanceChartOptions.colors!"
             [title]="performanceChartOptions.title!">
           </apx-chart>
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
     </div>
     <div class="grid-col-1">
-      <mat-card class="chart-card">
-        <mat-card-header>
-          <mat-card-title>Today's Attendance Overview</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+      <div class="chart-card">
+        <div class="card-header">
+          <h3>Today's Attendance Overview</h3>
+        </div>
+        <div class="card-content">
           <apx-chart
             [series]="attendanceChartOptions.series!"
             [chart]="attendanceChartOptions.chart!"
@@ -72,68 +99,73 @@
             [colors]="attendanceChartOptions.colors!"
             [responsive]="attendanceChartOptions.responsive!">
           </apx-chart>
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="dashboard-grid">
     <div class="grid-col-1">
-      <mat-card class="list-card">
-        <mat-card-header>
-          <mat-card-title>Today's Schedule</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+      <div class="list-card">
+        <div class="card-header">
+          <h3>Today's Schedule</h3>
+        </div>
+        <div class="card-content">
           <div class="schedule-item">
             <div class="time">09:00 AM</div>
             <div class="details">
               <h4>{{ teacher.departmentName }} – Class 10A</h4>
-              <p><mat-icon>room</mat-icon> Room 204</p>
+              <p><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Room 204</p>
             </div>
           </div>
           <div class="schedule-item">
             <div class="time">11:00 AM</div>
             <div class="details">
               <h4>{{ teacher.departmentName }} – Class 9B</h4>
-              <p><mat-icon>room</mat-icon> Room 105</p>
+              <p><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Room 105</p>
             </div>
           </div>
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
     </div>
     
     <div class="grid-col-2">
-      <mat-card class="list-card">
-        <mat-card-header>
-          <mat-card-title>Recent Activities</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+      <div class="list-card">
+        <div class="card-header">
+          <h3>Recent Activities</h3>
+        </div>
+        <div class="card-content">
           <div class="activity-list">
             <div class="activity-item">
-              <div class="activity-icon bg-blue"><mat-icon>assignment_turned_in</mat-icon></div>
+              <div class="activity-icon bg-blue">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
               <div class="activity-details">
                 <p><strong>Arun Kumar</strong> submitted <em>Quadratic Equations Practice</em></p>
                 <span class="time-ago">10 mins ago</span>
               </div>
             </div>
             <div class="activity-item">
-              <div class="activity-icon bg-green"><mat-icon>fact_check</mat-icon></div>
+              <div class="activity-icon bg-green">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
               <div class="activity-details">
                 <p>You marked attendance for <strong>Class 10A</strong></p>
                 <span class="time-ago">1 hour ago</span>
               </div>
             </div>
             <div class="activity-item">
-              <div class="activity-icon bg-orange"><mat-icon>campaign</mat-icon></div>
+              <div class="activity-icon bg-orange">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
               <div class="activity-details">
                 <p>New announcement posted: <em>Upcoming Unit Test</em></p>
                 <span class="time-ago">Yesterday</span>
               </div>
             </div>
           </div>
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
     </div>
   </div>
-
 </div>

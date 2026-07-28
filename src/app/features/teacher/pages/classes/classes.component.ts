@@ -3,6 +3,7 @@ import { ClassInfo } from '../../models/class.model';
 import { ClassService } from '../../services/class.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ClassDialogComponent } from './class-dialog/class-dialog.component';
+import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
   selector: 'app-classes',
@@ -15,7 +16,8 @@ export class ClassesComponent implements OnInit {
 
   constructor(
     private classService: ClassService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -23,6 +25,10 @@ export class ClassesComponent implements OnInit {
       this.classes = data;
       this.isLoading = false;
     });
+  }
+
+  viewClass(cls: ClassInfo) {
+    this.toastService.info(`Viewing details for class: ${cls.className} - Section ${cls.section}`);
   }
 
   addClass() {
@@ -33,6 +39,7 @@ export class ClassesComponent implements OnInit {
         this.classService.addClass(result as ClassInfo).subscribe(newClass => {
           if (newClass) {
             this.classes.push(newClass);
+            this.toastService.success(`Class '${newClass.className}' created successfully.`);
           }
         });
       }
@@ -52,6 +59,7 @@ export class ClassesComponent implements OnInit {
             const index = this.classes.findIndex(c => c.id === cls.id);
             if (index !== -1) {
               this.classes[index] = updated;
+              this.toastService.success(`Class '${updated.className}' updated successfully.`);
             }
           }
         });
@@ -66,6 +74,7 @@ export class ClassesComponent implements OnInit {
           const index = this.classes.findIndex(c => c.id === cls.id);
           if (index !== -1) {
             this.classes.splice(index, 1);
+            this.toastService.success(`Class '${cls.className}' deleted successfully.`);
           }
         }
       });

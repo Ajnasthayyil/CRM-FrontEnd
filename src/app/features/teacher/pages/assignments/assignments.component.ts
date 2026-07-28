@@ -1,11 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
 import { Assignment } from '../../models/assignment.model';
 import { AssignmentService } from '../../services/assignment.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AssignmentDialogComponent } from './assignment-dialog/assignment-dialog.component';
+import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
   selector: 'app-assignments',
@@ -13,17 +11,28 @@ import { AssignmentDialogComponent } from './assignment-dialog/assignment-dialog
   styleUrls: ['./assignments.component.scss']
 })
 export class AssignmentsComponent implements OnInit {
-  displayedColumns: string[] = ['title', 'class', 'dueDate', 'totalMarks', 'status', 'actions'];
-  dataSource: MatTableDataSource<Assignment> = new MatTableDataSource();
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
+  assignments: Assignment[] = [];
+  filteredAssignments: Assignment[] = [];
+  pagedAssignments: Assignment[] = [];
+  
+  searchQuery: string = '';
+  
+  // Pagination
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalPages: number = 1;
+  
+  // Sorting
+  sortColumn: string = 'dueDate';
+  sortDirection: 'asc' | 'desc' = 'asc';
+  
   isLoading = true;
+  Math = Math;
 
   constructor(
     private assignmentService: AssignmentService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -33,20 +42,66 @@ export class AssignmentsComponent implements OnInit {
   loadAssignments(): void {
     this.isLoading = true;
     this.assignmentService.getAssignments().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.assignments = data || [];
+      this.applyFilters();
       this.isLoading = false;
     });
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+  applyFilters() {
+    let result = [...this.assignments];
+    
+    if (this.searchQuery) {
+      const q = this.searchQuery.toLowerCase().trim();
+      result = result.filter(a => 
+        a.title.toLowerCase().includes(q) ||
+        a.className.toLowerCase().includes(q) ||
+        a.description.toLowerCase().includes(q)
+      );
     }
+    
+    // Sort
+    result.sort((a: any, b: any) => {
+      let valA = a[this.sortColumn];
+      let valB = b[this.sortColumn];
+      
+      if (typeof valA === 'string') valA = valA.toLowerCase();
+      if (typeof valB === 'string') valB = valB.toLowerCase();
+      
+      if (valA < valB) return this.sortDirection === 'asc' ? -1 : 1;
+      if (valA > valB) return this.sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+    
+    this.filteredAssignments = result;
+    this.totalPages = Math.ceil(this.filteredAssignments.length / this.itemsPerPage) || 1;
+    this.setPage(1);
+  }
+
+  sortBy(column: string) {
+    if (this.sortColumn === column) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+    this.applyFilters();
+  }
+
+  getSortIcon(column: string): string {
+    if (this.sortColumn !== column) return '↕';
+    return this.sortDirection === 'asc' ? '↑' : '↓';
+  }
+
+  setPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    const startIndex = (page - 1) * this.itemsPerPage;
+    this.pagedAssignments = this.filteredAssignments.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  totalPagesArray(): number[] {
+    return Array(this.totalPages).fill(0).map((x, i) => i + 1);
   }
 
   addAssignment() {
@@ -56,8 +111,9 @@ export class AssignmentsComponent implements OnInit {
       if (result) {
         this.assignmentService.addAssignment(result as Assignment).subscribe(newAssignment => {
           if (newAssignment) {
-            this.dataSource.data.push(newAssignment);
-            this.dataSource._updateChangeSubscription();
+            this.assignments.push(newAssignment);
+            this.applyFilters();
+            this.toastService.success(`Assignment '${newAssignment.title}' created successfully.`);
           }
         });
       }
@@ -74,10 +130,11 @@ export class AssignmentsComponent implements OnInit {
       if (result) {
         this.assignmentService.updateAssignment(assignment.id, result).subscribe(updated => {
           if (updated) {
-            const index = this.dataSource.data.findIndex(a => a.id === assignment.id);
+            const index = this.assignments.findIndex(a => a.id === assignment.id);
             if (index !== -1) {
-              this.dataSource.data[index] = updated;
-              this.dataSource._updateChangeSubscription();
+              this.assignments[index] = updated;
+              this.applyFilters();
+              this.toastService.success(`Assignment '${updated.title}' updated successfully.`);
             }
           }
         });
@@ -89,10 +146,11 @@ export class AssignmentsComponent implements OnInit {
     if (confirm(`Are you sure you want to delete '${assignment.title}'?`)) {
       this.assignmentService.deleteAssignment(assignment.id).subscribe(success => {
         if (success) {
-          const index = this.dataSource.data.findIndex(a => a.id === assignment.id);
+          const index = this.assignments.findIndex(a => a.id === assignment.id);
           if (index !== -1) {
-            this.dataSource.data.splice(index, 1);
-            this.dataSource._updateChangeSubscription();
+            this.assignments.splice(index, 1);
+            this.applyFilters();
+            this.toastService.success(`Assignment '${assignment.title}' deleted successfully.`);
           }
         }
       });

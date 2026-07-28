@@ -1,82 +1,83 @@
 <div class="page-container">
   <div class="page-header">
-    <div class="header-content">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / Teacher / Attendance</div>
       <h1>Mark Attendance</h1>
-      <p>Record student attendance for your classes</p>
+      <div class="subtitle">Record student attendance for your classes</div>
     </div>
-  </div>
-
-  <mat-card class="filter-card">
-    <div class="filters">
-      <mat-form-field appearance="outline">
-        <mat-label>Date</mat-label>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="loadAttendanceData()">
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Class</mat-label>
-        <mat-select [(ngModel)]="selectedClassId" (selectionChange)="onClassChange()">
-          <mat-option *ngFor="let cls of classes" [value]="cls.id">
-            {{ cls.className }} - {{ cls.section }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </mat-card>
-
-  <mat-card class="table-card">
-    <div class="table-toolbar">
-      <h3>Attendance List - {{ students.length }} Students</h3>
-      <div class="bulk-actions">
-        <button mat-button color="primary" (click)="markAll('Present')">Mark All Present</button>
-        <button mat-button color="warn" (click)="markAll('Absent')">Mark All Absent</button>
-      </div>
-    </div>
-
-    <div class="table-container">
-      <div class="loading-shade" *ngIf="isLoading">
-        <p>Loading attendance data...</p>
-      </div>
-
-      <table class="custom-table" *ngIf="!isLoading">
-        <thead>
-          <tr>
-            <th>Roll No.</th>
-            <th>Student Name</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let record of attendanceRecords">
-            <td>{{ record.rollNumber }}</td>
-            <td>
-              <strong>{{ record.studentName }}</strong>
-              <div class="student-id">{{ record.studentId }}</div>
-            </td>
-            <td>
-              <mat-button-toggle-group [(ngModel)]="record.status" aria-label="Attendance Status" class="status-toggle">
-                <mat-button-toggle value="Present" class="present">Present</mat-button-toggle>
-                <mat-button-toggle value="Absent" class="absent">Absent</mat-button-toggle>
-                <mat-button-toggle value="Late" class="late">Late</mat-button-toggle>
-                <mat-button-toggle value="Leave" class="leave">Leave</mat-button-toggle>
-              </mat-button-toggle-group>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="empty-state" *ngIf="!isLoading && attendanceRecords.length === 0">
-        <p>No students found for this class.</p>
-      </div>
-    </div>
-
-    <div class="card-actions" *ngIf="!isLoading && attendanceRecords.length > 0">
-      <button mat-stroked-button (click)="loadAttendanceData()">Reset</button>
-      <button mat-flat-button color="primary" (click)="saveAttendance()" [disabled]="isSaving">
+    <div class="header-right">
+      <button class="btn-outline-sm" (click)="loadAttendanceData()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l5.25 4.28"/></svg> Reset
+      </button>
+      <button class="btn-primary-sm" (click)="saveAttendance()" [disabled]="isSaving">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
         {{ isSaving ? 'Saving...' : 'Save Attendance' }}
       </button>
     </div>
-  </mat-card>
+  </div>
+
+  <!-- Filters -->
+  <div class="search-bar" style="justify-content: flex-start; gap: 16px;">
+    <div class="filter-group">
+      <label style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; display: block; text-transform: uppercase;">Date</label>
+      <input type="date" class="form-control" [ngModel]="selectedDate | date:'yyyy-MM-dd'" (ngModelChange)="selectedDate = $event; loadAttendanceData()">
+    </div>
+
+    <div class="filter-group">
+      <label style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; display: block; text-transform: uppercase;">Class</label>
+      <select class="form-control" [(ngModel)]="selectedClassId" (change)="onClassChange()">
+        <option *ngFor="let cls of classes" [value]="cls.id">
+          {{ cls.className }} - {{ cls.section }}
+        </option>
+      </select>
+    </div>
+    
+    <div class="filter-group" style="margin-left: auto; display: flex; align-items: flex-end;">
+      <div class="bulk-actions" style="display: flex; gap: 8px;">
+        <button class="btn-outline-sm" (click)="markAll('Present')" style="color: #10b981; border-color: #10b981;">Mark All Present</button>
+        <button class="btn-outline-sm block-btn" (click)="markAll('Absent')">Mark All Absent</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading-shade" *ngIf="isLoading" style="padding: 20px; text-align: center; color: var(--text-muted);">
+    <p>Loading attendance data...</p>
+  </div>
+
+  <div class="table-container" *ngIf="!isLoading">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 100px;">ROLL NO.</th>
+          <th>STUDENT NAME</th>
+          <th>ATTENDANCE STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of attendanceRecords">
+          <td style="font-weight: 500;">{{ record.rollNumber }}</td>
+          <td>
+            <div class="name-cell">
+              <strong style="color: var(--text-main);">{{ record.studentName }}</strong>
+              <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">{{ record.studentId }}</div>
+            </div>
+          </td>
+          <td>
+            <div class="status-toggle-group">
+              <button class="status-btn" [class.active-present]="record.status === 'Present'" (click)="record.status = 'Present'">Present</button>
+              <button class="status-btn" [class.active-absent]="record.status === 'Absent'" (click)="record.status = 'Absent'">Absent</button>
+              <button class="status-btn" [class.active-late]="record.status === 'Late'" (click)="record.status = 'Late'">Late</button>
+              <button class="status-btn" [class.active-leave]="record.status === 'Leave'" (click)="record.status = 'Leave'">Leave</button>
+            </div>
+          </td>
+        </tr>
+        
+        <tr *ngIf="attendanceRecords.length === 0">
+          <td colspan="3" style="text-align: center; padding: 30px; color: var(--text-muted);">
+            No students found for this class.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

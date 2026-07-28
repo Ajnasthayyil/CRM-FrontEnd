@@ -76,12 +76,12 @@ const routes: Routes = [
       {
         path: 'academic-head',
         loadChildren: () => import('./features/academic-head/academic-head.module').then(m => m.AcademicHeadModule)
+      },
+      {
+        path: 'teacher',
+        loadChildren: () => import('./features/teacher/teacher.module').then(m => m.TeacherModule)
       }
     ]
-  },
-  {
-    path: 'teacher',
-    loadChildren: () => import('./features/teacher/teacher.module').then(m => m.TeacherModule)
   },
   {
     path: '**',
