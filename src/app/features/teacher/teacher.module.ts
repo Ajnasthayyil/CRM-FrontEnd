@@ -30,6 +30,7 @@ import { PlaceholderComponent } from './components/placeholder/placeholder.compo
 import { EditStudentDialogComponent } from './pages/students/edit-student-dialog/edit-student-dialog.component';
 import { AssignmentDialogComponent } from './pages/assignments/assignment-dialog/assignment-dialog.component';
 import { ClassDialogComponent } from './pages/classes/class-dialog/class-dialog.component';
+import { CalendarComponent } from './pages/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ClassDialogComponent } from './pages/classes/class-dialog/class-dialog.
     PlaceholderComponent,
     EditStudentDialogComponent,
     AssignmentDialogComponent,
-    ClassDialogComponent
+    ClassDialogComponent,
+    CalendarComponent
   ],
   imports: [
     CommonModule,

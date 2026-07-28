@@ -1,0 +1,50 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-left">
+      <div class="breadcrumbs">Home / Teacher / Calendar</div>
+      <h1>Academic Calendar</h1>
+      <div class="subtitle">Reference for holidays, working days, and approved leaves.</div>
+    </div>
+  </div>
+
+  <div class="calendar-container mt-4">
+    <div class="calendar-header">
+      <h2>{{ currentMonth }}</h2>
+      <div>
+        <button class="btn-icon" style="display:inline-flex; margin-right: 8px;">&lt;</button>
+        <button class="btn-icon" style="display:inline-flex;">&gt;</button>
+      </div>
+    </div>
+    
+    <div class="calendar-grid">
+      <!-- Weekdays -->
+      <div class="weekday" *ngFor="let day of weekdays">{{ day }}</div>
+      
+      <!-- Padding days -->
+      <div class="day-cell padding" *ngFor="let p of paddingDays"></div>
+      
+      <!-- Calendar Days -->
+      <div class="day-cell" *ngFor="let day of calendarDays" [ngClass]="getStatusForDay(day)">
+        <div class="day-number">{{ day }}</div>
+        
+        <div class="day-stats" *ngIf="getStatusForDay(day) === 'leave'">
+          <span class="stat leave">Approved Leave</span>
+        </div>
+        
+        <div class="day-stats" *ngIf="getStatusForDay(day) === 'holiday'">
+          <span class="stat holiday">Holiday</span>
+        </div>
+        
+        <div class="day-label" *ngIf="getReasonForDay(day)">
+          {{ getReasonForDay(day) }}
+        </div>
+      </div>
+    </div>
+    
+    <div class="calendar-legend">
+      <div class="legend-item"><div class="dot blue"></div> Approved Leave</div>
+      <div class="legend-item"><div class="dot orange"></div> Holiday</div>
+      <div class="legend-item"><div class="dot gray"></div> Weekend</div>
+    </div>
+  </div>
+</div>

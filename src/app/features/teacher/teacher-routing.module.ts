@@ -9,6 +9,7 @@ import { AssignmentsComponent } from './pages/assignments/assignments.component'
 import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { PerformanceComponent } from './pages/performance/performance.component';
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
+import { CalendarComponent } from './pages/calendar/calendar.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -18,7 +19,7 @@ const routes: Routes = [
   { path: 'assignments', component: AssignmentsComponent },
   { path: 'attendance', component: AttendanceComponent },
   { path: 'performance', component: PerformanceComponent },
-  { path: 'calendar', component: PlaceholderComponent },
+  { path: 'calendar', component: CalendarComponent },
   { path: 'announcements', component: PlaceholderComponent },
   { path: 'materials', component: PlaceholderComponent },
   { path: 'reports', component: PlaceholderComponent },
