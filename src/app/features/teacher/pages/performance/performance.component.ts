@@ -112,10 +112,10 @@ export class PerformanceComponent implements OnInit {
           { label: 'Student Name', value: record.studentName },
           { label: 'Class ID', value: record.classId },
           { label: 'Assessment', value: record.assessmentName },
-          { label: 'Score', value: record.score },
-          { label: 'Total Marks', value: record.totalMarks },
+          { label: 'Score', value: record.obtainedMarks },
+          { label: 'Total Marks', value: record.maximumMarks },
           { label: 'Date', value: record.date },
-          { label: 'Remarks', value: record.remarks || 'None' }
+          { label: 'Remarks', value: record.teacherRemarks || 'None' }
         ]
       }
     });

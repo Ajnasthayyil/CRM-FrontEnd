@@ -116,8 +116,8 @@ export class StudentsComponent implements OnInit {
           { label: 'Student ID', value: student.studentId },
           { label: 'Name', value: student.studentName },
           { label: 'Class', value: student.className },
-          { label: 'Guardian', value: student.guardianName },
-          { label: 'Contact', value: student.contact },
+          { label: 'Guardian', value: student.parentName },
+          { label: 'Contact', value: student.phone },
           { label: 'Status', value: student.status }
         ]
       }
