@@ -1,0 +1,76 @@
+<div class="dialog-header">
+  <h2>{{ data.title }} - Submissions</h2>
+  <button class="close-btn" (click)="close()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+</div>
+
+<div class="dialog-content">
+  <div *ngIf="isLoading" style="padding: 20px; text-align: center; color: var(--text-muted);">
+    Loading submissions...
+  </div>
+  
+  <ng-container *ngIf="!isLoading">
+    <!-- Assignment Details Summary -->
+    <div class="details-summary">
+      <div class="detail-item"><strong>Class:</strong> {{ data.className }} ({{ data.section }})</div>
+      <div class="detail-item"><strong>Due Date:</strong> {{ data.dueDate | date:'mediumDate' }}</div>
+      <div class="detail-item"><strong>Total Marks:</strong> {{ data.totalMarks }}</div>
+    </div>
+    
+    <!-- Submitted Students -->
+    <div class="section-container">
+      <h3>Submitted Students</h3>
+      <table class="table" *ngIf="submittedSubmissions.length > 0; else noSubmissions">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sub of submittedSubmissions">
+            <td>{{ sub.studentName }}</td>
+            <td>{{ sub.submittedDate | date:'short' }}</td>
+            <td><span class="status-badge" [ngClass]="sub.status.toLowerCase()">{{ sub.status }}</span></td>
+            <td>{{ sub.score !== undefined ? sub.score + '/' + data.totalMarks : '-' }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #noSubmissions>
+        <p class="empty-state">No students have submitted yet.</p>
+      </ng-template>
+    </div>
+    
+    <!-- Pending Students -->
+    <div class="section-container mt-4">
+      <h3>Pending / Non-Submitted Students</h3>
+      <table class="table" *ngIf="pendingSubmissions.length > 0; else noPending">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sub of pendingSubmissions">
+            <td>{{ sub.studentName }}</td>
+            <td><span class="status-badge pending">Pending</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #noPending>
+        <p class="empty-state">All students have submitted.</p>
+      </ng-template>
+    </div>
+  </ng-container>
+</div>
+
+<div class="dialog-actions">
+  <button class="btn-primary" (click)="close()">Close</button>
+</div>

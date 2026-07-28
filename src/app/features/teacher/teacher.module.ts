@@ -31,6 +31,7 @@ import { EditStudentDialogComponent } from './pages/students/edit-student-dialog
 import { AssignmentDialogComponent } from './pages/assignments/assignment-dialog/assignment-dialog.component';
 import { ClassDialogComponent } from './pages/classes/class-dialog/class-dialog.component';
 import { CalendarComponent } from './pages/calendar/calendar.component';
+import { ViewAssignmentDialogComponent } from './pages/assignments/view-assignment-dialog/view-assignment-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CalendarComponent } from './pages/calendar/calendar.component';
     EditStudentDialogComponent,
     AssignmentDialogComponent,
     ClassDialogComponent,
-    CalendarComponent
+    CalendarComponent,
+    ViewAssignmentDialogComponent
   ],
   imports: [
     CommonModule,

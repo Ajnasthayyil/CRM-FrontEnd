@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { Assignment } from '../models/assignment.model';
+import { Assignment, AssignmentSubmission } from '../models/assignment.model';
 import { TeacherAuthService } from './teacher-auth.service';
 
 import { mockAssignments } from '../mock-data/assignments.data';
@@ -58,5 +58,49 @@ export class AssignmentService {
       return of(true).pipe(delay(300));
     }
     return of(false);
+  }
+
+  getSubmissions(assignmentId: string): Observable<AssignmentSubmission[]> {
+    // Generate some mock submissions based on the assignment ID
+    const submissions: AssignmentSubmission[] = [
+      {
+        id: 'SUB-101',
+        assignmentId,
+        studentId: 'STU-001',
+        studentName: 'John Doe',
+        submittedDate: new Date().toISOString(),
+        status: 'Submitted',
+        score: 85,
+        feedback: 'Good work.'
+      },
+      {
+        id: 'SUB-102',
+        assignmentId,
+        studentId: 'STU-002',
+        studentName: 'Jane Smith',
+        submittedDate: new Date().toISOString(),
+        status: 'Pending'
+      },
+      {
+        id: 'SUB-103',
+        assignmentId,
+        studentId: 'STU-003',
+        studentName: 'Alice Johnson',
+        submittedDate: new Date(Date.now() - 86400000).toISOString(),
+        status: 'Reviewed',
+        score: 95,
+        feedback: 'Excellent explanation.'
+      },
+      {
+        id: 'SUB-104',
+        assignmentId,
+        studentId: 'STU-004',
+        studentName: 'Bob Williams',
+        submittedDate: new Date(Date.now() + 86400000).toISOString(),
+        status: 'Late',
+        score: 70
+      }
+    ];
+    return of(submissions).pipe(delay(500));
   }
 }

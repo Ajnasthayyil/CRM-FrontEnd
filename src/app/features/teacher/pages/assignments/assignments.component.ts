@@ -3,6 +3,7 @@ import { Assignment } from '../../models/assignment.model';
 import { AssignmentService } from '../../services/assignment.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AssignmentDialogComponent } from './assignment-dialog/assignment-dialog.component';
+import { ViewAssignmentDialogComponent } from './view-assignment-dialog/view-assignment-dialog.component';
 import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
@@ -155,5 +156,12 @@ export class AssignmentsComponent implements OnInit {
         }
       });
     }
+  }
+
+  viewAssignment(assignment: Assignment) {
+    this.dialog.open(ViewAssignmentDialogComponent, {
+      width: '800px',
+      data: assignment
+    });
   }
 }
