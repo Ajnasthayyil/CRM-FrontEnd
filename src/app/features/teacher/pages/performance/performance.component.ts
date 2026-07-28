@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PerformanceRecord } from '../../models/performance.model';
 import { PerformanceService } from '../../services/performance.service';
 import { ToastService } from '../../../../core/services/toast.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { ViewDetailsDialogComponent } from '../../../../shared/components/view-details-dialog/view-details-dialog.component';
 @Component({
   selector: 'app-performance',
   templateUrl: './performance.component.html',
@@ -29,7 +30,8 @@ export class PerformanceComponent implements OnInit {
 
   constructor(
     private performanceService: PerformanceService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -102,6 +104,20 @@ export class PerformanceComponent implements OnInit {
   }
 
   viewDetails(record: PerformanceRecord) {
-    this.toastService.info(`Viewing details for ${record.studentName}'s ${record.assessmentName}`);
+    this.dialog.open(ViewDetailsDialogComponent, {
+      width: '500px',
+      data: {
+        title: 'Performance Details',
+        details: [
+          { label: 'Student Name', value: record.studentName },
+          { label: 'Class ID', value: record.classId },
+          { label: 'Assessment', value: record.assessmentName },
+          { label: 'Score', value: record.score },
+          { label: 'Total Marks', value: record.totalMarks },
+          { label: 'Date', value: record.date },
+          { label: 'Remarks', value: record.remarks || 'None' }
+        ]
+      }
+    });
   }
 }

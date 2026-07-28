@@ -4,6 +4,7 @@ import { StudentService } from '../../services/student.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { EditStudentDialogComponent } from './edit-student-dialog/edit-student-dialog.component';
+import { ViewDetailsDialogComponent } from '../../../../shared/components/view-details-dialog/view-details-dialog.component';
 import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
@@ -107,7 +108,20 @@ export class StudentsComponent implements OnInit {
   }
 
   viewStudent(student: Student) {
-    this.toastService.info(`Viewing details for student: ${student.studentName}`);
+    this.dialog.open(ViewDetailsDialogComponent, {
+      width: '500px',
+      data: {
+        title: 'Student Details',
+        details: [
+          { label: 'Student ID', value: student.studentId },
+          { label: 'Name', value: student.studentName },
+          { label: 'Class', value: student.className },
+          { label: 'Guardian', value: student.guardianName },
+          { label: 'Contact', value: student.contact },
+          { label: 'Status', value: student.status }
+        ]
+      }
+    });
   }
 
   editStudent(student: Student) {

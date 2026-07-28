@@ -3,6 +3,7 @@ import { ClassInfo } from '../../models/class.model';
 import { ClassService } from '../../services/class.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ClassDialogComponent } from './class-dialog/class-dialog.component';
+import { ViewDetailsDialogComponent } from '../../../../shared/components/view-details-dialog/view-details-dialog.component';
 import { ToastService } from '../../../../core/services/toast.service';
 
 @Component({
@@ -28,7 +29,18 @@ export class ClassesComponent implements OnInit {
   }
 
   viewClass(cls: ClassInfo) {
-    this.toastService.info(`Viewing details for class: ${cls.className} - Section ${cls.section}`);
+    this.dialog.open(ViewDetailsDialogComponent, {
+      width: '500px',
+      data: {
+        title: 'Class Details',
+        details: [
+          { label: 'Class ID', value: cls.id },
+          { label: 'Class Name', value: cls.className },
+          { label: 'Section', value: cls.section },
+          { label: 'Total Students', value: cls.totalStudents }
+        ]
+      }
+    });
   }
 
   addClass() {

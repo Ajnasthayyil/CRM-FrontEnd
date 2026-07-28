@@ -10,6 +10,7 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
 
 
 import { RouterModule } from '@angular/router';
+import { ViewDetailsDialogComponent } from './components/view-details-dialog/view-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RouterModule } from '@angular/router';
     FooterComponent,
     PageHeaderComponent,
     BreadcrumbComponent,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    ViewDetailsDialogComponent
   ],
   imports: [
     CommonModule,
