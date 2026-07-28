@@ -4,6 +4,27 @@ import { PerformanceService } from '../../services/performance.service';
 import { ToastService } from '../../../../core/services/toast.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewDetailsDialogComponent } from '../../../../shared/components/view-details-dialog/view-details-dialog.component';
+import {
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexTitleSubtitle,
+  ApexTooltip,
+  ApexDataLabels,
+  ApexPlotOptions,
+  ApexTheme
+} from 'ng-apexcharts';
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  title: ApexTitleSubtitle;
+  tooltip: ApexTooltip;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  theme: ApexTheme;
+};
 @Component({
   selector: 'app-performance',
   templateUrl: './performance.component.html',
@@ -28,6 +49,9 @@ export class PerformanceComponent implements OnInit {
   isLoading = true;
   Math = Math;
 
+  public chartOptions: Partial<ChartOptions> | any = {};
+  public showChart = false;
+
   constructor(
     private performanceService: PerformanceService,
     private toastService: ToastService,
@@ -43,8 +67,91 @@ export class PerformanceComponent implements OnInit {
     this.performanceService.getPerformanceRecords().subscribe(data => {
       this.performanceRecords = data || [];
       this.applyFilters();
+      this.updateChart();
       this.isLoading = false;
     });
+  }
+
+  updateChart(): void {
+    if (!this.filteredRecords || this.filteredRecords.length === 0) {
+      this.showChart = false;
+      return;
+    }
+
+    const typeMap = new Map<string, { total: number, count: number }>();
+
+    this.filteredRecords.forEach(r => {
+      const type = r.assessmentType;
+      const current = typeMap.get(type) || { total: 0, count: 0 };
+      current.total += r.percentage;
+      current.count += 1;
+      typeMap.set(type, current);
+    });
+
+    const categories = Array.from(typeMap.keys());
+    const data = categories.map(k => {
+      const item = typeMap.get(k)!;
+      return Number((item.total / item.count).toFixed(2));
+    });
+
+    this.chartOptions = {
+      series: [
+        {
+          name: "Average Score (%)",
+          data: data
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 350,
+        toolbar: { show: false },
+        background: 'transparent'
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 4,
+          horizontal: false,
+          columnWidth: '45%'
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        formatter: function (val: any) {
+          return val + "%";
+        },
+        style: {
+          colors: ['#fff']
+        }
+      },
+      xaxis: {
+        categories: categories,
+        labels: {
+          style: { cssClass: 'chart-text' }
+        }
+      },
+      theme: {
+        mode: 'light',
+        palette: 'palette1'
+      },
+      title: {
+        text: "Average Scores by Assessment Type",
+        align: 'left',
+        style: {
+          fontSize: '16px',
+          fontWeight: 600,
+          color: 'var(--text-main)'
+        }
+      },
+      tooltip: {
+        theme: 'light',
+        y: {
+          formatter: function (val: any) {
+            return val + "%";
+          }
+        }
+      }
+    };
+    this.showChart = true;
   }
 
   applyFilters() {
@@ -75,6 +182,7 @@ export class PerformanceComponent implements OnInit {
     this.filteredRecords = result;
     this.totalPages = Math.ceil(this.filteredRecords.length / this.itemsPerPage) || 1;
     this.setPage(1);
+    this.updateChart();
   }
 
   sortBy(column: string) {

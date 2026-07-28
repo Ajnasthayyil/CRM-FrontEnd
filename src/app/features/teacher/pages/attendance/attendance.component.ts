@@ -5,6 +5,25 @@ import { StudentService } from '../../services/student.service';
 import { Student } from '../../models/student.model';
 import { ClassService } from '../../services/class.service';
 import { ClassInfo } from '../../models/class.model';
+import {
+  ApexNonAxisChartSeries,
+  ApexChart,
+  ApexResponsive,
+  ApexLegend,
+  ApexTheme,
+  ApexTitleSubtitle
+} from 'ng-apexcharts';
+
+export type AttendanceChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: ApexResponsive[];
+  labels: any;
+  legend: ApexLegend;
+  theme: ApexTheme;
+  title: ApexTitleSubtitle;
+  colors: string[];
+};
 
 @Component({
   selector: 'app-attendance',
@@ -20,6 +39,9 @@ export class AttendanceComponent implements OnInit {
   attendanceRecords: AttendanceRecord[] = [];
   isLoading = true;
   isSaving = false;
+
+  public chartOptions: Partial<AttendanceChartOptions> | any = {};
+  public showChart = false;
 
   constructor(
     private attendanceService: AttendanceService,
@@ -67,13 +89,70 @@ export class AttendanceComponent implements OnInit {
             teacherId: 102
           } as AttendanceRecord;
         });
+        this.updateChart();
         this.isLoading = false;
       });
     });
   }
 
+  updateChart() {
+    if (!this.attendanceRecords || this.attendanceRecords.length === 0) {
+      this.showChart = false;
+      return;
+    }
+
+    let present = 0, absent = 0, late = 0, leave = 0;
+    this.attendanceRecords.forEach(r => {
+      if (r.status === 'Present') present++;
+      else if (r.status === 'Absent') absent++;
+      else if (r.status === 'Late') late++;
+      else if (r.status === 'Leave') leave++;
+    });
+
+    this.chartOptions = {
+      series: [present, absent, late, leave],
+      chart: {
+        type: 'donut',
+        height: 320,
+        background: 'transparent'
+      },
+      labels: ['Present', 'Absent', 'Late', 'Leave'],
+      colors: ['#10b981', '#ef4444', '#f59e0b', '#3b82f6'],
+      legend: {
+        position: 'bottom'
+      },
+      title: {
+        text: 'Attendance Summary',
+        align: 'center',
+        style: {
+          fontSize: '16px',
+          fontWeight: 600,
+          color: 'var(--text-main)'
+        }
+      },
+      theme: {
+        mode: 'light'
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 250
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }
+      ]
+    };
+    this.showChart = true;
+  }
+
   markAll(status: 'Present' | 'Absent' | 'Late' | 'Leave') {
     this.attendanceRecords.forEach(r => r.status = status);
+    this.updateChart();
   }
 
   saveAttendance() {
@@ -83,5 +162,10 @@ export class AttendanceComponent implements OnInit {
       // Show toast
       alert('Attendance saved successfully');
     }, 500);
+  }
+
+  updateStatus(record: AttendanceRecord, status: 'Present' | 'Absent' | 'Late' | 'Leave') {
+    record.status = status;
+    this.updateChart();
   }
 }

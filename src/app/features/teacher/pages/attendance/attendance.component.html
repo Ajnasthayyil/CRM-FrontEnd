@@ -44,7 +44,11 @@
     <p>Loading attendance data...</p>
   </div>
 
-  <div class="table-container" *ngIf="!isLoading">
+  <!-- Chart & Table Layout -->
+  <div class="content-layout" *ngIf="!isLoading" style="display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start;">
+    
+    <!-- Table -->
+    <div class="table-container">
     <table class="data-table">
       <thead>
         <tr>
@@ -64,10 +68,10 @@
           </td>
           <td>
             <div class="status-toggle-group">
-              <button class="status-btn" [class.active-present]="record.status === 'Present'" (click)="record.status = 'Present'">Present</button>
-              <button class="status-btn" [class.active-absent]="record.status === 'Absent'" (click)="record.status = 'Absent'">Absent</button>
-              <button class="status-btn" [class.active-late]="record.status === 'Late'" (click)="record.status = 'Late'">Late</button>
-              <button class="status-btn" [class.active-leave]="record.status === 'Leave'" (click)="record.status = 'Leave'">Leave</button>
+              <button class="status-btn" [class.active-present]="record.status === 'Present'" (click)="updateStatus(record, 'Present')">Present</button>
+              <button class="status-btn" [class.active-absent]="record.status === 'Absent'" (click)="updateStatus(record, 'Absent')">Absent</button>
+              <button class="status-btn" [class.active-late]="record.status === 'Late'" (click)="updateStatus(record, 'Late')">Late</button>
+              <button class="status-btn" [class.active-leave]="record.status === 'Leave'" (click)="updateStatus(record, 'Leave')">Leave</button>
             </div>
           </td>
         </tr>
@@ -80,4 +84,20 @@
       </tbody>
     </table>
   </div>
+  
+  <!-- Chart -->
+  <div class="chart-container" *ngIf="showChart" style="background: var(--bg-surface); padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [labels]="chartOptions.labels"
+      [colors]="chartOptions.colors"
+      [legend]="chartOptions.legend"
+      [title]="chartOptions.title"
+      [theme]="chartOptions.theme"
+      [responsive]="chartOptions.responsive"
+    ></apx-chart>
+  </div>
+
+  </div> <!-- End Layout -->
 </div>

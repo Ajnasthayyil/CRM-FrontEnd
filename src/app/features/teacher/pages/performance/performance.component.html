@@ -22,6 +22,19 @@
     <p>Loading performance data...</p>
   </div>
 
+  <div class="chart-container" *ngIf="showChart && !isLoading" style="background: var(--bg-surface); padding: 20px; border-radius: 8px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [dataLabels]="chartOptions.dataLabels"
+      [plotOptions]="chartOptions.plotOptions"
+      [xaxis]="chartOptions.xaxis"
+      [title]="chartOptions.title"
+      [theme]="chartOptions.theme"
+      [tooltip]="chartOptions.tooltip"
+    ></apx-chart>
+  </div>
+
   <div class="table-container" *ngIf="!isLoading">
     <table class="data-table">
       <thead>
