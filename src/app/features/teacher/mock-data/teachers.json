@@ -1,0 +1,26 @@
+[
+  {
+    "teacherId": 102,
+    "teacherName": "Anjali Thomas",
+    "role": "Teacher",
+    "departmentId": 2,
+    "departmentName": "Mathematics",
+    "email": "anjali.thomas@school.edu",
+    "phone": "+91 9876543210",
+    "subjects": ["Mathematics", "Advanced Calculus"],
+    "qualification": "M.Sc. Mathematics, B.Ed",
+    "experience": "8 Years"
+  },
+  {
+    "teacherId": 103,
+    "teacherName": "Rajiv Kumar",
+    "role": "Teacher",
+    "departmentId": 3,
+    "departmentName": "Computer Science",
+    "email": "rajiv.kumar@school.edu",
+    "phone": "+91 9876543211",
+    "subjects": ["Computer Science", "Information Practices"],
+    "qualification": "MCA, B.Ed",
+    "experience": "5 Years"
+  }
+]

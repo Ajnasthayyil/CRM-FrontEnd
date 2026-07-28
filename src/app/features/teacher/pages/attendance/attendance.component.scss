@@ -1,0 +1,149 @@
+.page-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 24px;
+
+  h1 { margin: 0; font-size: 24px; font-weight: 600; color: #1a2238; }
+  p { margin: 4px 0 0 0; color: #666; font-size: 14px; }
+}
+
+.filter-card {
+  margin-bottom: 24px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+
+  .filters {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    mat-form-field {
+      width: 250px;
+      margin-bottom: -1.25em;
+    }
+  }
+}
+
+.table-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  padding: 0;
+  overflow: hidden;
+}
+
+.table-toolbar {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .bulk-actions {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+.table-container {
+  position: relative;
+  min-height: 200px;
+  overflow-x: auto;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+
+  th {
+    background-color: #fafafa;
+    color: #666;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  td {
+    color: #333;
+    font-size: 14px;
+
+    .student-id {
+      font-size: 12px;
+      color: #888;
+      margin-top: 4px;
+    }
+  }
+
+  tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+}
+
+.loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(255,255,255,0.7);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #777;
+}
+
+.card-actions {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  background-color: #fafafa;
+  border-top: 1px solid #eee;
+}
+
+/* Custom Status Toggle Button Styling */
+::ng-deep .status-toggle {
+  .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    line-height: 36px;
+    padding: 0 16px;
+    font-weight: 500;
+  }
+
+  .present.mat-button-toggle-checked {
+    background-color: #4CAF50;
+    color: white;
+  }
+  .absent.mat-button-toggle-checked {
+    background-color: #F44336;
+    color: white;
+  }
+  .late.mat-button-toggle-checked {
+    background-color: #FFC107;
+    color: #333;
+  }
+  .leave.mat-button-toggle-checked {
+    background-color: #2196F3;
+    color: white;
+  }
+}

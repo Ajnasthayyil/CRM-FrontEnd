@@ -1,0 +1,72 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-content">
+      <h1>My Classes</h1>
+      <p>Manage your assigned classes and sessions</p>
+    </div>
+    <div class="header-actions">
+      <button mat-flat-button color="primary" (click)="addClass()">
+        <mat-icon>add</mat-icon> Create Class
+      </button>
+    </div>
+  </div>
+
+  <div class="loading-state" *ngIf="isLoading">
+    <p>Loading classes...</p>
+  </div>
+
+  <div class="classes-grid" *ngIf="!isLoading">
+    <mat-card class="class-card" *ngFor="let cls of classes">
+      <div class="card-header-bg">
+        <div class="badge">{{ cls.subject }}</div>
+      </div>
+      
+      <mat-card-content class="card-content">
+        <h2>{{ cls.className }} - Section {{ cls.section }}</h2>
+        <p class="description">{{ cls.description }}</p>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <mat-icon>schedule</mat-icon>
+            <span>{{ cls.schedule }}<br>{{ cls.startTime }} - {{ cls.endTime }}</span>
+          </div>
+          <div class="info-item">
+            <mat-icon>room</mat-icon>
+            <span>{{ cls.room }}</span>
+          </div>
+          <div class="info-item">
+            <mat-icon>people</mat-icon>
+            <span>{{ cls.totalStudents }} Students</span>
+          </div>
+          <div class="info-item">
+            <mat-icon>event</mat-icon>
+            <span>Next: {{ cls.nextSessionDate | date:'mediumDate' }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions class="card-actions">
+        <div class="card-footer">
+          <div class="actions">
+            <button mat-icon-button color="primary" matTooltip="View Details">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" matTooltip="Edit Class" (click)="editClass(cls)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" matTooltip="Delete Class" (click)="deleteClass(cls)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <button mat-stroked-button color="primary">Sessions</button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+
+    <div class="empty-state" *ngIf="classes.length === 0">
+      <mat-icon>class</mat-icon>
+      <h3>No Classes Found</h3>
+      <p>You haven't been assigned to any classes yet.</p>
+    </div>
+  </div>
+</div>

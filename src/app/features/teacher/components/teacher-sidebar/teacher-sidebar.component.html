@@ -1,0 +1,36 @@
+<div class="sidebar" [class.closed]="!isOpen">
+  <div class="sidebar-header">
+    <div class="logo">
+      <mat-icon>school</mat-icon>
+      <span class="logo-text" *ngIf="isOpen">EduCRM</span>
+    </div>
+  </div>
+
+  <div class="sidebar-menu">
+    <ng-container *ngFor="let item of menuItems">
+      
+      <!-- Single Menu Item -->
+      <div *ngIf="!item.children" class="menu-item" [class.active]="isRouteActive(item.route!)" [routerLink]="item.route">
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span class="menu-title" *ngIf="isOpen">{{ item.title }}</span>
+      </div>
+
+      <!-- Parent Menu Item -->
+      <div *ngIf="item.children" class="menu-item-group">
+        <div class="menu-item parent" (click)="toggleMenu(item.title)" [class.active]="activeMenu === item.title">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span class="menu-title" *ngIf="isOpen">{{ item.title }}</span>
+          <mat-icon class="expand-icon" *ngIf="isOpen">{{ activeMenu === item.title ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </div>
+        
+        <!-- Submenu -->
+        <div class="submenu" *ngIf="isOpen && activeMenu === item.title">
+          <div class="submenu-item" *ngFor="let sub of item.children" [class.active]="isRouteActive(sub.route)" [routerLink]="sub.route">
+            <span class="submenu-title">{{ sub.title }}</span>
+          </div>
+        </div>
+      </div>
+      
+    </ng-container>
+  </div>
+</div>

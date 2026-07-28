@@ -80,6 +80,10 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'teacher',
+    loadChildren: () => import('./features/teacher/teacher.module').then(m => m.TeacherModule)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

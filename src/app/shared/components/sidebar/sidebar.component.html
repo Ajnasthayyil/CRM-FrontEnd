@@ -25,6 +25,15 @@
             <span class="nav-text">Dashboard</span>
         </a>
 
+        <div class="menu-label">TEACHER PORTAL</div>
+        <a routerLink="/teacher" routerLinkActive="active" class="nav-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+            <span class="nav-text">Teacher Module</span>
+        </a>
+
         <ng-container *ngIf="userRole !== 'HR' && userRole !== 'Academic Lead'">
             <div class="menu-label">DIRECTORY</div>
             

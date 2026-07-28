@@ -1,0 +1,36 @@
+export const mockClasses = [
+  {
+    "id": "CLS-10A-MATH",
+    "className": "Class 10",
+    "subjectId": "SUB-MATH",
+    "subject": "Mathematics",
+    "section": "A",
+    "academicYear": "2026-2027",
+    "room": "Room 204",
+    "schedule": "Mon, Wed, Fri",
+    "startTime": "09:00",
+    "endTime": "10:00",
+    "description": "Core Mathematics class for section A",
+    "departmentId": 2,
+    "teacherId": 102,
+    "totalStudents": 40,
+    "nextSessionDate": "2026-07-28T09:00:00"
+  },
+  {
+    "id": "CLS-9B-MATH",
+    "className": "Class 9",
+    "subjectId": "SUB-MATH",
+    "subject": "Mathematics",
+    "section": "B",
+    "academicYear": "2026-2027",
+    "room": "Room 105",
+    "schedule": "Tue, Thu",
+    "startTime": "11:00",
+    "endTime": "12:00",
+    "description": "Core Mathematics class for section B",
+    "departmentId": 2,
+    "teacherId": 102,
+    "totalStudents": 35,
+    "nextSessionDate": "2026-07-28T11:00:00"
+  }
+];

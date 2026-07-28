@@ -1,0 +1,40 @@
+export const mockPerformance = [
+  {
+    "id": "PER-001",
+    "studentId": "STD-001",
+    "studentName": "Arun Kumar",
+    "classId": "10A",
+    "subject": "Mathematics",
+    "assessmentType": "Mid Term",
+    "assessmentName": "Term 1 Math Exam",
+    "maximumMarks": 100,
+    "obtainedMarks": 92,
+    "percentage": 92,
+    "grade": "A1",
+    "date": "2026-06-15",
+    "strengths": "Algebra, Geometry",
+    "areasForImprovement": "Probability",
+    "teacherRemarks": "Excellent performance. Keep it up.",
+    "departmentId": 2,
+    "teacherId": 102
+  },
+  {
+    "id": "PER-002",
+    "studentId": "STD-002",
+    "studentName": "Meera Reddy",
+    "classId": "10A",
+    "subject": "Mathematics",
+    "assessmentType": "Mid Term",
+    "assessmentName": "Term 1 Math Exam",
+    "maximumMarks": 100,
+    "obtainedMarks": 78,
+    "percentage": 78,
+    "grade": "B1",
+    "date": "2026-06-15",
+    "strengths": "Statistics",
+    "areasForImprovement": "Trigonometry",
+    "teacherRemarks": "Good effort, but needs focus on trig.",
+    "departmentId": 2,
+    "teacherId": 102
+  }
+];
