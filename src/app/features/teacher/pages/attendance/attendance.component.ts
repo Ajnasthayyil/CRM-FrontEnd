@@ -71,7 +71,8 @@ export class AttendanceComponent implements OnInit {
     this.studentService.getStudents().subscribe(students => {
       this.students = students.filter(s => s.classId === this.selectedClassId);
       
-      const dateString = this.selectedDate.toISOString().split('T')[0];
+      const dateObj = new Date(this.selectedDate);
+      const dateString = dateObj.toISOString().split('T')[0];
       this.attendanceService.getAttendanceByDate(dateString, this.selectedClassId).subscribe(records => {
         this.attendanceRecords = this.students.map(student => {
           const existingRecord = records.find(r => r.studentId === student.studentId);

@@ -706,8 +706,101 @@
     </div>
   </ng-container>
 
+  <!-- Student Dashboard Layout -->
+  <ng-container *ngIf="currentRole === 'Student'">
+    <div class="dash-header">
+      <div class="title-area">
+        <h1>Student Dashboard</h1>
+        <p>Welcome back · {{ dateStr }}</p>
+      </div>
+      <div class="action-area">
+        <button class="btn-primary">View Report Card</button>
+      </div>
+    </div>
+
+    <!-- Metrics Grid -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="card-top">
+          <div>
+            <div class="metric-label">ATTENDANCE LEAVES</div>
+            <div class="metric-value">2</div>
+            <div class="metric-subtext">This Month</div>
+          </div>
+          <div class="icon-box red">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          </div>
+        </div>
+        <div class="card-bottom trend-down">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+          <span>1 less</span> vs last month
+        </div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="card-top">
+          <div>
+            <div class="metric-label">PENDING ASSIGNMENTS</div>
+            <div class="metric-value">5</div>
+            <div class="metric-subtext">Due this week</div>
+          </div>
+          <div class="icon-box yellow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+        </div>
+        <div class="card-bottom trend-up">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+          <span>2 more</span> vs last week
+        </div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="card-top">
+          <div>
+            <div class="metric-label">COMPLETED ASSIGNMENTS</div>
+            <div class="metric-value">24</div>
+            <div class="metric-subtext">This Semester</div>
+          </div>
+          <div class="icon-box green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
+        </div>
+        <div class="card-bottom trend-up">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+          <span>On track</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Area -->
+    <div class="charts-grid mt-4">
+      <div class="chart-card flex-1">
+        <div class="chart-header">
+          <div>
+            <h3>Performance Progress</h3>
+            <p>Overall Academic Score Trend</p>
+          </div>
+          <a href="#" class="chart-link">Detailed Analytics</a>
+        </div>
+        <div class="chart-body">
+          <apx-chart
+            [series]="studentProgressChartOptions.series!"
+            [chart]="studentProgressChartOptions.chart!"
+            [xaxis]="studentProgressChartOptions.xaxis!"
+            [yaxis]="studentProgressChartOptions.yaxis!"
+            [stroke]="studentProgressChartOptions.stroke!"
+            [markers]="studentProgressChartOptions.markers!"
+            [grid]="studentProgressChartOptions.grid!"
+            [tooltip]="studentProgressChartOptions.tooltip!"
+            [colors]="studentProgressChartOptions.colors!"
+          ></apx-chart>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
   <!-- Default Dashboard Layout for other roles -->
-  <ng-container *ngIf="currentRole !== 'School Admin' && currentRole !== 'Principal' && currentRole !== 'HR'">
+  <ng-container *ngIf="currentRole !== 'School Admin' && currentRole !== 'Principal' && currentRole !== 'HR' && currentRole !== 'Student'">
     <div class="dash-header">
       <div class="title-area">
         <h1>{{ currentRole }} Dashboard</h1>

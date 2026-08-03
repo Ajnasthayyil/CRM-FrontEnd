@@ -56,6 +56,7 @@ export class RoleDashboardComponent implements OnInit {
   public mixChartOptions: Partial<DonutChartOptions>;
   public deptChartOptions: Partial<DonutChartOptions>;
   public hrPerfChartOptions: Partial<DonutChartOptions>;
+  public studentProgressChartOptions: Partial<LineChartOptions>;
 
   constructor(private authService: AuthService) {
     this.attendanceChartOptions = {
@@ -241,6 +242,43 @@ export class RoleDashboardComponent implements OnInit {
       dataLabels: { enabled: false },
       legend: { show: false },
       tooltip: { theme: 'light' }
+    };
+
+    this.studentProgressChartOptions = {
+      series: [
+        {
+          name: "Performance Score",
+          data: [75, 82, 78, 85, 89, 92, 90]
+        }
+      ],
+      chart: {
+        height: 300,
+        type: "area",
+        zoom: { enabled: false },
+        toolbar: { show: false },
+        fontFamily: 'Inter, sans-serif'
+      },
+      colors: ['#3b82f6'],
+      dataLabels: { enabled: false },
+      stroke: { curve: "smooth", width: 3 },
+      markers: { size: 5, colors: ['#3b82f6'], strokeColors: '#fff', strokeWidth: 2, hover: { size: 7 } },
+      grid: {
+        borderColor: 'var(--border-color)', strokeDashArray: 4,
+        xaxis: { lines: { show: true } }, yaxis: { lines: { show: true } },
+        padding: { top: 0, right: 20, bottom: 0, left: 10 }
+      },
+      xaxis: {
+        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        axisBorder: { show: false }, axisTicks: { show: false },
+        labels: { style: { colors: 'var(--text-muted)' } },
+        tooltip: { enabled: false },
+        crosshairs: { show: true, width: 1, position: 'back', opacity: 0.9, stroke: { color: 'var(--border-color)', width: 1, dashArray: 0 } }
+      },
+      yaxis: {
+        min: 0, max: 100, tickAmount: 5,
+        labels: { style: { colors: 'var(--text-muted)' }, formatter: (value) => { return value.toFixed(0) + '%'; } }
+      },
+      tooltip: { theme: 'light', y: { formatter: function(val) { return val + "%"; } } }
     };
   }
 
