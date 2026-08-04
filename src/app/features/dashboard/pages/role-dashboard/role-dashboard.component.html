@@ -773,8 +773,32 @@
     </div>
 
     <!-- Charts Area -->
-    <div class="charts-grid mt-4">
-      <div class="chart-card flex-1">
+    <div class="charts-grid split-grid mt-4">
+      
+      <div class="chart-card flex-2">
+        <div class="chart-header">
+          <div>
+            <h3>Daily Attendance</h3>
+            <p>Last 7 Days (Based on Teacher Records)</p>
+          </div>
+          <a href="#" class="chart-link">Full History</a>
+        </div>
+        <div class="chart-body">
+          <apx-chart
+            [series]="dailyAttendanceChartOptions.series!"
+            [chart]="dailyAttendanceChartOptions.chart!"
+            [xaxis]="dailyAttendanceChartOptions.xaxis!"
+            [yaxis]="dailyAttendanceChartOptions.yaxis!"
+            [plotOptions]="dailyAttendanceChartOptions.plotOptions!"
+            [grid]="dailyAttendanceChartOptions.grid!"
+            [tooltip]="dailyAttendanceChartOptions.tooltip!"
+            [colors]="dailyAttendanceChartOptions.colors!"
+            [dataLabels]="dailyAttendanceChartOptions.dataLabels!"
+          ></apx-chart>
+        </div>
+      </div>
+
+      <div class="chart-card flex-3">
         <div class="chart-header">
           <div>
             <h3>Performance Progress</h3>

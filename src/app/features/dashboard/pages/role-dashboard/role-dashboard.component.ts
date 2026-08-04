@@ -57,6 +57,7 @@ export class RoleDashboardComponent implements OnInit {
   public deptChartOptions: Partial<DonutChartOptions>;
   public hrPerfChartOptions: Partial<DonutChartOptions>;
   public studentProgressChartOptions: Partial<LineChartOptions>;
+  public dailyAttendanceChartOptions: any;
 
   constructor(private authService: AuthService) {
     this.attendanceChartOptions = {
@@ -279,6 +280,60 @@ export class RoleDashboardComponent implements OnInit {
         labels: { style: { colors: 'var(--text-muted)' }, formatter: (value) => { return value.toFixed(0) + '%'; } }
       },
       tooltip: { theme: 'light', y: { formatter: function(val) { return val + "%"; } } }
+    };
+
+    this.dailyAttendanceChartOptions = {
+      series: [
+        {
+          name: "Attendance",
+          data: [100, 100, 100, 0, 100, 100, 100]
+        }
+      ],
+      chart: {
+        height: 300,
+        type: "bar",
+        toolbar: { show: false },
+        fontFamily: 'Inter, sans-serif'
+      },
+      colors: ['#10b981'],
+      plotOptions: {
+        bar: {
+          borderRadius: 4,
+          columnWidth: '40%',
+          colors: {
+            ranges: [{
+              from: 0,
+              to: 0,
+              color: '#ef4444' // Red for absent
+            }]
+          }
+        }
+      },
+      dataLabels: { enabled: false },
+      xaxis: {
+        categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        axisBorder: { show: false },
+        axisTicks: { show: false },
+        labels: { style: { colors: 'var(--text-muted)' } }
+      },
+      yaxis: {
+        min: 0,
+        max: 100,
+        show: false
+      },
+      grid: {
+        borderColor: 'var(--border-color)',
+        strokeDashArray: 4,
+        padding: { top: 0, right: 0, bottom: 0, left: 0 }
+      },
+      tooltip: {
+        theme: 'light',
+        y: {
+          formatter: function(val: number) {
+            return val === 100 ? "Present" : "Absent";
+          }
+        }
+      }
     };
   }
 
