@@ -80,6 +80,10 @@ const routes: Routes = [
       {
         path: 'teacher',
         loadChildren: () => import('./features/teacher/teacher.module').then(m => m.TeacherModule)
+      },
+      {
+        path: 'student',
+        loadChildren: () => import('./features/student/student.module').then(m => m.StudentModule)
       }
     ]
   },
