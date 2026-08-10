@@ -7,8 +7,10 @@ import { StudentTimetableComponent } from './pages/student-timetable/student-tim
 import { StudentMaterialsComponent } from './pages/student-materials/student-materials.component';
 import { StudentFeesComponent } from './pages/student-fees/student-fees.component';
 import { StudentProfileComponent } from './pages/student-profile/student-profile.component';
+import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
 
 const routes: Routes = [
+  { path: 'dashboard', component: StudentDashboardComponent },
   { path: 'attendance', component: StudentAttendanceComponent },
   { path: 'assignments', component: StudentAssignmentsComponent },
   { path: 'performance', component: StudentPerformanceComponent },

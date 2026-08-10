@@ -1,1 +1,74 @@
-<p>student-attendance works!</p>
+<div class="attendance-container">
+  <div class="page-header">
+    <div class="header-content">
+      <h2>Attendance Tracker</h2>
+      <p>View your daily attendance and monthly statistics</p>
+    </div>
+  </div>
+
+  <div class="attendance-content">
+    <div class="stats-cards">
+      <div class="stat-card">
+        <div class="stat-icon present">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+        <div class="stat-details">
+          <h4>Total Present</h4>
+          <span class="stat-value">{{ totalPresent }}</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon absent">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </div>
+        <div class="stat-details">
+          <h4>Total Absent</h4>
+          <span class="stat-value">{{ totalAbsent }}</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon percentage">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
+        </div>
+        <div class="stat-details">
+          <h4>Attendance %</h4>
+          <span class="stat-value">{{ attendancePercentage }}%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="calendar-card">
+      <div class="calendar-header">
+        <button class="nav-btn" (click)="prevMonth()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <h3>{{ currentMonthName }} {{ currentYear }}</h3>
+        <button class="nav-btn" (click)="nextMonth()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+
+      <div class="calendar-grid">
+        <div class="weekday-header" *ngFor="let day of weekDays">{{ day }}</div>
+        
+        <div class="calendar-day" 
+             *ngFor="let day of calendarDays" 
+             [class.empty]="!day.date" 
+             [class.today]="day.isToday">
+          <div class="date-number" *ngIf="day.date">{{ day.date }}</div>
+          
+          <div class="status-indicator" *ngIf="day.status" [ngClass]="day.status">
+            {{ day.status }}
+          </div>
+        </div>
+      </div>
+
+      <div class="calendar-legend">
+        <div class="legend-item"><span class="dot present"></span> Present</div>
+        <div class="legend-item"><span class="dot absent"></span> Absent</div>
+        <div class="legend-item"><span class="dot late"></span> Late</div>
+        <div class="legend-item"><span class="dot holiday"></span> Holiday</div>
+      </div>
+    </div>
+  </div>
+</div>
