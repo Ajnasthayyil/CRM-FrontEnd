@@ -1,0 +1,139 @@
+.page-container {
+  padding: 24px;
+  background-color: var(--bg-main);
+  min-height: calc(100vh - 64px);
+  color: var(--text-main);
+  font-family: var(--font-family);
+}
+
+.page-header {
+  margin-bottom: 24px;
+  
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+  }
+  
+  .subtitle {
+    color: var(--text-muted);
+    margin: 0;
+  }
+}
+
+.assignments-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.assignment-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-sm);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .subject-badge {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--bg-main);
+    color: var(--text-muted);
+
+    // Subject colors
+    &.mathematics { background: rgba(37, 99, 235, 0.1); color: #2563eb; }
+    &.biology, &.chemistry, &.physics { background: rgba(34, 197, 94, 0.1); color: #16a34a; }
+    &.history, &.english { background: rgba(168, 85, 247, 0.1); color: #9333ea; }
+  }
+
+  .status-badge {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 4px;
+
+    &.pending { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+    &.submitted { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+    &.graded { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+    &.late { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+  }
+
+  .assignment-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: var(--text-main);
+    line-height: 1.3;
+  }
+
+  .assignment-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .due-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+
+    &.overdue {
+      color: #ef4444;
+    }
+  }
+
+  .action-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .grade-display {
+      font-size: 14px;
+      color: var(--text-main);
+      
+      strong {
+        color: #22c55e;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .assignments-list {
+    grid-template-columns: 1fr;
+  }
+}
