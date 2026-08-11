@@ -1,1 +1,81 @@
-<p>student-performance works!</p>
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-left">
+      <h2>Academic Performance</h2>
+      <p class="subtitle">Review your grades and subject-wise performance</p>
+    </div>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">OVERALL GPA</div>
+          <div class="metric-value">{{ overallGPA }}</div>
+        </div>
+        <div class="icon-box purple">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+        </div>
+      </div>
+    </div>
+    
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">CLASS RANK</div>
+          <div class="metric-value">{{ rank }}<span class="suffix">th</span></div>
+        </div>
+        <div class="icon-box blue">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="card-top">
+        <div>
+          <div class="metric-label">TOTAL CREDITS</div>
+          <div class="metric-value">{{ totalCredits }}</div>
+        </div>
+        <div class="icon-box green">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Teacher</th>
+          <th>Term 1</th>
+          <th>Term 2</th>
+          <th>Final Score</th>
+          <th>Grade</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of performances" class="clickable-row">
+          <td>
+            <strong>{{ p.subject }}</strong>
+          </td>
+          <td>{{ p.teacher }}</td>
+          <td>{{ p.term1Score }}%</td>
+          <td>{{ p.term2Score }}%</td>
+          <td><strong>{{ p.finalScore }}%</strong></td>
+          <td>
+            <span class="grade-badge">{{ p.grade }}</span>
+          </td>
+          <td>
+            <span class="status-badge" [ngClass]="p.status">
+              {{ p.status.replace('-', ' ') }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
