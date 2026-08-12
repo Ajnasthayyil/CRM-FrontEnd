@@ -59,6 +59,31 @@
 }
 
 .table-container {
-  margin-top: 16px;
+  margin-top: 24px;
   box-shadow: var(--shadow-sm);
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+
+  .chart-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 350px;
+    
+    // Ensure apexcharts takes full width within the card
+    apx-chart {
+      width: 100%;
+      display: block;
+    }
+  }
 }

@@ -2,7 +2,7 @@
   <div class="page-header">
     <div class="header-left">
       <h2>Academic Performance</h2>
-      <p class="subtitle">Review your grades and subject-wise performance</p>
+      <p class="subtitle">Review your grades, trends, and subject-wise performance</p>
     </div>
   </div>
 
@@ -41,6 +41,36 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card">
+      <apx-chart
+        *ngIf="radarChartOptions"
+        [series]="radarChartOptions.series!"
+        [chart]="radarChartOptions.chart!"
+        [xaxis]="radarChartOptions.xaxis!"
+        [title]="radarChartOptions.title!"
+        [stroke]="radarChartOptions.stroke!"
+        [fill]="radarChartOptions.fill!"
+        [markers]="radarChartOptions.markers!"
+        [colors]="radarChartOptions.colors!"
+      ></apx-chart>
+    </div>
+    <div class="chart-card">
+      <apx-chart
+        *ngIf="gpaTrendChartOptions"
+        [series]="gpaTrendChartOptions.series!"
+        [chart]="gpaTrendChartOptions.chart!"
+        [xaxis]="gpaTrendChartOptions.xaxis!"
+        [yaxis]="gpaTrendChartOptions.yaxis!"
+        [title]="gpaTrendChartOptions.title!"
+        [stroke]="gpaTrendChartOptions.stroke!"
+        [fill]="gpaTrendChartOptions.fill!"
+        [dataLabels]="gpaTrendChartOptions.dataLabels!"
+        [colors]="gpaTrendChartOptions.colors!"
+      ></apx-chart>
     </div>
   </div>
 

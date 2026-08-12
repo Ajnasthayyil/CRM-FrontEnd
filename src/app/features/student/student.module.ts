@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 import { StudentRoutingModule } from './student-routing.module';
 import { StudentAttendanceComponent } from './pages/student-attendance/student-attendance.component';
@@ -25,7 +26,8 @@ import { StudentDashboardComponent } from './pages/student-dashboard/student-das
   ],
   imports: [
     CommonModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    NgApexchartsModule
   ]
 })
 export class StudentModule { }
