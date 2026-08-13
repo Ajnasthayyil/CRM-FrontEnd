@@ -1027,9 +1027,181 @@
     </div>
   </ng-container>
 
+  <!-- Non Teaching Staff Dashboard Layout -->
+  <ng-container *ngIf="currentRole === 'Non Teaching Staff'">
+    <div class="dash-header">
+      <div class="title-area">
+        <h1>Non-Teaching Staff Dashboard</h1>
+        <p>Employee Self Service · {{ dateStr }}</p>
+      </div>
+      <div class="action-area">
+        <button class="btn-primary">New Request</button>
+      </div>
+    </div>
+
+    <!-- Metrics Grid -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="card-top">
+          <div>
+            <div class="metric-label">ATTENDANCE</div>
+            <div class="metric-value">98.5%</div>
+            <div class="metric-subtext">This Month</div>
+          </div>
+          <div class="icon-box green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="card-bottom trend-up">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+          </svg>
+          <span>100% target</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="card-top">
+          <div>
+            <div class="metric-label">AVAILABLE LEAVE</div>
+            <div class="metric-value">12</div>
+            <div class="metric-subtext">Days Remaining</div>
+          </div>
+          <div class="icon-box blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="card-bottom trend-up">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+          </svg>
+          <span>2 added this year</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="card-top">
+          <div>
+            <div class="metric-label">PENDING TASKS</div>
+            <div class="metric-value">3</div>
+            <div class="metric-subtext">Due this week</div>
+          </div>
+          <div class="icon-box yellow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="card-bottom trend-down">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <polyline points="19 12 12 19 5 12"></polyline>
+          </svg>
+          <span>Requires attention</span>
+        </div>
+      </div>
+      
+      <div class="metric-card">
+        <div class="card-top">
+          <div>
+            <div class="metric-label">UPCOMING EVENTS</div>
+            <div class="metric-value">1</div>
+            <div class="metric-subtext">Staff Meeting</div>
+          </div>
+          <div class="icon-box purple">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="card-bottom trend-up">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+          </svg>
+          <span>Scheduled for Friday</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Area -->
+    <div class="charts-grid split-grid mt-4">
+      <div class="chart-card flex-2">
+        <div class="chart-header">
+          <div>
+            <h3>Daily Attendance</h3>
+            <p>Last 7 Days</p>
+          </div>
+          <a href="#" class="chart-link">Full History</a>
+        </div>
+        <div class="chart-body">
+          <apx-chart [series]="dailyAttendanceChartOptions.series!" [chart]="dailyAttendanceChartOptions.chart!"
+            [xaxis]="dailyAttendanceChartOptions.xaxis!" [yaxis]="dailyAttendanceChartOptions.yaxis!"
+            [plotOptions]="dailyAttendanceChartOptions.plotOptions!" [grid]="dailyAttendanceChartOptions.grid!"
+            [tooltip]="dailyAttendanceChartOptions.tooltip!" [colors]="dailyAttendanceChartOptions.colors!"
+            [dataLabels]="dailyAttendanceChartOptions.dataLabels!"></apx-chart>
+        </div>
+      </div>
+
+      <div class="chart-card flex-3">
+        <div class="chart-header">
+          <div>
+            <h3>Recent Tasks & Requests</h3>
+            <p>Overview of assigned activities and tickets</p>
+          </div>
+          <a href="#" class="btn-outline-sm">View All</a>
+        </div>
+        <div class="chart-body">
+          <div class="perf-table-wrapper">
+            <table class="perf-table">
+              <thead>
+                <tr>
+                  <th>TASK / REQUEST</th>
+                  <th>CATEGORY</th>
+                  <th>DATE</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Fix projector in Room 102</strong></td>
+                  <td>IT Support</td>
+                  <td>22 Jul 2024</td>
+                  <td><span class="badge badge-yellow" style="font-size:0.7rem;padding:2px 8px;border-radius:10px;background:rgba(245,158,11,0.1);color:#f59e0b;">In Progress</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Leave Application (Sick Leave)</strong></td>
+                  <td>HR Request</td>
+                  <td>18 Jul 2024</td>
+                  <td><span class="badge badge-green" style="font-size:0.7rem;padding:2px 8px;border-radius:10px;background:rgba(16,185,129,0.1);color:#10b981;">Approved</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Restock cleaning supplies</strong></td>
+                  <td>Maintenance</td>
+                  <td>15 Jul 2024</td>
+                  <td><span class="badge badge-green" style="font-size:0.7rem;padding:2px 8px;border-radius:10px;background:rgba(16,185,129,0.1);color:#10b981;">Completed</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
   <!-- Default Dashboard Layout for other roles -->
   <ng-container
-    *ngIf="currentRole !== 'School Admin' && currentRole !== 'Principal' && currentRole !== 'HR' && currentRole !== 'Student'">
+    *ngIf="currentRole !== 'School Admin' && currentRole !== 'Principal' && currentRole !== 'HR' && currentRole !== 'Student' && currentRole !== 'Non Teaching Staff'">
     <div class="dash-header">
       <div class="title-area">
         <h1>{{ currentRole }} Dashboard</h1>
