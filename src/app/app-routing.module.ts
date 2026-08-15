@@ -10,8 +10,11 @@ import { RoleDashboardComponent } from './features/dashboard/pages/role-dashboar
 const routes: Routes = [
   {
     path: '',
-    component: DashboardHomeComponent,
-    pathMatch: 'full'
+    loadChildren: () => import('./features/landing/landing.module').then(m => m.LandingModule)
+  },
+  {
+    path: 'roles',
+    component: DashboardHomeComponent
   },
   {
     path: 'login',
