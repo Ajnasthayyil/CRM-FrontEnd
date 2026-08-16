@@ -33,99 +33,148 @@
   <main>
     <!-- Hero Section -->
     <section class="hero-section">
+      <!-- 3D Floating Orbs (CSS) -->
+      <div class="floating-orb orb-1"></div>
+      <div class="floating-orb orb-2"></div>
+      <div class="floating-orb orb-3"></div>
+
       <div class="hero-content">
-        <h1>Streamline Your School<br>Management with EduCRM</h1>
+        <div class="text-reveal-wrapper">
+          <h1 class="animate-text">Streamline Your School</h1>
+        </div>
+        <div class="text-reveal-wrapper delay-1">
+          <h1 class="animate-text">Management with EduCRM</h1>
+        </div>
       </div>
     </section>
 
-    <div class="split-layout">
-      <!-- Left Column -->
-      <div class="left-column">
-        <section class="academic-excellence">
-          <h2>Powerful Features</h2>
-          <p class="description">
-            EduCRM offers a unified platform to manage students, staff, academics, and administrative tasks with ease. Our system simplifies complex workflows and enhances productivity across your entire institution.
-          </p>
-          
-          <div class="programs-card">
-            <div class="icon-star">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
-            </div>
-            <h4>ALL-IN-ONE SOLUTION</h4>
-            <p>From admissions to alumni relations, handle every aspect of your educational institution in one seamless, cloud-based platform recognized globally for its excellence.</p>
-          </div>
-          <div class="building-image">
-            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&q=80" alt="Management Software" />
-          </div>
-        </section>
+    <section class="unified-platform">
+      <div class="up-header">
+        <h2>Unified Education Platform</h2>
+        <p>From admissions to graduation, equip your staff with the tools to act fast, minimize disruptions, and keep parents informed.</p>
       </div>
+      
+      <div class="up-diagram">
+        <div class="up-cards-col">
+          <div class="up-card">
+            <h4>Student Management</h4>
+            <p>Manage students from start to finish</p>
+          </div>
+          <div class="up-card">
+            <h4>AI Analytics</h4>
+            <p>Track performance faster with AI support</p>
+          </div>
+        </div>
 
-      <!-- Right Column -->
-      <div class="right-column">
-        <section class="stats-section">
-          <h2>System Modules & Roles</h2>
-          <p class="subtitle">Built for Modern Education</p>
-          <button class="btn-outline">Explore Modules</button>
-          
-          <div class="faculties-grid">
-            <div class="faculty-card dark">
-              <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&q=80" alt="Student Management" />
-              <div class="faculty-info">
-                <h4>Student Management</h4>
-                <p>ACTIVE STUDENTS</p>
-                <span class="stat">10,000+</span>
-              </div>
-            </div>
-            <div class="faculty-card main">
-              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80" alt="Staff & HR" />
-              <div class="faculty-info">
-                <h4>Staff & HR</h4>
-                <p>Empower your teaching and non-teaching staff with dedicated portals for payroll, leave, and performance tracking.</p>
-                <div class="stat-row">
-                  <div><p>REGISTERED STAFF</p><span class="stat">1,200+</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="faculty-card dark">
-              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80" alt="Academic Analytics" />
-              <div class="faculty-info">
-                <h4>Academics & Analytics</h4>
-                <p>REPORTS GENERATED</p>
-                <span class="stat">5,000+</span>
-              </div>
-            </div>
-          </div>
-        </section>
+        <div class="up-lines-1">
+           <svg width="100%" height="100%" preserveAspectRatio="none">
+              <!-- Connects left cards to middle cards -->
+              <path class="glow-line" d="M 0,25 L 100%,25" />
+              <path class="glow-line" d="M 0,75 L 100%,75" />
+           </svg>
+        </div>
 
-        <section class="success-stories">
-          <div class="success-image">
-             <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&q=80" alt="Trusted by Institutions" />
-             <div class="success-overlay">
-                <h3>Trusted by Institutions</h3>
-             </div>
+        <div class="up-cards-col">
+          <div class="up-card">
+            <h4>Staff & HR</h4>
+            <p>Bring the right educators together</p>
           </div>
-          
-          <div class="alumni-grid">
-            <div class="alumni-text">
-              <h5>PROVEN SUCCESS</h5>
-              <h3>Schools using EduCRM see a 40% increase in administrative efficiency.</h3>
-              <p>Read about their digital transformation journeys and how EduCRM helped shape their operational success.</p>
-              <div class="join-box">
-                 <button class="btn-blue">Request Demo</button>
-                 <p class="small-text">Join thousands of schools globally that have upgraded their campus experience and operational workflows.</p>
-              </div>
-            </div>
-            
-            <div class="testimonials">
-              <div class="testimonial-card">
-                 <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Client testimonial" class="testimonial-img"/>
-                 <h4>Client Testimonials</h4>
-                 <p>Hear directly from school administrators about how EduCRM transformed their daily operations.</p>
-              </div>
-            </div>
+          <div class="up-card">
+            <h4>Parent Portals</h4>
+            <p>Keep parents informed in real time</p>
           </div>
-        </section>
+        </div>
+
+        <div class="up-lines-2">
+           <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <!-- Connects middle cards to AI chip -->
+              <path id="path1" class="glow-line" d="M 0,25 C 50,25 50,50 100,50" />
+              <path id="path2" class="glow-line" d="M 0,75 C 50,75 50,50 100,50" />
+              
+              <circle class="glow-dot" r="2" fill="#a855f7">
+                <animateMotion dur="2s" repeatCount="indefinite">
+                  <mpath href="#path1"/>
+                </animateMotion>
+              </circle>
+              <circle class="glow-dot" r="2" fill="#6366f1">
+                <animateMotion dur="2.5s" repeatCount="indefinite">
+                  <mpath href="#path2"/>
+                </animateMotion>
+              </circle>
+           </svg>
+        </div>
+
+        <div class="up-chip">
+          <div class="chip-glow-bg"></div>
+          <img src="assets/images/ai_chip_glowing.png" alt="EduCRM AI Core" />
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Solid Foundation Section -->
+    <section class="solid-foundation">
+      <h2>Built on a solid foundation</h2>
+      
+      <div class="foundation-cards">
+        <div class="f-row row-top">
+          <div class="f-card card-insights">
+            <div class="f-icon">
+              <div class="layer layer-back"></div>
+              <div class="layer layer-front">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="3" width="4" height="18"></rect><rect x="10" y="8" width="4" height="13"></rect><rect x="2" y="13" width="4" height="8"></rect></svg>
+              </div>
+            </div>
+            <h4>Insights</h4>
+            <p>Identify patterns, cut through the noise, and speed up processes.</p>
+          </div>
+          
+          <div class="f-card card-catalog">
+            <div class="f-icon">
+              <div class="layer layer-back"></div>
+              <div class="layer layer-front">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              </div>
+            </div>
+            <h4>Catalog</h4>
+            <p>Access the right and relevant context for your institution instantly.</p>
+          </div>
+        </div>
+        
+        <div class="f-row row-bottom">
+          <div class="f-card card-integrations active">
+            <div class="f-icon">
+              <div class="layer layer-back"></div>
+              <div class="layer layer-front">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+              </div>
+            </div>
+            <h4>Integrations</h4>
+            <p>Bring together the tools you already use and take action from one place.</p>
+          </div>
+          
+          <div class="f-card card-workflows">
+            <div class="f-icon">
+              <div class="layer layer-back"></div>
+              <div class="layer layer-front">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg>
+              </div>
+            </div>
+            <h4>Workflows</h4>
+            <p>Automate administrative handling and maintain consistency at scale.</p>
+          </div>
+          
+          <div class="f-card card-ai">
+            <div class="f-icon">
+              <div class="layer layer-back"></div>
+              <div class="layer layer-front">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+            </div>
+            <h4>AI Insights</h4>
+            <p>Intelligence, context, and power at the heart of every decision.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </div>
