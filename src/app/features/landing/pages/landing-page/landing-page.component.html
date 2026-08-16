@@ -1,3 +1,5 @@
+<div class="cursor-glow" [style.left.px]="mouseX" [style.top.px]="mouseY"></div>
+
 <div class="landing-page-container">
   <!-- Navbar -->
   <header class="navbar">
@@ -48,7 +50,7 @@
       </div>
     </section>
 
-    <section class="unified-platform">
+    <section #scrollElement class="unified-platform animate-on-scroll">
       <div class="up-header">
         <h2>Unified Education Platform</h2>
         <p>From admissions to graduation, equip your staff with the tools to act fast, minimize disruptions, and keep parents informed.</p>
@@ -112,7 +114,7 @@
     </section>
 
     <!-- Solid Foundation Section -->
-    <section class="solid-foundation">
+    <section #scrollElement class="solid-foundation animate-on-scroll">
       <h2>Built on a solid foundation</h2>
       
       <div class="foundation-cards">
@@ -178,7 +180,7 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials-section">
+    <section #scrollElement class="testimonials-section animate-on-scroll">
       <div class="t-header">
         <h2>Trusted by Educational Leaders</h2>
         <p>See how EduCRM is transforming institutions globally.</p>
@@ -253,7 +255,7 @@
     </section>
 
     <!-- Final CTA Section -->
-    <section class="cta-section">
+    <section #scrollElement class="cta-section animate-on-scroll">
       <div class="cta-banner">
         <div class="cta-content">
           <h2>Ready to Transform Your Campus?</h2>
