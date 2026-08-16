@@ -495,19 +495,21 @@
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     backdrop-filter: blur(10px);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease, box-shadow 0.4s ease;
+    opacity: 0;
 
-    &.card-insights { transform: rotate(-5deg) translateY(20px); }
-    &.card-catalog { transform: rotate(5deg) translateY(20px); }
+    &.card-insights { transform: translateX(-200px) rotate(-15deg) translateY(50px); }
+    &.card-catalog { transform: translateX(200px) rotate(15deg) translateY(50px); }
 
-    &.card-integrations { transform: rotate(-8deg) translateY(10px); z-index: 3; }
-    &.card-workflows { transform: translateY(-10px); z-index: 2; }
-    &.card-ai { transform: rotate(8deg) translateY(10px); z-index: 1; }
+    &.card-integrations { transform: translateX(-300px) rotate(-25deg) translateY(50px); z-index: 3; }
+    &.card-workflows { transform: translateY(150px); z-index: 2; }
+    &.card-ai { transform: translateX(300px) rotate(25deg) translateY(50px); z-index: 1; }
 
     &:hover {
       transform: translateY(-20px) scale(1.05) rotate(0deg) !important;
       z-index: 10 !important;
       box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      transition: transform 0.4s ease, box-shadow 0.4s ease !important;
     }
 
     &.active {
@@ -566,6 +568,23 @@
       color: #94a3b8;
       font-size: 0.85rem;
       line-height: 1.5;
+    }
+  }
+
+  &.in-view {
+    .f-card {
+      opacity: 1;
+      
+      &.card-insights { transform: rotate(-5deg) translateY(20px); transition-delay: 0.1s; }
+      &.card-catalog { transform: rotate(5deg) translateY(20px); transition-delay: 0.2s; }
+  
+      &.card-integrations { transform: rotate(-8deg) translateY(10px); transition-delay: 0.3s; }
+      &.card-workflows { transform: translateY(-10px); transition-delay: 0.4s; }
+      &.card-ai { transform: rotate(8deg) translateY(10px); transition-delay: 0.5s; }
+      
+      &:hover {
+        transition-delay: 0s;
+      }
     }
   }
 }
