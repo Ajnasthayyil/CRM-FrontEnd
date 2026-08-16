@@ -744,14 +744,23 @@
       position: relative;
       z-index: 2;
 
+      /* Initial state for staggered animation */
+      h2, p, .cta-buttons {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
       h2 {
         font-size: 3.2rem;
         font-weight: 700;
         margin-bottom: 1.5rem;
         letter-spacing: -1px;
-        background: linear-gradient(135deg, #ffffff 40%, #a855f7 100%);
+        background: linear-gradient(135deg, #ffffff 40%, #a855f7 100%, #ffffff 160%);
+        background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        animation: textShine 4s linear infinite;
       }
 
       p {
@@ -1017,3 +1026,15 @@
     }
   }
 }
+
+.cta-section.in-view .cta-banner .cta-content {
+  h2 { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.1s; }
+  p { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.3s; }
+  .cta-buttons { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.5s; }
+}
+
+@keyframes textShine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
