@@ -8,7 +8,8 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  selectedRole: string = 'User';
+  selectedRole: string = 'Super Admin';
+  roles: string[] = ['Super Admin', 'Admin', 'Manager', 'Teacher', 'Student', 'Parent', 'Staff'];
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +23,11 @@ export class LoginComponent implements OnInit {
         this.selectedRole = params['role'];
       }
     });
+  }
+
+  onRoleChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.selectedRole = selectElement.value;
   }
 
   onLogin(event: Event) {

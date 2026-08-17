@@ -127,7 +127,7 @@
       transition: color 0.3s;
     }
 
-    input {
+    input, select {
       width: 100%;
       padding: 0.85rem 1rem 0.85rem 3rem;
       background-color: rgba(15, 23, 42, 0.6);
@@ -136,9 +136,17 @@
       color: #f8fafc;
       font-size: 0.95rem;
       transition: all 0.3s ease;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
 
       &::placeholder {
         color: #475569;
+      }
+
+      option {
+        background-color: #0f172a;
+        color: #f8fafc;
       }
 
       &:focus {
