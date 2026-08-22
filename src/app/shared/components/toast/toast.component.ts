@@ -32,35 +32,45 @@ import { Subscription } from 'rxjs';
       align-items: center;
       gap: 0.75rem;
       padding: 1rem 1.25rem;
-      border-radius: var(--radius-md);
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-color);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
-      color: var(--text-main);
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(30, 35, 50, 0.9), rgba(11, 13, 18, 0.95));
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      color: #e2e8f0;
       font-size: 0.95rem;
       font-weight: 500;
       min-width: 300px;
+      font-family: 'Inter', sans-serif;
     }
     .toast-notification.error {
-      border-left: 4px solid var(--accent-legal); /* Red */
-      svg { color: var(--accent-legal); }
+      border-left: 4px solid #ef4444;
+      border-color: rgba(239, 68, 68, 0.5) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.1) #ef4444;
+      svg { color: #ef4444; filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.5)); }
     }
     .toast-notification.success {
-      border-left: 4px solid var(--primary); /* Teal */
-      svg { color: var(--primary); }
+      border-left: 4px solid #10b981;
+      border-color: rgba(16, 185, 129, 0.5) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.1) #10b981;
+      svg { color: #10b981; filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.5)); }
     }
-    .close-btn {
+    .toast-notification.info {
+      border-left: 4px solid #3b82f6;
+      border-color: rgba(59, 130, 246, 0.5) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.1) #3b82f6;
+      svg { color: #3b82f6; filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5)); }
+    }
+    .toast-close {
       margin-left: auto;
       background: none;
       border: none;
-      color: var(--text-muted);
+      color: #64748b;
       cursor: pointer;
       padding: 0;
       display: flex;
       align-items: center;
+      transition: color 0.3s;
       
       &:hover {
-        color: var(--text-main);
+        color: #f8fafc;
       }
     }
     @keyframes slideIn {
