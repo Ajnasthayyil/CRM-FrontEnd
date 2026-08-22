@@ -3,7 +3,14 @@
 .landing-page-container {
   font-family: 'Inter', sans-serif;
   color: #e2e8f0;
+  
+  /* Apply parallax background to entire container */
+  background-image: linear-gradient(rgba(11, 13, 18, 0.4), rgba(11, 13, 18, 0.9)), url('../../../../../assets/images/simple_dark_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   background-color: #0b0d12;
+  
   min-height: 100vh;
   overflow-x: hidden;
 
@@ -107,10 +114,6 @@
   min-height: 100vh;
   margin-top: -6rem; /* pull under navbar */
   padding-top: 8rem;
-  background-image: linear-gradient(to bottom, rgba(11, 13, 18, 0.4), rgba(11, 13, 18, 1)), url('../../../../../assets/images/simple_dark_bg.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed; /* Parallax effect */
   display: flex;
   align-items: center;
   justify-content: center;
