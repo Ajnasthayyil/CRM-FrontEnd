@@ -13,7 +13,7 @@ export class EmployeeListComponent implements OnInit {
     {
       id: 'EMP001',
       name: 'Sunita Patel',
-      email: 'sunita.patel@educrm.in',
+      email: 'sunita.patel@EduNexa.in',
       phone: '+91 9876543210',
       initials: 'SP',
       avatarColor: 'purple',
@@ -27,7 +27,7 @@ export class EmployeeListComponent implements OnInit {
     {
       id: 'EMP002',
       name: 'Rajeev Kumar',
-      email: 'rajeev.k@educrm.in',
+      email: 'rajeev.k@EduNexa.in',
       phone: '+91 9876543211',
       initials: 'RK',
       avatarColor: 'blue',
@@ -41,7 +41,7 @@ export class EmployeeListComponent implements OnInit {
     {
       id: 'EMP003',
       name: 'Kavita Rao',
-      email: 'kavita.rao@educrm.in',
+      email: 'kavita.rao@EduNexa.in',
       phone: '+91 9876543212',
       initials: 'KR',
       avatarColor: 'pink',
@@ -55,7 +55,7 @@ export class EmployeeListComponent implements OnInit {
     {
       id: 'EMP004',
       name: 'Vikram Singh',
-      email: 'vikram.admin@educrm.in',
+      email: 'vikram.admin@EduNexa.in',
       phone: '+91 9876543213',
       initials: 'VS',
       avatarColor: 'blue',
@@ -69,7 +69,7 @@ export class EmployeeListComponent implements OnInit {
     {
       id: 'EMP005',
       name: 'Anita Desai',
-      email: 'anita.d@educrm.in',
+      email: 'anita.d@EduNexa.in',
       phone: '+91 9876543214',
       initials: 'AD',
       avatarColor: 'purple',

@@ -25,7 +25,7 @@ export class EmployeeDetailsComponent implements OnInit {
     this.employee = {
       id: this.employeeId || 'EMP001',
       name: 'Sunita Patel',
-      email: 'sunita.patel@educrm.in',
+      email: 'sunita.patel@EduNexa.in',
       personalEmail: 'sunita.patel.personal@gmail.com',
       phone: '+91 9876543210',
       initials: 'SP',

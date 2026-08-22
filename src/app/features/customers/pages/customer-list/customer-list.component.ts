@@ -15,7 +15,7 @@ export class CustomerListComponent implements OnInit {
     {
       id: 'STU001',
       name: 'Rajesh Kumar Sharma',
-      email: 'rajesh.sharma@student.educrm.in',
+      email: 'rajesh.sharma@student.EduNexa.in',
       initials: 'RK',
       avatarColor: 'blue',
       type: 'Grade 10',
@@ -33,7 +33,7 @@ export class CustomerListComponent implements OnInit {
     {
       id: 'TCH001',
       name: 'Sunita Patel',
-      email: 'sunita.patel@educrm.in',
+      email: 'sunita.patel@EduNexa.in',
       initials: 'SP',
       avatarColor: 'purple',
       type: 'Senior Teacher',
@@ -51,7 +51,7 @@ export class CustomerListComponent implements OnInit {
     {
       id: 'STU002',
       name: 'Arun Kumar',
-      email: 'arun@student.educrm.in',
+      email: 'arun@student.EduNexa.in',
       initials: 'AK',
       avatarColor: 'pink',
       type: 'Grade 12',
@@ -69,7 +69,7 @@ export class CustomerListComponent implements OnInit {
     {
       id: 'STU003',
       name: 'Deepak Malhotra',
-      email: 'deepak.m@student.educrm.in',
+      email: 'deepak.m@student.EduNexa.in',
       initials: 'DM',
       avatarColor: 'pink',
       type: 'Grade 8',
@@ -87,7 +87,7 @@ export class CustomerListComponent implements OnInit {
     {
       id: 'ADM001',
       name: 'Vikram Singh',
-      email: 'vikram.admin@educrm.in',
+      email: 'vikram.admin@EduNexa.in',
       initials: 'VS',
       avatarColor: 'blue',
       type: 'School Admin',
@@ -105,7 +105,7 @@ export class CustomerListComponent implements OnInit {
     {
       id: 'HR001',
       name: 'Anjali Desai',
-      email: 'anjali.hr@educrm.in',
+      email: 'anjali.hr@EduNexa.in',
       initials: 'AD',
       avatarColor: 'purple',
       type: 'HR Manager',
@@ -123,7 +123,7 @@ export class CustomerListComponent implements OnInit {
     {
       id: 'TCH002',
       name: 'Rahul Verma',
-      email: 'rahul.verma@educrm.in',
+      email: 'rahul.verma@EduNexa.in',
       initials: 'RV',
       avatarColor: 'pink',
       type: 'Junior Teacher',
@@ -141,7 +141,7 @@ export class CustomerListComponent implements OnInit {
     {
       id: 'STU004',
       name: 'Neha Gupta',
-      email: 'neha.g@student.educrm.in',
+      email: 'neha.g@student.EduNexa.in',
       initials: 'NG',
       avatarColor: 'blue',
       type: 'Grade 11',

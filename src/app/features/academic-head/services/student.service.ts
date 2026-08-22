@@ -10,22 +10,22 @@ import { map } from 'rxjs/operators';
 export class StudentService {
   private mockStudents: Student[] = [
     {
-      id: 'S001', name: 'Arun Patel', departmentId: 3, email: 'arun@student.educrm.com', phone: '9000000001',
+      id: 'S001', name: 'Arun Patel', departmentId: 3, email: 'arun@student.EduNexa.com', phone: '9000000001',
       className: 'B.Tech CS', batch: '2024', semester: 'S5', section: 'A', attendanceStatus: 'Present',
       photoUrl: '', attendanceSummary: { totalClasses: 200, present: 180, absent: 10, leave: 10, percentage: 90 }
     },
     {
-      id: 'S002', name: 'Priya Sharma', departmentId: 3, email: 'priya@student.educrm.com', phone: '9000000002',
+      id: 'S002', name: 'Priya Sharma', departmentId: 3, email: 'priya@student.EduNexa.com', phone: '9000000002',
       className: 'B.Tech CS', batch: '2024', semester: 'S5', section: 'A', attendanceStatus: 'Absent',
       photoUrl: '', attendanceSummary: { totalClasses: 200, present: 190, absent: 5, leave: 5, percentage: 95 }
     },
     {
-      id: 'S003', name: 'Vikram Singh', departmentId: 3, email: 'vikram@student.educrm.com', phone: '9000000003',
+      id: 'S003', name: 'Vikram Singh', departmentId: 3, email: 'vikram@student.EduNexa.com', phone: '9000000003',
       className: 'B.Tech CS', batch: '2025', semester: 'S3', section: 'B', attendanceStatus: 'Late',
       photoUrl: '', attendanceSummary: { totalClasses: 200, present: 170, absent: 20, leave: 10, percentage: 85 }
     },
     {
-      id: 'S101', name: 'Anita Desai', departmentId: 4, email: 'anita@student.educrm.com', phone: '9000000101',
+      id: 'S101', name: 'Anita Desai', departmentId: 4, email: 'anita@student.EduNexa.com', phone: '9000000101',
       className: 'B.Com', batch: '2024', semester: 'S5', section: 'A', attendanceStatus: 'Present',
       photoUrl: '', attendanceSummary: { totalClasses: 200, present: 195, absent: 2, leave: 3, percentage: 97.5 }
     }

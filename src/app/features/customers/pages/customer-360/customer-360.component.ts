@@ -13,7 +13,7 @@ export class Customer360Component implements OnInit {
     {
       id: 'STU001',
       name: 'Rajesh Kumar Sharma',
-      email: 'rajesh.sharma@student.educrm.in',
+      email: 'rajesh.sharma@student.EduNexa.in',
       phone: '+91 98765 43210',
       city: 'Mumbai',
       pan: 'Guardian: Ramesh Sharma',
@@ -30,7 +30,7 @@ export class Customer360Component implements OnInit {
     {
       id: 'TCH001',
       name: 'Sunita Patel',
-      email: 'sunita.patel@educrm.in',
+      email: 'sunita.patel@EduNexa.in',
       phone: '+91 98765 11111',
       city: 'Delhi',
       pan: 'Emp ID: T-4921',
@@ -47,7 +47,7 @@ export class Customer360Component implements OnInit {
     {
       id: 'ADM001',
       name: 'Vikram Singh',
-      email: 'vikram.admin@educrm.in',
+      email: 'vikram.admin@EduNexa.in',
       phone: '+91 98765 22222',
       city: 'Pune',
       pan: 'Emp ID: A-001',
@@ -64,7 +64,7 @@ export class Customer360Component implements OnInit {
     {
       id: 'HR001',
       name: 'Anjali Desai',
-      email: 'anjali.hr@educrm.in',
+      email: 'anjali.hr@EduNexa.in',
       phone: '+91 98765 33333',
       city: 'Mumbai',
       pan: 'Emp ID: H-102',
@@ -118,7 +118,7 @@ export class Customer360Component implements OnInit {
           this.customer = {
             id: id,
             name: 'User ' + id,
-            email: 'user@educrm.in',
+            email: 'user@EduNexa.in',
             phone: '+91 99999 99999',
             city: 'Unknown',
             pan: 'N/A',
