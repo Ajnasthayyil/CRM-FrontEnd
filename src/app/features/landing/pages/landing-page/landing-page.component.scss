@@ -456,12 +456,12 @@
     -webkit-text-fill-color: transparent;
   }
 
-  .foundation-cards {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    perspective: 1500px;
+    perspective: 2000px;
+    transform-style: preserve-3d;
   }
 
   .f-row {
@@ -484,8 +484,9 @@
   }
 
   .f-card {
-    background: linear-gradient(145deg, rgba(30, 35, 50, 0.8), rgba(20, 24, 34, 0.9));
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: linear-gradient(145deg, rgba(25, 30, 45, 0.95), rgba(12, 15, 22, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 20px;
     padding: 2rem;
     width: 250px;
@@ -494,7 +495,11 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -1px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 
+      0 6px 0 #05070a,
+      0 15px 35px rgba(0,0,0,0.7), 
+      inset 0 1px 2px rgba(255, 255, 255, 0.15), 
+      inset 0 -2px 5px rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
     transform-style: preserve-3d;
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease, box-shadow 0.4s ease, border-color 0.4s ease;
@@ -508,23 +513,33 @@
     &.card-ai { transform: translateX(300px) rotate(25deg) translateY(50px); z-index: 1; }
 
     &:hover {
-      transform: translateY(-20px) scale(1.05) rotate(0deg) translateZ(30px) !important;
+      transform: translateY(-25px) scale(1.05) rotateX(5deg) rotateY(-5deg) translateZ(40px) !important;
       z-index: 10 !important;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255, 255, 255, 0.3), inset 0 -1px 1px rgba(0, 0, 0, 0.5);
-      border-color: rgba(37, 99, 235, 0.4);
-      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease !important;
+      box-shadow: 
+        10px 15px 0 #05070a,
+        -15px 30px 50px rgba(37,99,235,0.3), 
+        inset 0 2px 4px rgba(255, 255, 255, 0.3), 
+        inset 0 -2px 5px rgba(0, 0, 0, 0.8);
+      border-color: rgba(37, 99, 235, 0.6);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease !important;
     }
 
     &.active {
       background: linear-gradient(145deg, #1d4ed8, #1e3a8a);
-      border-color: #1d4ed8;
-      box-shadow: 0 15px 40px rgba(29, 78, 216, 0.4);
+      border-color: #3b82f6;
+      border-top: 1px solid #93c5fd;
+      box-shadow: 
+        0 8px 0 #0f172a,
+        0 20px 45px rgba(29, 78, 216, 0.5),
+        inset 0 2px 10px rgba(255, 255, 255, 0.3);
 
       .f-icon .layer-back {
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
       }
       .f-icon .layer-front {
-        background: #172554;
+        background: #1e3a8a;
+        border-color: #60a5fa;
       }
     }
 
@@ -534,7 +549,7 @@
       height: 60px;
       margin-bottom: 1.5rem;
       transform-style: preserve-3d;
-      transform: rotateX(20deg) rotateY(-10deg);
+      transform: rotateX(25deg) rotateY(-15deg);
 
       .layer {
         position: absolute;
@@ -544,19 +559,20 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: transform 0.3s ease;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
 
       .layer-back {
-        background: rgba(37, 99, 235, 0.2);
-        transform: translateZ(-10px) translateY(-5px) translateX(5px);
+        background: rgba(37, 99, 235, 0.3);
+        transform: translateZ(-15px) translateY(-8px) translateX(8px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
       }
 
       .layer-front {
-        background: #1e1b4b;
-        border: 1px solid rgba(255,255,255,0.1);
-        transform: translateZ(10px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        border: 1px solid rgba(255,255,255,0.2);
+        transform: translateZ(15px);
+        box-shadow: -5px 10px 20px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.2);
       }
     }
 
@@ -578,12 +594,12 @@
     .f-card {
       opacity: 1;
       
-      &.card-insights { transform: rotate(-5deg) translateY(20px); transition-delay: 0.1s; }
-      &.card-catalog { transform: rotate(5deg) translateY(20px); transition-delay: 0.2s; }
+      &.card-insights { transform: rotateX(10deg) rotate(-5deg) translateY(20px) translateZ(-20px); transition-delay: 0.1s; }
+      &.card-catalog { transform: rotateX(10deg) rotate(5deg) translateY(20px) translateZ(-20px); transition-delay: 0.2s; }
   
-      &.card-integrations { transform: rotate(-8deg) translateY(10px); transition-delay: 0.3s; }
-      &.card-workflows { transform: translateY(-10px); transition-delay: 0.4s; }
-      &.card-ai { transform: rotate(8deg) translateY(10px); transition-delay: 0.5s; }
+      &.card-integrations { transform: rotateX(15deg) rotate(-8deg) translateY(10px) translateZ(30px); transition-delay: 0.3s; }
+      &.card-workflows { transform: rotateX(15deg) translateY(-10px) translateZ(60px); transition-delay: 0.4s; }
+      &.card-ai { transform: rotateX(15deg) rotate(8deg) translateY(10px) translateZ(30px); transition-delay: 0.5s; }
       
       &:hover {
         transition-delay: 0s;
