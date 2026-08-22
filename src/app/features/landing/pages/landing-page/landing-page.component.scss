@@ -173,17 +173,18 @@
       color: #e2e8f0;
       font-size: 0.9rem;
       font-weight: 500;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       backdrop-filter: blur(10px);
       box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 0 10px rgba(37, 99, 235, 0.1);
     }
 
     .hero-title {
-      font-size: 4.2rem;
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 3.2rem;
       font-weight: 800;
-      line-height: 1.15;
-      margin: 0 0 1.5rem 0;
-      letter-spacing: -1.2px;
+      line-height: 1.2;
+      margin: 0 0 1rem 0;
+      letter-spacing: -1px;
       background: linear-gradient(135deg, #ffffff 40%, #2563eb 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -191,17 +192,17 @@
 
     .hero-subtitle {
       color: #94a3b8;
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       line-height: 1.6;
       max-width: 600px;
-      margin: 0 auto 3rem auto;
+      margin: 0 auto 2rem auto;
     }
 
     .hero-actions {
       display: flex;
       gap: 1rem;
       justify-content: center;
-      margin-bottom: 4rem;
+      margin-bottom: 2rem;
 
       .hero-btn {
         padding: 1rem 2.5rem;
